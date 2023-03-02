@@ -15,7 +15,7 @@ namespace Library_System
 
         public User()
         {
-            if (userID[0] == '1' && userID[1] == '0')
+            if (userID[0] == '1' && userID[1] == '0') //change this to find parent of xml file
             {
                 userType = "member";
                 //set borrowedBooks by looking at xml file elements
