@@ -16,8 +16,10 @@ namespace Library_System
 {
     public partial class Window1 : Window
     {
-        public Window1()
+        Globals globalValues;
+        public Window1(Globals globals)
         {
+            globalValues = globals;
             InitializeComponent();
             txtblkLoginError.Visibility = Visibility.Hidden;
             txtblkLoginErrorOmission.Visibility = Visibility.Hidden;
@@ -29,17 +31,31 @@ namespace Library_System
             List<String> list = new List<String> {"Admin123"};
             return list;
         }
+        public void SwitchScreen()
+        { 
+            
+        }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        private async void btnLogin_Click(object sender, RoutedEventArgs e)
         {
             if (pswdbxPassword.Password.Equals(""))
             {
-                System.Media.SystemSounds.Beep.Play();
                 txtblkLoginErrorOmission.Visibility = Visibility.Visible;
             }
             else if (UpdateUserIDs().Contains(pswdbxPassword.Password))
-            { 
-                globalValues.userID = pswdbxPassword.Password;
+            {
+                globalValues.currentUser.userID = pswdbxPassword.Password;
+                SwitchScreen();
+            }
+            else
+            {
+                txtblkLoginError.Visibility = Visibility.Visible;
+                await Task.Delay(3000);
+                txtblkLoginError.Visibility = Visibility.Hidden;
+                txtblkLoginErrorOmission.Visibility = Visibility.Hidden;
+
+
+
             }
         }
 

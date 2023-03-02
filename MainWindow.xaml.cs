@@ -14,16 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Library_System //I think we need to find the Window class and change it to have a storage for global values with a global object that contains all variables, then use that new Window as the partial class location thing for the other stuff.
+namespace Library_System
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public class Globals
-    {
-        //usage in Window1.xaml
-        public String userID;
-    }
     public partial class MainWindow : Window
     {
         
@@ -31,13 +23,12 @@ namespace Library_System //I think we need to find the Window class and change i
         Stopwatch stopwatch;
         int attempts;
         String terminalPassword = "Admin123";
-
+        Globals globalValues;
         
         public MainWindow()
         {
             InitializeComponent();
-            Globals globalValues = new Globals();
-            globalValues.userID = null;
+            globalValues = new Globals();
             Hide2();
         }
 
@@ -72,7 +63,8 @@ namespace Library_System //I think we need to find the Window class and change i
         }
         private void btnProceed_Click(object sender, RoutedEventArgs e)
         {
-            Window1 win2 = new Window1();
+
+            Window1 win2 = new Window1(globalValues);
             win2.Show();
             Close();
 
