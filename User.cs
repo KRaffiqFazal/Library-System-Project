@@ -13,14 +13,14 @@ namespace Library_System
         public String userType { get; set; } //determined by first 2 digits in the user ID
         public List<Book> borrowedBooks { get; set; }
 
-        public User()
+        public User(String id)
         {
-            if (userID[0] == '1' && userID[1] == '0') //change this to find parent of xml file
+            userID = id;
+            if (userID[0] == '1')
             {
                 userType = "member";
-                //set borrowedBooks by looking at xml file elements
             }
-            else if (userID[0] == '2' && userID[1] == '1')
+            else if (userID[1] == '2')
             {
                 userType = "librarian";
             }
@@ -28,7 +28,6 @@ namespace Library_System
             {
                 userType = "admin";
             }
-
         }
     }
 }

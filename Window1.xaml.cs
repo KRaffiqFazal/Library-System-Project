@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace Library_System
     public partial class Window1 : Window
     {
         Globals globalValues;
+        XmlController xmlC = new XmlController();
         public Window1(Globals globals)
         {
             globalValues = globals;
@@ -24,16 +26,9 @@ namespace Library_System
             txtblkLoginError.Visibility = Visibility.Hidden;
             txtblkLoginErrorOmission.Visibility = Visibility.Hidden;
         }
-
-        private List<String> UpdateUserIDs()
-        {
-            //will look through xml file for all user IDs that exist and make a list of them
-            List<String> list = new List<String> {"Admin123"};
-            return list;
-        }
         public void SwitchScreen()
         { 
-            
+            //load next screen
         }
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -42,9 +37,10 @@ namespace Library_System
             {
                 txtblkLoginErrorOmission.Visibility = Visibility.Visible;
             }
-            else if (UpdateUserIDs().Contains(pswdbxPassword.Password))
+            else if (xmlC.Exists(pswdbxPassword.Password))
             {
-                globalValues.currentUser.userID = pswdbxPassword.Password;
+                globalValues.currentUser = new User(pswdbxPassword.Password);
+                globalValues.currentUser.borrowedBooks = xmlC.GetBorrowedBooks(globalValues.currentUser);
                 SwitchScreen();
             }
             else

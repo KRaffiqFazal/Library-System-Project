@@ -9,6 +9,5 @@ namespace Library_System
     public class Globals
     {
         public User currentUser { get; set; }
-        public String path { get; set; }
     }
 }

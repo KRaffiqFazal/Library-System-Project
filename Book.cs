@@ -8,15 +8,16 @@ namespace Library_System
 {
     public class Book
     {
-        public int id { get; set; }
+        public String id { get; set; }
         public String title { get; set; }
         public String author { get; set; }
         public String year { get; set; }
         public String publisher { get; set; }
         public String edition { get; set; }
         public String isbn { get; set; }
-        public String category { get; set; }
-        public String availableCopies { get; set; }
+        public List<String> category { get; set; }
+        public int availableCopies { get; set; }
         public String description { get; set; }
+        public DateTime dueDate { get; set; }
     }
 }
