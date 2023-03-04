@@ -26,9 +26,12 @@ namespace Library_System
             txtblkLoginError.Visibility = Visibility.Hidden;
             txtblkLoginErrorOmission.Visibility = Visibility.Hidden;
         }
-        public void SwitchScreen()
-        { 
-            //load next screen
+        public async void SwitchScreen()
+        {
+            MemberPage win = new MemberPage(globalValues);
+            win.Show();
+            await Task.Delay(250);
+            Close();
         }
 
         private async void btnLogin_Click(object sender, RoutedEventArgs e)
@@ -36,11 +39,18 @@ namespace Library_System
             if (pswdbxPassword.Password.Equals(""))
             {
                 txtblkLoginErrorOmission.Visibility = Visibility.Visible;
+                await Task.Delay(3000);
+                txtblkLoginErrorOmission.Visibility = Visibility.Hidden;
             }
             else if (xmlC.Exists(pswdbxPassword.Password))
             {
                 globalValues.currentUser = new User(pswdbxPassword.Password);
-                globalValues.currentUser.borrowedBooks = xmlC.GetBorrowedBooks(globalValues.currentUser);
+                String[] temp = xmlC.GetInfo(pswdbxPassword.Password);
+
+                globalValues.currentUser.name = temp[0];
+                globalValues.currentUser.phoneNumber = temp[1];
+                globalValues.currentUser.email = temp[2];
+                globalValues.currentUser.borrowedBooks = xmlC.GetBorrowedBooks(globalValues.currentUser.userID);
                 SwitchScreen();
             }
             else
@@ -49,9 +59,6 @@ namespace Library_System
                 await Task.Delay(3000);
                 txtblkLoginError.Visibility = Visibility.Hidden;
                 txtblkLoginErrorOmission.Visibility = Visibility.Hidden;
-
-
-
             }
         }
 

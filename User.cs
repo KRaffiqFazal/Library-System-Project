@@ -10,7 +10,10 @@ namespace Library_System
     public class User
     {
         public String userID { get; set; }
+        public String name { get; set; }
         public String userType { get; set; } //determined by first 2 digits in the user ID
+        public String phoneNumber { get; set; }
+        public String email { get; set; }
         public List<Book> borrowedBooks { get; set; }
 
         public User(String id)
@@ -20,11 +23,11 @@ namespace Library_System
             {
                 userType = "member";
             }
-            else if (userID[1] == '2')
+            else if (userID[0] == '2')
             {
                 userType = "librarian";
             }
-            else
+            else if (userType[0] == '3')
             {
                 userType = "admin";
             }

@@ -19,9 +19,12 @@ namespace Library_System
     /// </summary>
     public partial class MemberPage : Window
     {
-        public MemberPage()
+        Globals globalValues;
+        public MemberPage(Globals global)
         {
             InitializeComponent();
+            globalValues = global;
+            txtblkTitle.Text = "Welcome: " + globalValues.currentUser.name;
         }
     }
 }

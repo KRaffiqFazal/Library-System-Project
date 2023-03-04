@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Diagnostics;
+using System.Globalization;
+using System.Windows.Navigation;
 
 namespace Library_System
 {
@@ -18,23 +20,7 @@ namespace Library_System
         public bool Exists(String enteredID)
         { 
             doc.Load(userPath);
-            XmlNode node;
-            if (enteredID[0] == '1')
-            {
-                node = doc.SelectSingleNode("//users/members[id='" + enteredID + "']");
-            }
-            else if (enteredID[0] == '2')
-            {
-                node = doc.SelectSingleNode("//users/librarians[id='" + enteredID + "']");
-            }
-            else if (enteredID[0] == '3')
-            {
-                node = doc.SelectSingleNode("//users/admins[id='" + enteredID + "']");
-            }
-            else
-            {
-                return false;
-            }
+            XmlNode node = UserType(enteredID);
             
             if (node != null)
             {
@@ -45,36 +31,66 @@ namespace Library_System
                 return false;
             }
         }
-
-        public List<Book> GetBorrowedBooks (User currentUser)
+        public String[] GetInfo(String userID)
         {
             doc.Load(userPath);
-            doc.Load(bookPath);
-            XmlNode userNode;
-            XmlNode bookNode;
-            if (currentUser.userType.Equals("member"))
+            XmlNode userNode = UserType(userID);
+            String[] temp = new String[3];
+            temp[0] = userNode.ChildNodes.Item(1).InnerText; //name
+            temp[1] = userNode.ChildNodes.Item(2).InnerText; //phone number
+            temp[2] = userNode.ChildNodes.Item(3).InnerText; //email
+            return temp;
+        }
+
+        public XmlNode UserType(String userID)
+        {
+            User currentUser = new User(userID);
+            if (userID[0] == '1')
             {
-                userNode = doc.SelectSingleNode("//users/members[id='" + currentUser.userID + "']");
+                currentUser.userType = "member";
             }
-            else if (currentUser.userType.Equals("librarian"))
+            else if (userID[0] == '2')
             {
-                userNode = doc.SelectSingleNode("//users/librarians[id='" + currentUser.userID + "']");
+                currentUser.userType = "librarian";
+            }
+            else if (userID[0] == '3')
+            {
+                currentUser.userType = "admin";
             }
             else
             {
-                userNode = doc.SelectSingleNode("//users/admins[id='" + currentUser.userID + "']");
-            }
-            if (userNode == null)
-            {
                 return null;
             }
+            if (currentUser.userType.Equals("member"))
+            {
+                Trace.WriteLine(Object.ReferenceEquals(doc.SelectSingleNode("/users/members/user[id='" + currentUser.userID + "']"), null));
+                return doc.SelectSingleNode("/users/members/user[id='" + currentUser.userID + "']");
+
+            }
+            else if (currentUser.userType.Equals("librarian"))
+            {
+                return doc.SelectSingleNode("/users/librarians/user[id='" + currentUser.userID + "']");
+            }
+            else
+            {
+                return doc.SelectSingleNode("/users/admins/user[id='" + currentUser.userID + "']");
+            }
+        }
+        public List<Book> GetBorrowedBooks (String userID)
+        {
+            doc.Load(bookPath);
+            XmlNode userNode = UserType(userID);
+            XmlNode bookNode;
             List<String> bookIDList = new List<String>();
+            Trace.WriteLine(userNode.ChildNodes.Item(4));
             bookIDList.AddRange(userNode.ChildNodes.Item(4).InnerText.Split(',')); //contains ids of borrowed books
             List<Book> books = new List<Book>();
             Book temp = new Book();
+            //update each empty book with values from database and put it in list of books that user has borrowed
             foreach (String bookID in bookIDList)
             {
-                bookNode = doc.SelectSingleNode("//library[id='" + bookID + "']");
+                bookNode = doc.SelectSingleNode("/library/book[id='" + bookID + "']");
+                temp = null;
                 temp.id = bookNode.ChildNodes.Item(0).InnerText;
                 temp.title = bookNode.ChildNodes.Item(1).InnerText;
                 temp.author = bookNode.ChildNodes.Item(2).InnerText;
@@ -83,12 +99,15 @@ namespace Library_System
                 temp.edition = bookNode.ChildNodes.Item(5).InnerText;
                 temp.isbn = bookNode.ChildNodes.Item(6).InnerText;
                 temp.category = new List<String>();
-                temp.category.AddRange(bookNode.ChildNodes.Item(7).InnerText.Split(','));
-                temp.availableCopies = Convert.ToInt32(bookNode.ChildNodes.Item(8).InnerText);
-                temp.description = bookNode.ChildNodes.Item(9).InnerText;
-                //add due date by using culture information
+                temp.category.AddRange(bookNode.ChildNodes.Item(7).InnerText.Split(';'));
+                temp.description = bookNode.ChildNodes.Item(8).InnerText;
+
+                // https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parseexact?view=net-7.0
+                temp.dueDate = DateTime.ParseExact(bookNode.ChildNodes.Item(9).InnerText, "ddMMyyyy", CultureInfo.InvariantCulture); //converts a string of numbers from database to dateTime;
+                
+                books.Add(temp);
             }
-            return null;
+            return books;
         }
     }
 }

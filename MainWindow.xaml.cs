@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,11 +62,12 @@ namespace Library_System
             pswdbxTerminalPassword.Visibility = Visibility.Visible;
             lblUserHelp.Visibility = Visibility.Visible;
         }
-        private void btnProceed_Click(object sender, RoutedEventArgs e)
+        private async void btnProceed_Click(object sender, RoutedEventArgs e)
         {
 
-            Window1 win2 = new Window1(globalValues);
-            win2.Show();
+            Window1 win = new Window1(globalValues);
+            win.Show();
+            await Task.Delay(250);
             Close();
 
         }
