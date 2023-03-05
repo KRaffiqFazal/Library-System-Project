@@ -24,7 +24,20 @@ namespace Library_System
         {
             InitializeComponent();
             globalValues = global;
+            txtblkLogoutMessage.Visibility = Visibility.Hidden;
             txtblkTitle.Text = "Welcome: " + globalValues.currentUser.name;
+        }
+
+        private async void picLogout_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            globalValues = null;
+            txtblkLogoutMessage.Margin = new Thickness(0, 0, 0, 0);
+            txtblkLogoutMessage.Visibility= Visibility.Visible;
+            await Task.Delay(2000);
+            MainWindow window = new MainWindow();
+            window.Show();
+            await Task.Delay(250);
+            Close();
         }
     }
 }

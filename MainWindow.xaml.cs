@@ -30,6 +30,7 @@ namespace Library_System
         {
             InitializeComponent();
             globalValues = new Globals();
+            globalValues.xmlC = new XmlController();
             Hide2();
         }
 

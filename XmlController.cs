@@ -15,10 +15,10 @@ namespace Library_System
     {
         String userPath = "Users.xml"; //borrowed books displayed with "book_id,date_borrowed;book_id2"
         String bookPath = "Library.xml";
-        XmlDocument doc = new XmlDocument();
 
         public bool Exists(String enteredID)
         { 
+            XmlDocument doc = new XmlDocument();
             doc.Load(userPath);
             XmlNode node = UserType(enteredID);
             
@@ -33,18 +33,22 @@ namespace Library_System
         }
         public String[] GetInfo(String userID)
         {
+            XmlDocument doc = new XmlDocument();
             doc.Load(userPath);
             XmlNode userNode = UserType(userID);
-            String[] temp = new String[3];
+            String[] temp = new String[4];
             temp[0] = userNode.ChildNodes.Item(1).InnerText; //name
             temp[1] = userNode.ChildNodes.Item(2).InnerText; //phone number
             temp[2] = userNode.ChildNodes.Item(3).InnerText; //email
+            temp[3] = userNode.ChildNodes.Item(5).InnerText; //notifications
             return temp;
         }
 
         public XmlNode UserType(String userID)
         {
             User currentUser = new User(userID);
+            XmlDocument doc = new XmlDocument();
+            doc.Load(userPath);
             if (userID[0] == '1')
             {
                 currentUser.userType = "member";
@@ -63,7 +67,6 @@ namespace Library_System
             }
             if (currentUser.userType.Equals("member"))
             {
-                Trace.WriteLine(Object.ReferenceEquals(doc.SelectSingleNode("/users/members/user[id='" + currentUser.userID + "']"), null));
                 return doc.SelectSingleNode("/users/members/user[id='" + currentUser.userID + "']");
 
             }
@@ -78,19 +81,22 @@ namespace Library_System
         }
         public List<Book> GetBorrowedBooks (String userID)
         {
-            doc.Load(bookPath);
+            XmlDocument doc = new XmlDocument();
             XmlNode userNode = UserType(userID);
             XmlNode bookNode;
             List<String> bookIDList = new List<String>();
-            Trace.WriteLine(userNode.ChildNodes.Item(4));
+            if (userNode.ChildNodes.Item(4).InnerText == "") //no borrowed books
+            {
+                return null;
+            }
             bookIDList.AddRange(userNode.ChildNodes.Item(4).InnerText.Split(',')); //contains ids of borrowed books
             List<Book> books = new List<Book>();
             Book temp = new Book();
+            doc.Load(bookPath);
             //update each empty book with values from database and put it in list of books that user has borrowed
             foreach (String bookID in bookIDList)
             {
                 bookNode = doc.SelectSingleNode("/library/book[id='" + bookID + "']");
-                temp = null;
                 temp.id = bookNode.ChildNodes.Item(0).InnerText;
                 temp.title = bookNode.ChildNodes.Item(1).InnerText;
                 temp.author = bookNode.ChildNodes.Item(2).InnerText;

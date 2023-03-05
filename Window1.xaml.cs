@@ -18,7 +18,6 @@ namespace Library_System
     public partial class Window1 : Window
     {
         Globals globalValues;
-        XmlController xmlC = new XmlController();
         public Window1(Globals globals)
         {
             globalValues = globals;
@@ -42,19 +41,35 @@ namespace Library_System
                 await Task.Delay(3000);
                 txtblkLoginErrorOmission.Visibility = Visibility.Hidden;
             }
-            else if (xmlC.Exists(pswdbxPassword.Password))
+            else if (globalValues.xmlC.Exists(pswdbxPassword.Password))
             {
                 globalValues.currentUser = new User(pswdbxPassword.Password);
-                String[] temp = xmlC.GetInfo(pswdbxPassword.Password);
+                String[] temp = globalValues.xmlC.GetInfo(pswdbxPassword.Password);
 
                 globalValues.currentUser.name = temp[0];
                 globalValues.currentUser.phoneNumber = temp[1];
                 globalValues.currentUser.email = temp[2];
-                globalValues.currentUser.borrowedBooks = xmlC.GetBorrowedBooks(globalValues.currentUser.userID);
+                if (temp[3].Equals("") || !temp[3].Contains(";"))
+                {
+                    if (temp[3].Equals("")) //no notifications
+                    {
+                        globalValues.currentUser.notifications = null;
+                    }
+                    else //only one notification
+                    {
+                        globalValues.currentUser.notifications.Add(temp[3]);
+                    }
+                }
+                else // >1 notifications
+                {
+                    globalValues.currentUser.notifications.AddRange(temp[3].Split(';'));
+                }
+                globalValues.currentUser.borrowedBooks = globalValues.xmlC.GetBorrowedBooks(globalValues.currentUser.userID);
                 SwitchScreen();
             }
             else
             {
+                txtblkLoginError.Margin = new Thickness(0, 0, 0, 0);
                 txtblkLoginError.Visibility = Visibility.Visible;
                 await Task.Delay(3000);
                 txtblkLoginError.Visibility = Visibility.Hidden;

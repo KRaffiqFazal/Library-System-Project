@@ -15,6 +15,7 @@ namespace Library_System
         public String phoneNumber { get; set; }
         public String email { get; set; }
         public List<Book> borrowedBooks { get; set; }
+        public List<String> notifications { get; set; }
 
         public User(String id)
         {
@@ -27,7 +28,7 @@ namespace Library_System
             {
                 userType = "librarian";
             }
-            else if (userType[0] == '3')
+            else if (userID[0] == '3')
             {
                 userType = "admin";
             }
