@@ -13,12 +13,20 @@ namespace Library_System
 {
     public class XmlController
     {
-        String userPath = "Users.xml"; //borrowed books displayed with "book_id,date_borrowed;book_id2"
-        String bookPath = "Library.xml";
+        public String userPath { get; set; }
+        public String bookPath { get; set; }
+        public XmlDocument doc { get; set; }
 
+
+        public XmlController() 
+        {
+            userPath = "Users.xml";
+            bookPath = "Library.xml";
+            doc = new XmlDocument();
+
+        }
         public bool Exists(String enteredID)
         { 
-            XmlDocument doc = new XmlDocument();
             doc.Load(userPath);
             XmlNode node = UserType(enteredID);
             
@@ -33,7 +41,6 @@ namespace Library_System
         }
         public String[] GetInfo(String userID)
         {
-            XmlDocument doc = new XmlDocument();
             doc.Load(userPath);
             XmlNode userNode = UserType(userID);
             String[] temp = new String[4];
@@ -47,7 +54,6 @@ namespace Library_System
         public XmlNode UserType(String userID)
         {
             User currentUser = new User(userID);
-            XmlDocument doc = new XmlDocument();
             doc.Load(userPath);
             if (userID[0] == '1')
             {
@@ -81,7 +87,6 @@ namespace Library_System
         }
         public List<Book> GetBorrowedBooks (String userID)
         {
-            XmlDocument doc = new XmlDocument();
             XmlNode userNode = UserType(userID);
             XmlNode bookNode;
             List<String> bookIDList = new List<String>();

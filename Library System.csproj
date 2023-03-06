@@ -60,6 +60,9 @@
     <Compile Include="MemberPage.xaml.cs">
       <DependentUpon>MemberPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Profile.xaml.cs">
+      <DependentUpon>Profile.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
@@ -78,6 +81,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="MemberPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Profile.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,6 +124,39 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="SearchButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="BorrowButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ReturnButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ProfileButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ManageBooks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="LibrarianManageMembers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="TrackOverdueBooks.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="LibrarianLogErrors.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="AdminManageUsers.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="AdminErrors.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Back.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
