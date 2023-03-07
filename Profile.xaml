@@ -58,7 +58,6 @@
         </Style>
     </Window.Resources>
     <Grid Width="1920" Height="1080" Background="#FFB4F5F4" >
-        <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="113" Margin="0,61,0,0" TextWrapping="NoWrap" Text="My Profile" VerticalAlignment="Top" Width="Auto" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>
         <Image x:Name="picBack" Cursor="Hand" HorizontalAlignment="Left" Height="178" Margin="1566,5,0,0" VerticalAlignment="Top" Width="344" Source="/Back.png" MouseLeftButtonDown="picBack_MouseLeftButtonDown"/>
         <Image x:Name="picLogo" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/logo.png" Stretch="UniformToFill" Margin="0,20,0,0" Height="343" Width="445" MouseLeftButtonDown="picLogo_MouseLeftButtonDown"/>
         <Button Style="{DynamicResource CurvedButton}" Cursor="Hand" x:Name="btnSave" Content="Save" HorizontalAlignment="Left" Height="141" Margin="1566,886,0,0" VerticalAlignment="Top" Width="344" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="100" Click="btnSave_Click">
@@ -80,6 +79,21 @@
         <TextBox x:Name="txtbxMobile" HorizontalAlignment="Left" Height="109" Margin="459,696,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
         <TextBox x:Name="txtbxEmail" HorizontalAlignment="Left" Height="104" Margin="459,805,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
         <TextBlock x:Name="txtblkErrorMessage" HorizontalAlignment="Left" Height="108" Margin="58,914,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="1057" FontFamily="Verdana" FontSize="40" FontWeight="Bold" Foreground="Red"/>
+        <Button Style="{DynamicResource CurvedButton}" Cursor="Hand" x:Name="btnReset" Content="Undo" HorizontalAlignment="Left" Height="141" Margin="1566,661,0,0" VerticalAlignment="Top" Width="344" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="100" Click="btnReset_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF557B54"/>
+                    <GradientStop Color="#FF557B54" Offset="1"/>
+                    <GradientStop Color="#FF3E5E42" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Image x:Name="picNotifications" Cursor="Hand" HorizontalAlignment="Left" Height="365" Margin="1566,248,0,0" VerticalAlignment="Top" Width="344" Source="/NotiificationButton.png" MouseLeftButtonDown="picNotifications_MouseLeftButtonDown"/>
+        <Rectangle x:Name="rctnglCover" HorizontalAlignment="Left" Height="592" Margin="-1222,457,0,0" VerticalAlignment="Top" Width="1057" Fill="#FFCFF3F3" Stroke="#FF4E724E"/>
+        <ScrollViewer x:Name="scrlvwrNotifications" HorizontalAlignment="Left" Height="520" Margin="-1196,494,0,0" VerticalAlignment="Top" Width="1004">
+            <TextBlock x:Name="txtblkNotifications" TextWrapping="Wrap" FontFamily="Verdana" FontSize="40" FontWeight="Bold" Width="1058"><Run Language="en-gb" Text="xxx"/></TextBlock>
+        </ScrollViewer>
+        <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="113" Margin="0,123,0,0" TextWrapping="NoWrap" Text="My Profile" VerticalAlignment="Top" Width="Auto" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>
 
     </Grid>
 </Window>

@@ -33,7 +33,36 @@ namespace Library_System
             Close();
         }
 
-        private async void btnLogin_Click(object sender, RoutedEventArgs e)
+        private void btnLogin_Click(object sender, RoutedEventArgs e)
+        {
+            Login();
+        }
+
+        private void txtbxWatermarkedText_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtbxWatermarkedText.Visibility = Visibility.Collapsed;
+            pswdbxPassword.Visibility = Visibility.Visible;
+            pswdbxPassword.Focus();
+        }
+
+        private void pswdbxTerminalPassword_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrEmpty(pswdbxPassword.Password))
+            {
+                pswdbxPassword.Visibility = Visibility.Collapsed;
+                txtbxWatermarkedText.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void pswdbxPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter) 
+            {
+                Login();
+            }
+        }
+
+        private async void Login()
         {
             if (pswdbxPassword.Password.Equals(""))
             {
@@ -74,22 +103,6 @@ namespace Library_System
                 await Task.Delay(3000);
                 txtblkLoginError.Visibility = Visibility.Hidden;
                 txtblkLoginErrorOmission.Visibility = Visibility.Hidden;
-            }
-        }
-
-        private void txtbxWatermarkedText_GotFocus(object sender, RoutedEventArgs e)
-        {
-            txtbxWatermarkedText.Visibility = Visibility.Collapsed;
-            pswdbxPassword.Visibility = Visibility.Visible;
-            pswdbxPassword.Focus();
-        }
-
-        private void pswdbxTerminalPassword_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (string.IsNullOrEmpty(pswdbxPassword.Password))
-            {
-                pswdbxPassword.Visibility = Visibility.Collapsed;
-                txtbxWatermarkedText.Visibility = Visibility.Visible;
             }
         }
     }

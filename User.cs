@@ -32,6 +32,8 @@ namespace Library_System
             {
                 userType = "admin";
             }
+            notifications = new List<String>();
+            borrowedBooks = new List<Book>();
         }
     }
 }

@@ -21,6 +21,10 @@ namespace Library_System
     public partial class Profile : Window
     {
         Globals globalValues;
+        String oldName;
+        String oldPhone;
+        String oldEmail;
+        bool page1 = true;
         public Profile(Globals globals)
         {
             InitializeComponent();
@@ -29,6 +33,13 @@ namespace Library_System
             txtbxName.Text = globalValues.currentUser.name;
             txtbxMobile.Text = globalValues.currentUser.phoneNumber;
             txtbxEmail.Text = globalValues.currentUser.email;
+
+            oldName = globalValues.currentUser.name;
+            oldPhone = globalValues.currentUser.phoneNumber;
+            oldEmail = globalValues.currentUser.email;
+
+            rctnglCover.Visibility = Visibility.Hidden;
+            scrlvwrNotifications.Visibility = Visibility.Hidden;
         }
         private async void Home()
         {
@@ -39,7 +50,21 @@ namespace Library_System
         }
         private void picBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            Home();
+            if (page1)
+            {
+                Home();
+            }
+            else
+            {
+                rctnglCover.Visibility = Visibility.Hidden;
+                scrlvwrNotifications.Visibility = Visibility.Hidden;
+
+                btnReset.Visibility = Visibility.Visible;
+                btnSave.Visibility = Visibility.Visible;
+                picNotifications.Visibility = Visibility.Visible;
+
+                page1 = true;
+            }
         }
 
         private void picLogo_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -104,6 +129,54 @@ namespace Library_System
             txtblkErrorMessage.Text = "Save Unsuccessful: " + msg;
             await Task.Delay(10000);
             txtblkErrorMessage.Text = "";
+        }
+
+        private async void btnReset_Click(object sender, RoutedEventArgs e)
+        {
+            txtbxName.Text = oldName;
+            txtbxMobile.Text = oldPhone;
+            txtbxEmail.Text = oldEmail;
+            txtblkErrorMessage.Foreground = Brushes.Black;
+            txtblkErrorMessage.Text = "Changes undone, remember to save!";
+            await Task.Delay(4000);
+            txtblkErrorMessage.Text = "";
+        }
+
+        private void picNotifications_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            rctnglCover.Margin = new Thickness(59, 437, 0, 0);
+            rctnglCover.Visibility = Visibility.Visible;
+            scrlvwrNotifications.Margin = new Thickness(85, 473, 0, 0);
+            scrlvwrNotifications.Visibility = Visibility.Visible;
+            txtblkNotifications.Text = "";
+
+            btnSave.Visibility = Visibility.Hidden;
+            btnReset.Visibility = Visibility.Hidden;
+            picNotifications.Visibility = Visibility.Hidden;
+
+            XmlNode userNode = globalValues.xmlC.UserType(globalValues.currentUser.userID);
+            if (userNode.ChildNodes.Item(4).InnerText.Equals("") && userNode.ChildNodes.Item(5).Equals("")) //item 5 is notifications and item 4 is books
+            {
+                txtblkNotifications.Text = "Clear!"; //no borrowed books and no active notifications
+            }
+            if (!userNode.ChildNodes.Item(4).InnerText.Equals("")) // there are books that are currently being borrowed
+            {
+                List<Book> books = globalValues.xmlC.GetBorrowedBooks(globalValues.currentUser.userID);
+                foreach (Book book in books)
+                {
+                    txtblkNotifications.Text += book.title + " has been borrowed until " + book.dueDate.ToShortDateString() + "\n";
+                }
+            }
+            if (!userNode.ChildNodes.Item(5).InnerText.Equals("")) //there are notifications to be displayed
+            {
+                List<String> notifications = new List<String>();
+                notifications.AddRange(userNode.ChildNodes.Item(5).InnerText.Split('}'));
+                foreach (String notif in notifications)
+                {
+                    txtblkNotifications.Text += notif + "\n";
+                }
+            }
+            page1 = false;
         }
     }
 }

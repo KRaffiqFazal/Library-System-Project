@@ -141,5 +141,13 @@ namespace Library_System
             await Task.Delay(250);
             Close();
         }
+
+        private async void picSearchForBooks_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            SearchBooks win = new SearchBooks(globalValues);
+            win.Show();
+            await Task.Delay(250);
+            Close();
+        }
     }
 }

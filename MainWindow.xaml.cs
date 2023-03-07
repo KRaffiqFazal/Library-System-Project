@@ -117,9 +117,6 @@ namespace Library_System
             Hide2();
             Reveal1();
         }
-        /// <summary>
-        /// https://learn.microsoft.com/en-us/dotnet/api/system.windows.input.keyboard.keydown?view=windowsdesktop-7.0
-        /// </summary>
         private void PasswordEnter()
         {
                 if (pswdbxTerminalPassword.Password.Equals(terminalPassword))
