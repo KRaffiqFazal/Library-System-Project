@@ -19,5 +19,11 @@ namespace Library_System
         public int availableCopies { get; set; }
         public String description { get; set; }
         public DateTime dueDate { get; set; }
+        public decimal price { get; set; }
+
+        public Book()
+        { 
+            availableCopies = 0;
+        }
     }
 }

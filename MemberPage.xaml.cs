@@ -149,5 +149,13 @@ namespace Library_System
             await Task.Delay(250);
             Close();
         }
+
+        private async void picLogErrors_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ErrorLogger win = new ErrorLogger(globalValues);
+            win.Show();
+            await Task.Delay(250);
+            Close();
+        }
     }
 }

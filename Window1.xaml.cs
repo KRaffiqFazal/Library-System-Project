@@ -100,6 +100,7 @@ namespace Library_System
             {
                 txtblkLoginError.Margin = new Thickness(0, 0, 0, 0);
                 txtblkLoginError.Visibility = Visibility.Visible;
+                pswdbxPassword.Password = "";
                 await Task.Delay(3000);
                 txtblkLoginError.Visibility = Visibility.Hidden;
                 txtblkLoginErrorOmission.Visibility = Visibility.Hidden;

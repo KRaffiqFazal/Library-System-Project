@@ -74,9 +74,9 @@
             </Button.Background>
         </Button>
         <Image x:Name="picTrackOverdueBooks" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,-85,0,0" VerticalAlignment="Top" Width="284" Source="/TrackOverdueBooks.png"/>
-        <Image x:Name="picLogErrors" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,199,0,0" VerticalAlignment="Top" Width="284" Source="/LibrarianLogErrors.png"/>
+        <Image x:Name="picLogErrors" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,199,0,0" VerticalAlignment="Top" Width="284" Source="/LibrarianLogErrors.png" MouseLeftButtonDown="picLogErrors_MouseLeftButtonDown"/>
         <Image x:Name="picManageUsers" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,483,0,0" VerticalAlignment="Top" Width="284" Source="/AdminManageUsers.png"/>
-        <Image x:Name="picErrors" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,767,0,0" VerticalAlignment="Top" Width="284" Source="/AdminErrors.png"/>
+        <Image x:Name="picErrors" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,767,0,0" VerticalAlignment="Top" Width="284" Source="/AdminErrors.png" MouseLeftButtonDown="picLogErrors_MouseLeftButtonDown"/>
         <Image x:Name="picManageBooks" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-769,-90,0,0" VerticalAlignment="Top" Width="284" Source="/ManageBooks.png"/>
         <Image x:Name="picManageMembers" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-774,194,0,0" VerticalAlignment="Top" Width="284" Source="/LibrarianManageMembers.png"/>
         <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="Auto" Margin="0,123,0,0" TextWrapping="Wrap" Text="Welcome: xxx" VerticalAlignment="Top" Width="744" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>

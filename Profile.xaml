@@ -94,6 +94,7 @@
             <TextBlock x:Name="txtblkNotifications" TextWrapping="Wrap" FontFamily="Verdana" FontSize="40" FontWeight="Bold" Width="1058"><Run Language="en-gb" Text="xxx"/></TextBlock>
         </ScrollViewer>
         <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="113" Margin="0,123,0,0" TextWrapping="NoWrap" Text="My Profile" VerticalAlignment="Top" Width="Auto" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>
+        <Image x:Name="imgMugshot" HorizontalAlignment="Left" Height="225" Margin="1157,367,0,0" VerticalAlignment="Top" Width="278"/>
 
     </Grid>
 </Window>
