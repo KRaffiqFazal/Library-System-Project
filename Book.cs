@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library_System
 {
@@ -20,10 +17,14 @@ namespace Library_System
         public String description { get; set; }
         public DateTime dueDate { get; set; }
         public decimal price { get; set; }
+        public bool reserved { get; set; }
+        public bool renewed { get; set; }
 
         public Book()
-        { 
+        {
             availableCopies = 0;
+            reserved = false;
+            renewed = false;
         }
     }
 }

@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Xml;
 
 namespace Library_System
@@ -154,23 +147,25 @@ namespace Library_System
             btnReset.Visibility = Visibility.Hidden;
             picNotifications.Visibility = Visibility.Hidden;
 
-            XmlNode userNode = globalValues.xmlC.UserType(globalValues.currentUser.userID);
-            if (userNode.ChildNodes.Item(4).InnerText.Equals("") && userNode.ChildNodes.Item(5).Equals("")) //item 5 is notifications and item 4 is books
+            if (globalValues.currentUser.notifications.Count == 0 && globalValues.currentUser.borrowedBooks.Count == 0 && globalValues.currentUser.reserved.Equals(""))
             {
                 txtblkNotifications.Text = "Clear!"; //no borrowed books and no active notifications
             }
-            if (!userNode.ChildNodes.Item(4).InnerText.Equals("")) // there are books that are currently being borrowed
+            if (!(globalValues.currentUser.reserved.Equals(""))) //there is a book being reserved
             {
-                List<Book> books = globalValues.xmlC.GetBorrowedBooks(globalValues.currentUser.userID);
+                txtblkNotifications.Text += globalValues.xmlC.BookCompiler()[globalValues.xmlC.BookCompiler().FindIndex(book => book.id == globalValues.currentUser.reserved)].title + " is being reserved.\n";
+            }
+            if (!(globalValues.currentUser.borrowedBooks.Count == 0)) // there are books that are currently being borrowed
+            {
+                List<Book> books = globalValues.currentUser.borrowedBooks;
                 foreach (Book book in books)
                 {
-                    txtblkNotifications.Text += book.title + " has been borrowed until " + book.dueDate.ToShortDateString() + "\n";
+                    txtblkNotifications.Text += book.id + " " + book.title + " has been borrowed until " + book.dueDate.ToShortDateString() + "\n";
                 }
             }
-            if (!userNode.ChildNodes.Item(5).InnerText.Equals("")) //there are notifications to be displayed
+            if (!(globalValues.currentUser.notifications.Count == 0))//there are notifications to be displayed
             {
-                List<String> notifications = new List<String>();
-                notifications.AddRange(userNode.ChildNodes.Item(5).InnerText.Split('}'));
+                List<String> notifications = globalValues.currentUser.notifications;
                 foreach (String notif in notifications)
                 {
                     txtblkNotifications.Text += notif + "\n";

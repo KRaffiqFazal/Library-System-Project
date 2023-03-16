@@ -1,16 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Library_System
 {
@@ -35,7 +29,7 @@ namespace Library_System
             Close();
         }
 
-        private void UserCheck() 
+        private void UserCheck()
         {
             if (globalValues.currentUser.borrowedBooks.Count >= 6)
             {
@@ -74,34 +68,64 @@ namespace Library_System
         {
             if (txtbxToBorrow.Text.Equals(""))
             {
+                lblError.Foreground = Brushes.Red;
                 lblError.Content = "Error: No input detected.";
                 await Task.Delay(3000);
             }
-            else if (globalValues.xmlC.GetAllBooks().FindIndex(book => book.id == txtbxToBorrow.Text) != -1) //if the entered id exists in the database, proceeds
+            else if (globalValues.xmlC.BookCompiler().FindIndex(book => book.id == txtbxToBorrow.Text) != -1) //if the entered id exists in the database, proceeds
             {
-                List<Book> books = globalValues.xmlC.GetAllBooks();
+                List<Book> books = globalValues.xmlC.BookCompiler();
                 int index = books.FindIndex(book => book.id == txtbxToBorrow.Text);
                 Book toBorrow = books[index];
                 if (toBorrow.dueDate == DateTime.MinValue) //can be borrowed
                 {
                     toBorrow.dueDate = DateTime.Now.AddDays(30); //due in a month
                     txtbxToBorrow.Text = "";
-                    globalValues.xmlC.UpdateRecord(toBorrow);
+                    globalValues.xmlC.UpdateRecord(toBorrow, true);
+                    globalValues.currentUser.borrowedBooks.Add(toBorrow);
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
+                    lblError.Foreground = Brushes.Red;
                     lblError.Content = "Book Borrowed, happy reading!";
                     await Task.Delay(3000);
                     lblError.Content = "";
 
                 }
-                else
+                else //needs to check if the borrowed book belongs to a user or is lost
                 {
-                    lblError.Content = "Please report to a librarian with this book immediately."; //the book is in the library whilst it has been borrowed, librarian needs to report it.
+                    if (globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == txtbxToBorrow.Text) != -1) //belongs to a user
+                    {
+                        lblError.Foreground = Brushes.Red;
+                        lblError.Content = "This book has already been borrowed.";
+                        await Task.Delay(3000);
+                        lblError.Content = "";
+                    }
+                    else
+                    {
+                        lblError.Foreground = Brushes.Red;
+                        lblError.Content = "Please report this book to a librarian immediately.";
+                    }
+
                 }
             }
             else
             {
+                lblError.Foreground = Brushes.Red;
                 lblError.Content = "Error: ID not found, please enter a valid book ID.";
                 await Task.Delay(3000);
+                lblError.Content = "";
+            }
+        }
+
+        private void txtbxToBorrow_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            String id = txtbxToBorrow.Text;
+            if (globalValues.xmlC.BookCompiler().FindIndex(book => book.id == id) != -1) //exists
+            {
+                lblError.Foreground = Brushes.Black;
+                lblError.Content = globalValues.xmlC.BookCompiler()[globalValues.xmlC.BookCompiler().FindIndex(book => book.id == id)].title;
+            }
+            else
+            {
                 lblError.Content = "";
             }
         }

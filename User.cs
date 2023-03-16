@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Library_System
 {
@@ -14,9 +10,11 @@ namespace Library_System
         public String userType { get; set; } //determined by first 2 digits in the user ID
         public String phoneNumber { get; set; }
         public String email { get; set; }
-        
+
         public List<Book> borrowedBooks { get; set; }
         public List<String> notifications { get; set; }
+
+        public String reserved { get; set; }
 
         public User(String id)
         {

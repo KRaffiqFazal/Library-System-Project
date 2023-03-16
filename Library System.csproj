@@ -78,7 +78,13 @@
     <Compile Include="SearchBooks.xaml.cs">
       <DependentUpon>SearchBooks.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SearchUsers.xaml.cs">
+      <DependentUpon>SearchUsers.xaml</DependentUpon>
+    </Compile>
     <Compile Include="User.cs" />
+    <Compile Include="UserLine.xaml.cs">
+      <DependentUpon>UserLine.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Window1.xaml.cs">
       <DependentUpon>Window1.xaml</DependentUpon>
     </Compile>
@@ -120,6 +126,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="SearchBooks.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SearchUsers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserLine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

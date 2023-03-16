@@ -73,7 +73,7 @@
         <Label Content="ID:" HorizontalAlignment="Left" Height="104" Margin="58,0,0,0" VerticalAlignment="Center" Width="164" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
         <Label Content="Name:" HorizontalAlignment="Left" Height="104" Margin="58,592,0,0" VerticalAlignment="Top" Width="249" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
         <Label Content="Mobile No: " HorizontalAlignment="Left" Height="104" Margin="58,701,0,0" VerticalAlignment="Top" Width="444" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
-        <Label Content="E-mail:" HorizontalAlignment="Left" Height="104" Margin="58,805,0,0" VerticalAlignment="Top" Width="249" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
+        <Label Content="E-mail:" HorizontalAlignment="Left" Height="104" Margin="58,805,0,0" VerticalAlignment="Top" Width="279" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
         <Label x:Name="lblID" Cursor="No"  Content="xxx" HorizontalAlignment="Left" Height="104" Margin="459,0,0,0" VerticalAlignment="Center" Width="627" FontFamily="Verdana" FontWeight="Bold" FontSize="40" Background="#FFFBFBFB" BorderBrush="Black" BorderThickness="1,1,1,1"/>
         <TextBox x:Name="txtbxName" HorizontalAlignment="Left" Height="104" Margin="459,592,0,0" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" TextWrapping="Wrap" Text="xxx"/>
         <TextBox x:Name="txtbxMobile" HorizontalAlignment="Left" Height="109" Margin="459,696,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
@@ -91,7 +91,7 @@
         <Image x:Name="picNotifications" Cursor="Hand" HorizontalAlignment="Left" Height="365" Margin="1566,248,0,0" VerticalAlignment="Top" Width="344" Source="/NotiificationButton.png" MouseLeftButtonDown="picNotifications_MouseLeftButtonDown"/>
         <Rectangle x:Name="rctnglCover" HorizontalAlignment="Left" Height="592" Margin="-1222,457,0,0" VerticalAlignment="Top" Width="1057" Fill="#FFCFF3F3" Stroke="#FF4E724E"/>
         <ScrollViewer x:Name="scrlvwrNotifications" HorizontalAlignment="Left" Height="520" Margin="-1196,494,0,0" VerticalAlignment="Top" Width="1004">
-            <TextBlock x:Name="txtblkNotifications" TextWrapping="Wrap" FontFamily="Verdana" FontSize="40" FontWeight="Bold" Width="1058"><Run Language="en-gb" Text="xxx"/></TextBlock>
+            <TextBlock x:Name="txtblkNotifications" TextWrapping="Wrap" FontFamily="Verdana" FontSize="40" FontWeight="Bold" Height="Auto" Width="917"><Run Language="en-gb" Text="xxx"/></TextBlock>
         </ScrollViewer>
         <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="113" Margin="0,123,0,0" TextWrapping="NoWrap" Text="My Profile" VerticalAlignment="Top" Width="Auto" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>
         <Image x:Name="imgMugshot" HorizontalAlignment="Left" Height="225" Margin="1157,367,0,0" VerticalAlignment="Top" Width="278"/>

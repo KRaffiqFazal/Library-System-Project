@@ -172,16 +172,23 @@
         <Image x:Name="picLogo" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/logo.png" Stretch="UniformToFill" Margin="0,20,0,0" Height="343" Width="445" MouseLeftButtonDown="picLogo_MouseLeftButtonDown"/>
         <Image x:Name="picBack" Cursor="Hand" HorizontalAlignment="Left" Height="178" Margin="1566,5,0,0" VerticalAlignment="Top" Width="344" Source="/Back.png" MouseLeftButtonDown="picBack_MouseLeftButtonDown"/>
         <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="113" Margin="0,123,0,0" TextWrapping="NoWrap" Text="Search for Books" VerticalAlignment="Top" Width="Auto" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>
-        <TextBox Style="{DynamicResource Curved}" x:Name="txtbxSearch" LostFocus="txtbxSearch_LostFocus" HorizontalAlignment="Left" Margin="619,295,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="675" FontSize="50" FontFamily="Verdana" Height="46"/>
+        <TextBox Style="{DynamicResource Curved}" x:Name="txtbxSearch" TextChanged="txtbxSearch_TextChanged" LostFocus="txtbxSearch_LostFocus" HorizontalAlignment="Left" Margin="619,295,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="675" FontSize="50" FontFamily="Verdana" Height="46"/>
         <TextBox Style="{DynamicResource Curved}" x:Name="txtbxWatermarkedText" GotFocus="txtbxWatermarkedText_GotFocus" HorizontalAlignment="Left" Margin="619,295,0,0" TextWrapping="NoWrap" Text="Search" VerticalAlignment="Top" Width="675" FontSize="50" FontStyle="Italic" Foreground="#FF848282" FontFamily="Verdana" Height="46"/>
         <Rectangle HorizontalAlignment="Left" Height="657" Margin="10,413,0,0" Stroke="Black" VerticalAlignment="Top" Width="1521" Fill="#FFCCF7F7"/>
         <Rectangle HorizontalAlignment="Left" Height="657" Margin="1536,413,0,0" Stroke="Black" VerticalAlignment="Top" Width="374" Fill="#FFCCF7F7"/>
         <ScrollViewer HorizontalAlignment="Left" Height="580" Margin="62,452,0,0" VerticalAlignment="Top" Width="1418" ClipToBounds="True">
             <StackPanel x:Name="stackPanel" Height="Auto" Width="Auto" Orientation="Vertical"/>
         </ScrollViewer>
+        <Label Content="Filters:" Margin="1536,413,10,586" FontFamily="Verdana" FontWeight="Bold" FontSize="40" FontStyle="Italic" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="Title" Margin="1566,522,-20,477" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="Author" Margin="1566,602,-20,397" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="ISBN" Margin="1566,682,-20,316" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="Year" Margin="1566,757,-20,242" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="Publisher" Margin="1566,837,-20,162" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="Category" Margin="1566,915,-20,84" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
         <Rectangle x:Name="rctnglFocus" HorizontalAlignment="Left" Height="558" Margin="80,474,0,0" Stroke="Black" VerticalAlignment="Top" Width="1310" Fill="White"/>
         <Image x:Name="picBookFocus" HorizontalAlignment="Left" Height="300" Margin="1088,576,0,0" VerticalAlignment="Top" Width="300"/>
-        <Button Style="{DynamicResource CurvedButton}" x:Name="btnReserve" Cursor="Hand" Content="Reserve" HorizontalAlignment="Left" Height="137" Margin="1089,895,0,0" VerticalAlignment="Top" Width="300" FontFamily="Verdana" FontWeight="Bold" Foreground="White" FontSize="50" BorderBrush="{x:Null}">
+        <Button Style="{DynamicResource CurvedButton}" x:Name="btnReserve" Cursor="Hand" Content="Reserve" HorizontalAlignment="Left" Height="137" Margin="1089,895,0,0" VerticalAlignment="Top" Width="300" FontFamily="Verdana" FontWeight="Bold" Foreground="White" FontSize="50" BorderBrush="{x:Null}" Click="btnReserve_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF517651"/>
@@ -191,9 +198,70 @@
             </Button.Background>
         </Button>
         <Button Style="{DynamicResource Crossbutton}" x:Name="btnCloseFocus" Cursor="Hand" Content="X" HorizontalAlignment="Left" Height="102" Margin="1288,474,0,0" VerticalAlignment="Top" Width="102" Background="Red" FontFamily="Verdana" Foreground="White" FontWeight="Bold" FontSize="50" BorderBrush="{x:Null}" Click="btnCloseFocus_Click"/>
-        <ScrollViewer x:Name="scrlvwrFocus" Margin="99,504,896,78">
+        <ScrollViewer x:Name="scrlvwrFocus" Margin="99,504,896,138">
             <TextBlock x:Name="txtblkBookInfoFocus" Height="Auto" TextWrapping="Wrap" Text="Title" Width="Auto" FontFamily="Verdana" FontSize="30" FontStyle="Italic" FontWeight="Bold"/>
         </ScrollViewer>
+        <Label x:Name="lblError" Content="" HorizontalAlignment="Left" Height="85" Margin="80,947,0,0" VerticalAlignment="Top" Width="944" Background="{x:Null}" Foreground="Red" FontFamily="Verdana" FontWeight="Bold" FontSize="20" VerticalContentAlignment="Center"/>
+        <CheckBox x:Name="chkbxTitle" Content="" HorizontalAlignment="Left" Height="15" Margin="1606,555,0,0" VerticalAlignment="Top" Width="20" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="7" IsChecked="True" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontStyle="Italic">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="5" ScaleY="5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+        <CheckBox x:Name="chkbxAuthor" Content="" HorizontalAlignment="Left" Height="15" Margin="1606,635,0,0" VerticalAlignment="Top" Width="20" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="7" IsChecked="True" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontStyle="Italic">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="5" ScaleY="5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+        <CheckBox x:Name="chkbxIsbn" Content="" HorizontalAlignment="Left" Height="15" Margin="1606,715,0,0" VerticalAlignment="Top" Width="20" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="7" IsChecked="False" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontStyle="Italic">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="5" ScaleY="5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+        <CheckBox x:Name="chkbxYear" Content="" HorizontalAlignment="Left" Height="15" Margin="1606,790,0,0" VerticalAlignment="Top" Width="20" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="7" IsChecked="False" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontStyle="Italic">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="5" ScaleY="5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+        <CheckBox x:Name="chkbxPublisher" Content="" HorizontalAlignment="Left" Height="15" Margin="1606,870,0,0" VerticalAlignment="Top" Width="20" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="7" IsChecked="False" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontStyle="Italic">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="5" ScaleY="5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
+        <CheckBox x:Name="chkbxCategory" Content="" HorizontalAlignment="Left" Height="15" Margin="1606,948,0,0" VerticalAlignment="Top" Width="20" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="7" IsChecked="False" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontStyle="Italic">
+            <CheckBox.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="5" ScaleY="5"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </CheckBox.RenderTransform>
+        </CheckBox>
 
 
     </Grid>

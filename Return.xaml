@@ -105,10 +105,19 @@
         <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="Auto" Margin="0,123,0,0" TextWrapping="Wrap" Text="Return a Book" VerticalAlignment="Top" Width="636" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>
         <Image x:Name="picLogo" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/logo.png" Stretch="UniformToFill" Margin="0,20,0,0" Height="343" Width="445" MouseLeftButtonDown="picLogo_MouseLeftButtonDown"/>
         <Image x:Name="picBack" Cursor="Hand" HorizontalAlignment="Left" Height="178" Margin="1566,5,0,0" VerticalAlignment="Top" Width="344" Source="/Back.png" MouseLeftButtonDown="picBack_MouseLeftButtonDown"/>
-        <TextBox Style="{DynamicResource Curved}" x:Name="txtbxToReturn" LostFocus="txtbxToBorrow_LostFocus" HorizontalAlignment="Center" Height="120" TextWrapping="Wrap" VerticalAlignment="Top" Width="636" Margin="0,420,0,0" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="70" Text="dafd"/>
+        <TextBox Style="{DynamicResource Curved}" x:Name="txtbxToReturn" TextChanged="txtbxToReturn_TextChanged" LostFocus="txtbxToBorrow_LostFocus" HorizontalAlignment="Center" Height="120" TextWrapping="Wrap" VerticalAlignment="Top" Width="636" Margin="0,420,0,0" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="70"/>
         <TextBox Style="{DynamicResource Curved}" x:Name="txtbxWatermarked" GotFocus="txtbxWatermarked_GotFocus" HorizontalAlignment="Center" Height="120" TextWrapping="Wrap" VerticalAlignment="Top" Width="636" Margin="0,420,0,0" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="70" Foreground="#FF5D5D5D" FontStyle="Italic" Text="BookID"/>
-        <Label x:Name="lblError" Content="" HorizontalAlignment="Center" Height="94" Margin="0,562,0,0" VerticalAlignment="Top" Width="1372" FontWeight="Bold" FontFamily="Verdana" Foreground="Red" FontSize="50" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}"/>
-        <Button Style="{DynamicResource CurvedButton}" x:Name="btnReturn" Content="Return" HorizontalAlignment="Center" Height="208" Margin="0,661,0,0" VerticalAlignment="Top" Width="636" BorderBrush="{x:Null}" FontFamily="Verdana" Foreground="White" FontWeight="Bold" FontSize="130" Click="btnReturn_Click">
+        <Label x:Name="lblError" Content="" HorizontalAlignment="Center" Height="94" Margin="0,562,0,0" VerticalAlignment="Top" Width="1372" FontWeight="Bold" FontFamily="Verdana" Foreground="Red" FontSize="30" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Background="{x:Null}"/>
+        <Button Style="{DynamicResource CurvedButton}" x:Name="btnReturn" Cursor="Hand" Content="Return" HorizontalAlignment="Left" Height="208" Margin="319,656,0,0" VerticalAlignment="Top" Width="636" BorderBrush="{x:Null}" FontFamily="Verdana" Foreground="White" FontWeight="Bold" FontSize="130" Click="btnReturn_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF517651"/>
+                    <GradientStop Color="#FF517651" Offset="1"/>
+                    <GradientStop Color="#FF406144" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button Style="{DynamicResource CurvedButton}" x:Name="btnRenew" Cursor="Hand" Content="Renew" HorizontalAlignment="Left" Height="208" Margin="960,656,0,0" VerticalAlignment="Top" Width="636" BorderBrush="{x:Null}" FontFamily="Verdana" Foreground="White" FontWeight="Bold" FontSize="130" Click="btnRenew_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF517651"/>
@@ -119,4 +128,4 @@
         </Button>
 
     </Grid>
-    </Window>
+</Window>

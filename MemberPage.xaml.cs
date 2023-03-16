@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Library_System
 {
@@ -27,8 +17,8 @@ namespace Library_System
             globalValues = global;
             txtblkLogoutMessage.Visibility = Visibility.Hidden;
             txtblkTitle.Text = "Welcome: " + globalValues.currentUser.name;
-            
-            if (globalValues.currentUser.userType.Equals("member")) 
+
+            if (globalValues.currentUser.userType.Equals("member"))
             {
                 btnNextBack.Visibility = Visibility.Hidden; //members can't see additional functionality
                 LoadPage1();
@@ -39,7 +29,7 @@ namespace Library_System
         {
             globalValues = null;
             txtblkLogoutMessage.Margin = new Thickness(0, 0, 0, 0);
-            txtblkLogoutMessage.Visibility= Visibility.Visible;
+            txtblkLogoutMessage.Visibility = Visibility.Visible;
             await Task.Delay(2000);
             MainWindow window = new MainWindow();
             window.Show();
@@ -74,7 +64,7 @@ namespace Library_System
             picBorrowBooks.Margin = new Thickness(608, 430, 0, 0);
             picReturn.Margin = new Thickness(995, 430, 0, 0);
             picProfile.Margin = new Thickness(1382, 430, 0, 0);
-            
+
             picSearchForBooks.Visibility = Visibility.Visible; //make elements visible
             picBorrowBooks.Visibility = Visibility.Visible;
             picReturn.Visibility = Visibility.Visible;
@@ -90,9 +80,9 @@ namespace Library_System
             btnNextBack.Content = "Next"; //change content of button
         }
 
-        private void LoadPage2Librarian() 
+        private void LoadPage2Librarian()
         {
-            picManageBooks.Margin = new Thickness(221, 430, 0, 0); 
+            picManageBooks.Margin = new Thickness(221, 430, 0, 0);
             picManageMembers.Margin = new Thickness(608, 430, 0, 0);
             picTrackOverdueBooks.Margin = new Thickness(995, 430, 0, 0);
             picLogErrors.Margin = new Thickness(1382, 430, 0, 0);
@@ -153,6 +143,22 @@ namespace Library_System
         private async void picLogErrors_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             ErrorLogger win = new ErrorLogger(globalValues);
+            win.Show();
+            await Task.Delay(250);
+            Close();
+        }
+
+        private async void picBorrowBooks_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Borrow win = new Borrow(globalValues);
+            win.Show();
+            await Task.Delay(250);
+            Close();
+        }
+
+        private async void picReturn_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Return win = new Return(globalValues);
             win.Show();
             await Task.Delay(250);
             Close();

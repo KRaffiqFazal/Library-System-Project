@@ -1,16 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Library_System
 {
@@ -20,11 +13,12 @@ namespace Library_System
     public partial class Return : Window
     {
         Globals globalValues;
+        bool txtChangedRun;
         public Return(Globals globals)
         {
             InitializeComponent();
             globalValues = globals;
-            lblError.Visibility = Visibility.Hidden;
+            txtChangedRun = true;
         }
         private async void Home()
         {
@@ -66,32 +60,93 @@ namespace Library_System
             {
                 lblError.Content = "Error: No input detected.";
                 await Task.Delay(3000);
+                lblError.Content = "";
             }
-            else if (globalValues.xmlC.GetAllBooks().FindIndex(book => book.id == txtbxToReturn.Text) != -1) //if the entered id exists in the database, proceeds
+            else if (globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == txtbxToReturn.Text) != -1) //if the entered id exists in user's borrowed books it can be returned
             {
-                List<Book> books = globalValues.xmlC.GetAllBooks();
-                int index = books.FindIndex(book => book.id == txtbxToReturn.Text);
-                Book toReturn = books[index];
+                Book toReturn = globalValues.currentUser.borrowedBooks[globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == txtbxToReturn.Text)];
                 if (toReturn.dueDate != DateTime.MinValue) //can be returned
                 {
-                    toReturn.dueDate = DateTime.MinValue; //due in a month
+                    toReturn.dueDate = DateTime.MinValue;
+                    toReturn.renewed = false;
                     txtbxToReturn.Text = "";
-                    globalValues.xmlC.UpdateRecord(toReturn);
+                    globalValues.currentUser.borrowedBooks.Remove(toReturn);
+                    globalValues.xmlC.UpdateRecord(toReturn, false);
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
-                    lblError.Content = "Book returned!";
+                    txtChangedRun = false;
+                    lblError.Content = "Book returned, hope it was enjoyable!";
                     await Task.Delay(3000);
+                    txtChangedRun = true;
                     lblError.Content = "";
-
                 }
                 else
                 {
+                    txtChangedRun = false;
                     lblError.Content = "Error: This book has not been borrowed.";
+                    await Task.Delay(3000);
+                    txtChangedRun = true;
+                    lblError.Content = "";
                 }
             }
             else
             {
                 lblError.Content = "Error: ID not found, please enter a valid book ID.";
-                await Task.Delay(3000);
+            }
+        }
+
+        private async void btnRenew_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtbxToReturn.Text.Equals(""))
+            {
+                lblError.Content = "Error: No input detected.";
+            }
+            else if (globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == txtbxToReturn.Text) != -1) //a borrowed book that the user possesses
+            {
+                Book toRenew = globalValues.currentUser.borrowedBooks[globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == txtbxToReturn.Text)];
+                if (!toRenew.renewed)
+                {
+                    globalValues.currentUser.borrowedBooks.Remove(toRenew); //remove old version
+                    toRenew.dueDate = DateTime.Now.AddDays(30); //ensures renewed books do not get renewed 30 more days from new renewal date
+                    toRenew.renewed = true;
+                    globalValues.currentUser.borrowedBooks.Add(toRenew);
+                    globalValues.xmlC.UpdateRecord(toRenew, true);
+                    globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
+                    lblError.Foreground = Brushes.Red;
+                    txtChangedRun = false;
+                    lblError.Content = "Book renewed successfully!";
+                    await Task.Delay(3000);
+                    txtChangedRun = true;
+                    lblError.Content = "";
+
+                }
+                else
+                {
+                    lblError.Foreground = Brushes.Red;
+                    txtChangedRun = false;
+                    lblError.Content = "This book has already been renewed once and cannot be renewed again";
+                    await Task.Delay(3000);
+                    txtChangedRun = true;
+                    lblError.Content = "";
+                }
+
+
+            }
+            else
+            {
+                lblError.Content = "Error: ID not found, please enter a valid book ID.";
+            }
+        }
+
+        private void txtbxToReturn_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            String id = txtbxToReturn.Text;
+            if (globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == id) != -1) //exists
+            {
+                lblError.Foreground = Brushes.Black;
+                lblError.Content = globalValues.currentUser.borrowedBooks[globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == id)].title;
+            }
+            else if (txtChangedRun)
+            {
                 lblError.Content = "";
             }
         }

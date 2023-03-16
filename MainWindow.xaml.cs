@@ -1,32 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Library_System
 {
     public partial class MainWindow : Window
     {
-        
+
         //usage in MainWindow.xaml
         Stopwatch stopwatch;
         int attempts;
         String terminalPassword = "Admin123";
         Globals globalValues;
-        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -41,7 +29,7 @@ namespace Library_System
             btnQuit.Visibility = Visibility.Hidden;
             picLogo.Visibility = Visibility.Hidden;
         }
-        private void Hide2() 
+        private void Hide2()
         {
             btnAdminQuit.Visibility = Visibility.Hidden;
             btnRestart.Visibility = Visibility.Hidden;
@@ -56,7 +44,7 @@ namespace Library_System
             btnQuit.Visibility = Visibility.Visible;
             picLogo.Visibility = Visibility.Visible;
         }
-        private void Reveal2() 
+        private void Reveal2()
         {
             btnAdminQuit.Visibility = Visibility.Visible;
             btnRestart.Visibility = Visibility.Visible;
@@ -90,7 +78,7 @@ namespace Library_System
             {
                 Hide1();
                 Reveal2();
-                
+
             }
         }
 
@@ -120,19 +108,19 @@ namespace Library_System
         }
         private void PasswordEnter()
         {
-                if (pswdbxTerminalPassword.Password.Equals(terminalPassword))
+            if (pswdbxTerminalPassword.Password.Equals(terminalPassword))
+            {
+                Application.Current.Shutdown();
+            }
+            else
+            {
+                attempts--;
+                if (attempts <= 0)
                 {
-                    Application.Current.Shutdown();
+                    Restart();
                 }
-                else
-                {
-                    attempts--;
-                    if (attempts <= 0)
-                    {
-                        Restart();
-                    }
-                    pswdbxTerminalPassword.Password = null;
-                }
+                pswdbxTerminalPassword.Password = "";
+            }
         }
         private void btnAdminQuit_Click(object sender, RoutedEventArgs e)
         {
@@ -149,7 +137,7 @@ namespace Library_System
         /// </summary>
         private void pswdbxTerminalPassword_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key== Key.Enter) 
+            if (e.Key == Key.Enter)
             {
                 PasswordEnter();
             }

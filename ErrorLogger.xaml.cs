@@ -1,17 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Library_System
 {
@@ -27,7 +20,7 @@ namespace Library_System
             InitializeComponent();
             globalValues = global;
             Start();
-            
+
         }
 
         private void Start()
@@ -40,8 +33,8 @@ namespace Library_System
                 btnNext.Visibility = Visibility.Visible;
             }
             else
-            { 
-                btnNext.Visibility= Visibility.Hidden;
+            {
+                btnNext.Visibility = Visibility.Hidden;
             }
             scrlvwrReport.Visibility = Visibility.Hidden;
         }
@@ -109,7 +102,7 @@ namespace Library_System
             txtbxErrorEntry.Visibility = Visibility.Hidden;
 
             String[] report = File.ReadAllLines(path);
-            foreach (String reportItem in report) 
+            foreach (String reportItem in report)
             {
                 txtblkErrorReport.Text += reportItem + Environment.NewLine;
             }

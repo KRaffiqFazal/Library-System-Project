@@ -1,17 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Library_System
 {
@@ -56,7 +46,7 @@ namespace Library_System
 
         private void pswdbxPassword_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter) 
+            if (e.Key == Key.Enter)
             {
                 Login();
             }
@@ -80,20 +70,17 @@ namespace Library_System
                 globalValues.currentUser.email = temp[2];
                 if (temp[3].Equals("") || !temp[3].Contains(";"))
                 {
-                    if (temp[3].Equals("")) //no notifications
-                    {
-                        globalValues.currentUser.notifications = null;
-                    }
-                    else //only one notification
+                    if (!temp[3].Equals("")) //one notification
                     {
                         globalValues.currentUser.notifications.Add(temp[3]);
                     }
                 }
                 else // >1 notifications
                 {
-                    globalValues.currentUser.notifications.AddRange(temp[3].Split(';'));
+                    globalValues.currentUser.notifications.AddRange(temp[3].Split('}'));
                 }
                 globalValues.currentUser.borrowedBooks = globalValues.xmlC.GetBorrowedBooks(globalValues.currentUser.userID);
+                globalValues.currentUser.reserved = temp[4];
                 SwitchScreen();
             }
             else
