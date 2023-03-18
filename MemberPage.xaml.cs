@@ -163,5 +163,22 @@ namespace Library_System
             await Task.Delay(250);
             Close();
         }
+
+        private void picManageMembers_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ViewUsers();
+        }
+
+        private void picManageUsers_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ViewUsers();
+        }
+        private async void ViewUsers()
+        {
+            SearchUsers win = new SearchUsers(globalValues);
+            win.Show();
+            await Task.Delay(250);
+            Close();
+        }
     }
 }

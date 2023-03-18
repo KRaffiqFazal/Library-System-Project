@@ -75,8 +75,7 @@ namespace Library_System
             else if (globalValues.xmlC.BookCompiler().FindIndex(book => book.id == txtbxToBorrow.Text) != -1) //if the entered id exists in the database, proceeds
             {
                 List<Book> books = globalValues.xmlC.BookCompiler();
-                int index = books.FindIndex(book => book.id == txtbxToBorrow.Text);
-                Book toBorrow = books[index];
+                Book toBorrow = books.Find(book => book.id == txtbxToBorrow.Text);
                 if (toBorrow.dueDate == DateTime.MinValue) //can be borrowed
                 {
                     toBorrow.dueDate = DateTime.Now.AddDays(30); //due in a month
@@ -122,7 +121,7 @@ namespace Library_System
             if (globalValues.xmlC.BookCompiler().FindIndex(book => book.id == id) != -1) //exists
             {
                 lblError.Foreground = Brushes.Black;
-                lblError.Content = globalValues.xmlC.BookCompiler()[globalValues.xmlC.BookCompiler().FindIndex(book => book.id == id)].title;
+                lblError.Content = globalValues.xmlC.BookCompiler().Find(book => book.id == id).title;
             }
             else
             {

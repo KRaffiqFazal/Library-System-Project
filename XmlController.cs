@@ -163,12 +163,10 @@ namespace Library_System
             doc.Load(bookPath);
             //fix this
             XmlNode rootNode = doc.SelectSingleNode("/library");
-            XmlNode currentNode;
             Decimal price;
-            for (int i = 0; i < rootNode.ChildNodes.Count; i++) //adds all the books to a list based on xml node information
+            foreach(XmlNode currentNode in rootNode.ChildNodes) //adds all the books to a list based on xml node information
             {
                 currentBook = new Book();
-                currentNode = doc.SelectSingleNode("/library/book[id='" + (i + 1) + "']"); //change to do it in foreach
                 currentBook.id = currentNode.ChildNodes.Item(0).InnerText;
                 currentBook.title = currentNode.ChildNodes.Item(1).InnerText;
                 currentBook.author = currentNode.ChildNodes.Item(2).InnerText;
@@ -266,6 +264,57 @@ namespace Library_System
                 }
             }
             return "";
+        }
+        public List<User> GetAllUsers(User currentUser)
+        {
+            doc.Load(userPath);
+            XmlNode rootNode = doc.SelectSingleNode("/users");
+            XmlNode rootNode1 = rootNode.ChildNodes[0];
+            List<User> toAdd = new List<User>();
+            User temp;
+
+            foreach (XmlNode node in rootNode1.ChildNodes)
+            {
+                temp = new User(node.ChildNodes.Item(0).InnerText);
+                temp.name = node.ChildNodes.Item(1).InnerText;
+                temp.phoneNumber = node.ChildNodes.Item(2).InnerText;
+                temp.email = node.ChildNodes.Item(3).InnerText;
+                temp.borrowedBooks = GetBorrowedBooks(temp.userID);
+                temp.notifications.AddRange(node.ChildNodes.Item(5).InnerText.Split('}'));
+                temp.reserved = node.ChildNodes.Item(6).InnerText;
+                toAdd.Add(temp);
+                
+            }
+            if (currentUser.userType.Equals("admin")) //only admin and librarian details
+            {
+                rootNode1 = rootNode.ChildNodes[1];
+                foreach (XmlNode node in rootNode1.ChildNodes)
+                {
+
+                    temp = new User(node.ChildNodes.Item(0).InnerText);
+                    temp.name = node.ChildNodes.Item(1).InnerText;
+                    temp.phoneNumber = node.ChildNodes.Item(2).InnerText;
+                    temp.email = node.ChildNodes.Item(3).InnerText;
+                    temp.borrowedBooks = GetBorrowedBooks(temp.userID);
+                    temp.notifications.AddRange(node.ChildNodes.Item(5).InnerText.Split('}'));
+                    temp.reserved = node.ChildNodes.Item(6).InnerText;
+                    toAdd.Add(temp);
+                }
+                rootNode1 = rootNode.ChildNodes[2];
+                foreach (XmlNode node in rootNode1.ChildNodes)
+                {
+
+                    temp = new User(node.ChildNodes.Item(0).InnerText);
+                    temp.name = node.ChildNodes.Item(1).InnerText;
+                    temp.phoneNumber = node.ChildNodes.Item(2).InnerText;
+                    temp.email = node.ChildNodes.Item(3).InnerText;
+                    temp.borrowedBooks = GetBorrowedBooks(temp.userID);
+                    temp.notifications.AddRange(node.ChildNodes.Item(5).InnerText.Split('}'));
+                    temp.reserved = node.ChildNodes.Item(6).InnerText;
+                    toAdd.Add(temp);
+                }   
+            }
+            return toAdd;
         }
     }
 }

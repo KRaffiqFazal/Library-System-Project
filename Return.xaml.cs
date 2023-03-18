@@ -64,7 +64,7 @@ namespace Library_System
             }
             else if (globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == txtbxToReturn.Text) != -1) //if the entered id exists in user's borrowed books it can be returned
             {
-                Book toReturn = globalValues.currentUser.borrowedBooks[globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == txtbxToReturn.Text)];
+                Book toReturn = globalValues.currentUser.borrowedBooks.Find(book => book.id == txtbxToReturn.Text);
                 if (toReturn.dueDate != DateTime.MinValue) //can be returned
                 {
                     toReturn.dueDate = DateTime.MinValue;
@@ -102,7 +102,7 @@ namespace Library_System
             }
             else if (globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == txtbxToReturn.Text) != -1) //a borrowed book that the user possesses
             {
-                Book toRenew = globalValues.currentUser.borrowedBooks[globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == txtbxToReturn.Text)];
+                Book toRenew = globalValues.currentUser.borrowedBooks.Find(book => book.id == txtbxToReturn.Text);
                 if (!toRenew.renewed)
                 {
                     globalValues.currentUser.borrowedBooks.Remove(toRenew); //remove old version
@@ -143,7 +143,7 @@ namespace Library_System
             if (globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == id) != -1) //exists
             {
                 lblError.Foreground = Brushes.Black;
-                lblError.Content = globalValues.currentUser.borrowedBooks[globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == id)].title;
+                lblError.Content = globalValues.currentUser.borrowedBooks.Find(book => book.id == id).title;
             }
             else if (txtChangedRun)
             {

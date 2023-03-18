@@ -48,7 +48,6 @@ namespace Library_System
         private void CreateScreen(List<Book> books)
         {
             BookDisplay currentDisplayed;
-            Trace.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
             for (int i = 0; i < filePaths.Length; i++)
             {
                 availableImgs[i] = filePaths[i].Substring(6, filePaths[i].Length - 10); //gets array of ids that have images
@@ -82,7 +81,7 @@ namespace Library_System
             temp = (BookDisplay)sender;
             picBookFocus.Source = temp.picBook.Source;
             List<Book> bookList = globalValues.xmlC.GetAvailableBooks(globalValues.xmlC.BookCompiler());
-            Book currentBook = bookList[bookList.FindIndex(book => book.isbn == temp.BookIsbn)];
+            Book currentBook = bookList.Find(book => book.isbn == temp.BookIsbn);
             picBookFocus.Visibility = Visibility.Visible;
             txtblkBookInfoFocus.Text = currentBook.title + "\n\nAuthor: " + currentBook.author + "  Publisher: " + currentBook.publisher + "\n\nEdition: " + currentBook.edition
                 + "  Year: " + currentBook.year + "\n\nCategory: " + String.Join(", ", currentBook.category) + "\n\nISBN: " + currentBook.isbn + "\n\n" + currentBook.description +
@@ -158,7 +157,7 @@ namespace Library_System
         private async void btnReserve_Click(object sender, RoutedEventArgs e) //button only seen if reservation possible
         {
             List<Book> booksAvailable = globalValues.xmlC.GetAvailableBooks(globalValues.xmlC.BookCompiler());
-            Book currentBook = booksAvailable[booksAvailable.FindIndex(book => book.isbn == currentIsbn)];
+            Book currentBook = booksAvailable.Find(book => book.isbn == currentIsbn);
             if (!globalValues.xmlC.ToReserve(currentBook).Equals("")) //checks if it has not been reserved whilst the page is open
             {
                 globalValues.currentUser.reserved = globalValues.xmlC.ToReserve(currentBook);
@@ -178,10 +177,15 @@ namespace Library_System
             }
         }
 
-        private void txtbxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        private void txtbxSearch_TextChanged(object sender, TextChangedEventArgs e) //displays books based on filters selected
         {
             List<Book> newList = globalValues.xmlC.GetAvailableBooks(globalValues.xmlC.BookCompiler());
             List<Book> updatedList = new List<Book>();
+            if (txtbxSearch.Text.Equals("")) //if nothing has been entered, all results shown
+            {
+                CreateScreen(newList);
+                return;
+            }
             foreach (Book item in newList)
             {
                 if (chkbxTitle.IsChecked == true)

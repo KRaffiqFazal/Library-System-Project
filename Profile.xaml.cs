@@ -153,7 +153,7 @@ namespace Library_System
             }
             if (!(globalValues.currentUser.reserved.Equals(""))) //there is a book being reserved
             {
-                txtblkNotifications.Text += globalValues.xmlC.BookCompiler()[globalValues.xmlC.BookCompiler().FindIndex(book => book.id == globalValues.currentUser.reserved)].title + " is being reserved.\n";
+                txtblkNotifications.Text += globalValues.xmlC.BookCompiler().Find(book => book.id == globalValues.currentUser.reserved).title + " is being reserved.\n";
             }
             if (!(globalValues.currentUser.borrowedBooks.Count == 0)) // there are books that are currently being borrowed
             {

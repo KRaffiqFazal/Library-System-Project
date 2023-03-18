@@ -75,10 +75,10 @@
         </Button>
         <Image x:Name="picTrackOverdueBooks" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,-85,0,0" VerticalAlignment="Top" Width="284" Source="/TrackOverdueBooks.png"/>
         <Image x:Name="picLogErrors" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,199,0,0" VerticalAlignment="Top" Width="284" Source="/LibrarianLogErrors.png" MouseLeftButtonDown="picLogErrors_MouseLeftButtonDown"/>
-        <Image x:Name="picManageUsers" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,483,0,0" VerticalAlignment="Top" Width="284" Source="/AdminManageUsers.png"/>
+        <Image x:Name="picManageUsers" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,483,0,0" VerticalAlignment="Top" Width="284" Source="/AdminManageUsers.png" MouseLeftButtonDown="picManageUsers_MouseLeftButtonDown"/>
         <Image x:Name="picErrors" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,767,0,0" VerticalAlignment="Top" Width="284" Source="/AdminErrors.png" MouseLeftButtonDown="picLogErrors_MouseLeftButtonDown"/>
         <Image x:Name="picManageBooks" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-769,-90,0,0" VerticalAlignment="Top" Width="284" Source="/ManageBooks.png"/>
-        <Image x:Name="picManageMembers" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-774,194,0,0" VerticalAlignment="Top" Width="284" Source="/LibrarianManageMembers.png"/>
+        <Image x:Name="picManageMembers" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-774,194,0,0" VerticalAlignment="Top" Width="284" Source="/LibrarianManageMembers.png" MouseLeftButtonDown="picManageMembers_MouseLeftButtonDown"/>
         <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="Auto" Margin="0,123,0,0" TextWrapping="Wrap" Text="Welcome: xxx" VerticalAlignment="Top" Width="744" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>
         <TextBlock x:Name="txtblkLogoutMessage" HorizontalAlignment="Center" Height="1080" TextWrapping="Wrap" VerticalAlignment="Top" Width="1920" IsEnabled="False" TextAlignment="Center" FontSize="150" FontFamily="Verdana" FontWeight="Bold" Background="#FFB4F5F4" Foreground="Black" Margin="0,-1080,0,0"><Run Language="en-gb"/><LineBreak/><Run Language="en-gb"/><LineBreak/><Run Language="en-gb" Text="Thank you for visiting!"/></TextBlock>
 
