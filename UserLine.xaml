@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Library_System"
              mc:Ignorable="d" 
-             d:DesignHeight="100" d:DesignWidth="1536"
-             Height="100"
+             d:DesignHeight="102" d:DesignWidth="1536"
+             Height="102"
              Width="1536">
     <Grid Background="Black">
         <TextBlock x:Name="txtblkId" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Height="100" TextWrapping="Wrap" VerticalAlignment="Center" Width="305" FontFamily="Verdana" FontSize="40" Background="White"/>

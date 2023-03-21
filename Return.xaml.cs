@@ -67,6 +67,15 @@ namespace Library_System
                 Book toReturn = globalValues.currentUser.borrowedBooks.Find(book => book.id == txtbxToReturn.Text);
                 if (toReturn.dueDate != DateTime.MinValue) //can be returned
                 {
+                    if (globalValues.currentUser.CalculateFine(toReturn) > globalValues.currentUser.fine)
+                    {
+                        globalValues.currentUser.fine = globalValues.currentUser.CalculateFine(toReturn);
+                        lblError.Content = "Book returned, fine due, please see a librarian.";
+                    }
+                    else
+                    {
+                        lblError.Content = "Book returned, hope it was enjoyable!";
+                    }
                     toReturn.dueDate = DateTime.MinValue;
                     toReturn.renewed = false;
                     txtbxToReturn.Text = "";
@@ -74,7 +83,6 @@ namespace Library_System
                     globalValues.xmlC.UpdateRecord(toReturn, false);
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
                     txtChangedRun = false;
-                    lblError.Content = "Book returned, hope it was enjoyable!";
                     await Task.Delay(3000);
                     txtChangedRun = true;
                     lblError.Content = "";
@@ -103,7 +111,11 @@ namespace Library_System
             else if (globalValues.currentUser.borrowedBooks.FindIndex(book => book.id == txtbxToReturn.Text) != -1) //a borrowed book that the user possesses
             {
                 Book toRenew = globalValues.currentUser.borrowedBooks.Find(book => book.id == txtbxToReturn.Text);
-                if (!toRenew.renewed)
+                if (globalValues.currentUser.CalculateFine(toRenew) > globalValues.currentUser.fine) //if they are different, a fine needs to take place so the book must be returned
+                {
+                    lblError.Content = "Please return this book as it is overdue.";
+                }
+                else if (!toRenew.renewed)
                 {
                     globalValues.currentUser.borrowedBooks.Remove(toRenew); //remove old version
                     toRenew.dueDate = DateTime.Now.AddDays(30); //ensures renewed books do not get renewed 30 more days from new renewal date

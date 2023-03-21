@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
@@ -63,24 +64,7 @@ namespace Library_System
             else if (globalValues.xmlC.Exists(pswdbxPassword.Password))
             {
                 globalValues.currentUser = new User(pswdbxPassword.Password);
-                String[] temp = globalValues.xmlC.GetInfo(pswdbxPassword.Password);
-
-                globalValues.currentUser.name = temp[0];
-                globalValues.currentUser.phoneNumber = temp[1];
-                globalValues.currentUser.email = temp[2];
-                if (temp[3].Equals("") || !temp[3].Contains(";"))
-                {
-                    if (!temp[3].Equals("")) //one notification
-                    {
-                        globalValues.currentUser.notifications.Add(temp[3]);
-                    }
-                }
-                else // >1 notifications
-                {
-                    globalValues.currentUser.notifications.AddRange(temp[3].Split('}'));
-                }
-                globalValues.currentUser.borrowedBooks = globalValues.xmlC.GetBorrowedBooks(globalValues.currentUser.userID);
-                globalValues.currentUser.reserved = temp[4];
+                globalValues.currentUser = globalValues.xmlC.CreateUser(pswdbxPassword.Password);
                 SwitchScreen();
             }
             else
@@ -92,6 +76,12 @@ namespace Library_System
                 txtblkLoginError.Visibility = Visibility.Hidden;
                 txtblkLoginErrorOmission.Visibility = Visibility.Hidden;
             }
+        }
+
+        private void pswdbxPassword_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 }

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace Library_System
 {
@@ -38,13 +40,40 @@ namespace Library_System
         {
             doc.Load(userPath);
             XmlNode userNode = UserType(userID);
-            String[] temp = new String[5];
+            String[] temp = new String[6];
             temp[0] = userNode.ChildNodes.Item(1).InnerText; //name
             temp[1] = userNode.ChildNodes.Item(2).InnerText; //phone number
             temp[2] = userNode.ChildNodes.Item(3).InnerText; //email
             temp[3] = userNode.ChildNodes.Item(5).InnerText; //notifications
             temp[4] = userNode.ChildNodes.Item(6).InnerText; //reserved book
+            temp[5] = userNode.ChildNodes.Item(7).InnerText; //fine
             return temp;
+        }
+        public User CreateUser(String userID)
+        {
+            doc.Load(userPath);
+            User newUser = new User(userID);
+            String[] userInfo = GetInfo(userID);
+            XmlNode userNode = UserType(userID);
+            newUser.name = userInfo[0];
+            newUser.phoneNumber = userInfo[1];
+            newUser.email = userInfo[2];
+            newUser.borrowedBooks = GetBorrowedBooks(userID);
+            if (userInfo[3].Equals("") || !userInfo[3].Contains("}"))
+            {
+                if (!userInfo[3].Equals("")) //new notification
+                {
+                    newUser.notifications.Add(userInfo[3]);
+                }
+            }
+            else // >1 notifications
+            {
+                newUser.notifications.AddRange(userInfo[3].Split('}'));
+            }
+            newUser.reserved = userInfo[4];
+            newUser.fine = Decimal.Parse(userInfo[5]);
+            return newUser;
+
         }
 
         public XmlNode UserType(String userID)
@@ -164,7 +193,7 @@ namespace Library_System
             //fix this
             XmlNode rootNode = doc.SelectSingleNode("/library");
             Decimal price;
-            foreach(XmlNode currentNode in rootNode.ChildNodes) //adds all the books to a list based on xml node information
+            foreach (XmlNode currentNode in rootNode.ChildNodes) //adds all the books to a list based on xml node information
             {
                 currentBook = new Book();
                 currentBook.id = currentNode.ChildNodes.Item(0).InnerText;
@@ -208,6 +237,77 @@ namespace Library_System
             doc.Save(bookPath);
         }
 
+        public void DeleteUserRecord(String userId)
+        {
+            doc.Load(userPath);
+            XmlNode toDelete;
+            if (userId[0] == '1')
+            {
+                toDelete = doc.SelectSingleNode("/users/members/user[id='" + userId+ "']");
+
+            }
+            else if (userId[0] == '2')
+            {
+                toDelete = doc.SelectSingleNode("/users/librarians/user[id='" + userId + "']");
+            }
+            else
+            {
+                toDelete = doc.SelectSingleNode("/users/admins/user[id='" + userId + "']");
+            }
+            toDelete.ParentNode.RemoveChild(toDelete);
+            doc.Save(userPath);
+        }
+
+        public void AddUserRecord(User user) //creates nodes for the new user
+        {
+            doc.Load(userPath);
+            XmlNode insertLocation;
+
+            XmlNode userNode = doc.CreateElement("user");
+            XmlNode idNode = doc.CreateElement("id");
+            XmlNode nameNode = doc.CreateElement("name");
+            XmlNode phoneNode = doc.CreateElement("phone_number");
+            XmlNode emailNode = doc.CreateElement("email");
+            XmlNode borrowedBooksNode = doc.CreateElement("borrowed_books");
+            XmlNode notificationsNode = doc.CreateElement("notifications");
+            XmlNode reservedNode = doc.CreateElement("reserved");
+            XmlNode fineNode = doc.CreateElement("fine");
+
+            idNode.InnerText = user.userID;
+            nameNode.InnerText = user.name;
+            phoneNode.InnerText = user.phoneNumber;
+            emailNode.InnerText = user.email;
+            borrowedBooksNode.InnerText = "";
+            notificationsNode.InnerText = "";
+            reservedNode.InnerText = user.reserved;
+            fineNode.InnerText = user.fine.ToString();
+
+            userNode.AppendChild(idNode);
+            userNode.AppendChild(nameNode);
+            userNode.AppendChild(phoneNode);
+            userNode.AppendChild(emailNode);
+            userNode.AppendChild(borrowedBooksNode);
+            userNode.AppendChild(notificationsNode);
+            userNode.AppendChild(reservedNode);
+            userNode.AppendChild(fineNode);
+
+
+            if (user.userType.Equals("member")) //find which child it must be inserted into
+            {
+                insertLocation = doc.SelectSingleNode("/users/members");
+            }
+            else if (user.userType.Equals("librarian"))
+            {
+                insertLocation = doc.SelectSingleNode("/users/librarians");
+            }
+            else
+            {
+                insertLocation = doc.SelectSingleNode("/users/admins");
+            }
+            insertLocation.AppendChild(userNode);
+            doc.Save(userPath);
+        }
+
         public void UpdateUserRecord(User user) //updates the xml user file based on current global variables
         {
             doc.Load(userPath);
@@ -233,24 +333,26 @@ namespace Library_System
                     userNode.ChildNodes.Item(4).InnerText = books;
                 }
             }
-            if (userNode.ChildNodes.Item(5).InnerText.Equals("") && user.notifications.Count == 1) //new notification needs to be added
+            if (user.notifications.Count == 1) //new notification needs to be added
             {
                 userNode.ChildNodes.Item(5).InnerText = user.notifications[0];
             }
-            else
+            else if (user.notifications.Count == 0)
             {
-                if (user.notifications.Count > 0)
+                userNode.ChildNodes.Item(5).InnerText = "";
+            }
+            else if (user.notifications.Count > 1)
+            {
+                String notifs = "";
+                for (int i = 0; i < user.notifications.Count - 1; i++)
                 {
-                    String notifs = "";
-                    for (int i = 0; i < user.notifications.Count - 1; i++)
-                    {
-                        notifs += user.notifications[i] + ",";
-                    }
-                    notifs += user.notifications[user.notifications.Count - 1];
-                    userNode.ChildNodes.Item(5).InnerText = notifs;
+                    notifs += user.notifications[i] + "}";
                 }
+                notifs += user.notifications[user.notifications.Count - 1];
+                userNode.ChildNodes.Item(5).InnerText = notifs;
             }
             userNode.ChildNodes.Item(6).InnerText = user.reserved;
+            userNode.ChildNodes.Item(7).InnerText = user.fine.ToString();
             doc.Save(userPath);
         }
         public String ToReserve(Book finalBook) //finalBook is a book of multiple copies but needs to check if a book has already been reserved
@@ -282,6 +384,7 @@ namespace Library_System
                 temp.borrowedBooks = GetBorrowedBooks(temp.userID);
                 temp.notifications.AddRange(node.ChildNodes.Item(5).InnerText.Split('}'));
                 temp.reserved = node.ChildNodes.Item(6).InnerText;
+                temp.fine = Decimal.Parse(node.ChildNodes.Item(7).InnerText);
                 toAdd.Add(temp);
                 
             }
@@ -298,6 +401,7 @@ namespace Library_System
                     temp.borrowedBooks = GetBorrowedBooks(temp.userID);
                     temp.notifications.AddRange(node.ChildNodes.Item(5).InnerText.Split('}'));
                     temp.reserved = node.ChildNodes.Item(6).InnerText;
+                    temp.fine = Decimal.Parse(node.ChildNodes.Item(7).InnerText);
                     toAdd.Add(temp);
                 }
                 rootNode1 = rootNode.ChildNodes[2];
@@ -311,6 +415,7 @@ namespace Library_System
                     temp.borrowedBooks = GetBorrowedBooks(temp.userID);
                     temp.notifications.AddRange(node.ChildNodes.Item(5).InnerText.Split('}'));
                     temp.reserved = node.ChildNodes.Item(6).InnerText;
+                    temp.fine = Decimal.Parse(node.ChildNodes.Item(7).InnerText);
                     toAdd.Add(temp);
                 }   
             }

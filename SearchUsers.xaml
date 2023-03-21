@@ -90,14 +90,6 @@
                             <Trigger Property="IsDefaulted" Value="true">
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border}"/>
-                            </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
@@ -162,10 +154,10 @@
         <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="Auto" Margin="0,123,0,0" TextWrapping="Wrap" Text="Search Users" VerticalAlignment="Top" Width="636" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>
         <TextBox Style="{DynamicResource Curved}" x:Name="txtbxSearch" TextChanged="txtbxSearch_TextChanged" LostFocus="txtbxSearch_LostFocus" HorizontalAlignment="Center" Height="104" Margin="0,436,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="1148" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="70"/>
         <TextBox Style="{DynamicResource Curved}" x:Name="txtbxWatermarked" GotFocus="txtbxWatermarked_GotFocus" HorizontalAlignment="Center" Height="104" Margin="0,436,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="1148" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="70" Foreground="#FF5D5D5D" Text="User Info" FontStyle="Italic"/>
-        <ScrollViewer Margin="0,671,386,0">
+        <ScrollViewer Margin="3,662,383,9">
             <StackPanel x:Name="stackPanel" Height="Auto" Width="Auto" Orientation="Vertical"/>
         </ScrollViewer>
-        <Button Style="{DynamicResource CurvedButton}" x:Name="btnAddUser" Content="Add" HorizontalAlignment="Left" Height="104" Margin="1543,436,0,0" VerticalAlignment="Top" Width="374" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="60" BorderBrush="{x:Null}">
+        <Button Style="{DynamicResource CurvedButton}" x:Name="btnAddUser" Click="btnAddUser_Click" Cursor="Hand" Content="Add" HorizontalAlignment="Left" Height="104" Margin="1543,436,0,0" VerticalAlignment="Top" Width="374" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="60" BorderBrush="{x:Null}">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF4E734F"/>
@@ -226,10 +218,10 @@
         <Label x:Name="lblPhoneFocus" Content="Mobile No: " HorizontalAlignment="Left" Height="104" Margin="52,607,0,0" VerticalAlignment="Top" Width="444" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
         <Label x:Name="lblEmailFocus" Content="E-mail:" HorizontalAlignment="Left" Height="104" Margin="52,711,0,0" VerticalAlignment="Top" Width="280" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
         <TextBox x:Name="txtbxName" HorizontalAlignment="Left" Height="104" Margin="454,499,0,0" VerticalAlignment="Top" Width="626" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" TextWrapping="Wrap"/>
-        <TextBox x:Name="txtbxMobile" HorizontalAlignment="Left" Height="108" Margin="454,603,0,0" VerticalAlignment="Top" Width="626" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
+        <TextBox x:Name="txtbxMobile" PreviewTextInput="txtbxMobile_PreviewTextInput"  HorizontalAlignment="Left" Height="108" Margin="454,603,0,0" VerticalAlignment="Top" Width="626" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
         <TextBox x:Name="txtbxEmail" HorizontalAlignment="Left" Height="104" Margin="454,711,0,0" VerticalAlignment="Top" Width="626" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
         <Label x:Name="lblFineFocus" Content="Fine:" HorizontalAlignment="Left" Height="104" Margin="52,815,0,0" VerticalAlignment="Top" Width="280" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
-        <RadioButton x:Name="rdbtnMember" Content="Member" HorizontalAlignment="Left" Margin="599,330,0,0" VerticalAlignment="Top" Height="16" Width="68" BorderBrush="{x:Null}" FontFamily="Verdana" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontSize="10" IsChecked="True">
+        <RadioButton x:Name="rdbtnMember" Content="Member" HorizontalAlignment="Left" Margin="599,330,0,0" VerticalAlignment="Top" Height="16" Width="68" BorderBrush="{x:Null}" FontFamily="Verdana" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontSize="10" IsChecked="False" Checked="rdbtnMember_Checked">
             <RadioButton.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="5" ScaleY="5"/>
@@ -240,9 +232,9 @@
             </RadioButton.RenderTransform>
         </RadioButton>
         <Label x:Name="lblUserIdFocus" Content="User ID: " HorizontalAlignment="Left" Height="104" Margin="52,390,0,0" VerticalAlignment="Top" Width="402" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
-        <Label x:Name="lblFineFocusBox" Content="" HorizontalAlignment="Left" Height="104" Margin="454,815,0,0" VerticalAlignment="Top" Width="626" Background="White" FontWeight="Bold" FontFamily="Verdana" FontSize="40" BorderBrush="Black" BorderThickness="1,1,1,1"/>
+        <Label x:Name="lblFineFocusBox" Cursor="No" Content="" HorizontalAlignment="Left" Height="104" Margin="454,815,0,0" VerticalAlignment="Top" Width="626" Background="White" FontWeight="Bold" FontFamily="Verdana" FontSize="40" BorderBrush="Black" BorderThickness="1,1,1,1"/>
         <Label x:Name="lblUserIdFocusBox" Cursor="No" Content="" HorizontalAlignment="Left" Height="104" Margin="454,395,0,0" VerticalAlignment="Top" Width="626" Background="White" FontWeight="Bold" FontFamily="Verdana" FontSize="40" BorderBrush="Black" BorderThickness="1,1,1,1"/>
-        <RadioButton x:Name="rdbtnLibrarian" Content="Librarian" HorizontalAlignment="Left" Margin="1155,330,0,0" VerticalAlignment="Top" Height="16" Width="70" BorderBrush="{x:Null}" FontFamily="Verdana" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontSize="10">
+        <RadioButton x:Name="rdbtnLibrarian" Content="Librarian" HorizontalAlignment="Left" Margin="1155,330,0,0" VerticalAlignment="Top" Height="16" Width="70" BorderBrush="{x:Null}" FontFamily="Verdana" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontSize="10" Checked="rdbtnLibrarian_Checked">
             <RadioButton.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="5" ScaleY="5"/>
@@ -252,7 +244,7 @@
                 </TransformGroup>
             </RadioButton.RenderTransform>
         </RadioButton>
-        <RadioButton x:Name="rdbtnAdmin" Content="Admin" HorizontalAlignment="Left" Margin="1710,330,0,0" VerticalAlignment="Top" Height="16" Width="70" BorderBrush="{x:Null}" FontFamily="Verdana" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontSize="10">
+        <RadioButton x:Name="rdbtnAdmin" Content="Admin" HorizontalAlignment="Left" Margin="1710,330,0,0" VerticalAlignment="Top" Height="16" Width="70" BorderBrush="{x:Null}" FontFamily="Verdana" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontSize="10" Checked="rdbtnAdmin_Checked">
             <RadioButton.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform ScaleX="5" ScaleY="5"/>
@@ -263,8 +255,8 @@
             </RadioButton.RenderTransform>
         </RadioButton>
         <Button Style="{DynamicResource Close}" x:Name="btnCloseFocus" Cursor="Hand" Content="X" HorizontalAlignment="Left" Height="102" Margin="1819,-1,0,0" VerticalAlignment="Top" Width="102" Background="Red" FontFamily="Verdana" Foreground="White" FontWeight="Bold" FontSize="50" BorderBrush="{x:Null}" Click="btnCloseFocus_Click"/>
-        <Label x:Name="lblError" Content="" HorizontalAlignment="Left" Height="71" Margin="454,961,0,0" VerticalAlignment="Top" Width="626" FontSize="40" Foreground="Red" FontFamily="Verdana" FontWeight="Bold"/>
-        <Button x:Name="btnSaveFocus" Content="Save" HorizontalAlignment="Left" Height="198" Margin="1315,844,0,0" VerticalAlignment="Top" Width="555" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="100" Style="{DynamicResource CurvedButton}" Click="btnSaveFocus_Click">
+        <Label x:Name="lblError" Content="" HorizontalAlignment="Left" Height="71" Margin="52,961,0,0" VerticalAlignment="Top" Width="1226" FontSize="40" Foreground="Red" FontFamily="Verdana" FontWeight="Bold"/>
+        <Button x:Name="btnSaveFocus" Cursor="Hand" Content="Save" HorizontalAlignment="Left" Height="198" Margin="1315,620,0,0" VerticalAlignment="Top" Width="555" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="100" Style="{DynamicResource CurvedButton}" Click="btnSaveFocus_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF507550"/>
@@ -273,7 +265,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button x:Name="btnFineRemove" Content="Fine Paid" HorizontalAlignment="Left" Height="198" Margin="1315,624,0,0" VerticalAlignment="Top" Width="555" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="95" Style="{DynamicResource CurvedButton}" Click="btnFineRemove_Click">
+        <Button x:Name="btnFineRemove" Cursor="Hand" Content="Fine Paid" HorizontalAlignment="Left" Height="198" Margin="1315,400,0,0" VerticalAlignment="Top" Width="555" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="95" Style="{DynamicResource CurvedButton}" Click="btnFineRemove_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="#FF507550"/>
@@ -282,5 +274,33 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
+        <Button x:Name="btnDelete" Cursor="Hand" Content="Delete" HorizontalAlignment="Left" Height="198" Margin="1315,844,0,0" VerticalAlignment="Top" Width="555" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="100" Style="{DynamicResource CurvedButton}" Click="btnDelete_Click" Background="Red"/>
+        <Button x:Name="btnMore" Cursor="Hand" Content="Next" HorizontalAlignment="Left" Height="198" Margin="1314,159,0,0" VerticalAlignment="Top" Width="556" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="100" Style="{DynamicResource CurvedButton}" Click="btnMore_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF507550"/>
+                    <GradientStop Color="#FF507550" Offset="1"/>
+                    <GradientStop Color="#FF3F6043" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <TextBlock x:Name="txtblkDeleteConfirm" HorizontalAlignment="Center" Height="1080" TextWrapping="Wrap" VerticalAlignment="Center" Width="1920" Background="White" TextAlignment="Center" FontFamily="Verdana" FontWeight="Bold" FontStyle="Italic" FontSize="95" Text=""/>
+        <Button x:Name="btnAddNotification" Cursor="Hand" Content="Add Notification" HorizontalAlignment="Left" Height="198" Margin="1131,763,0,0" VerticalAlignment="Top" Width="704" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="70" Style="{DynamicResource CurvedButton}" Click="btnAddNotification_Click">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF507550"/>
+                    <GradientStop Color="#FF507550" Offset="1"/>
+                    <GradientStop Color="#FF3F6043" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Button.Background>
+        </Button>
+        <Button x:Name="btnDeleteConfirmCancel" Cursor="Hand" Content="Cancel" Height="198" Margin="1188,682,179,0" VerticalAlignment="Top" BorderBrush="{x:Null}" Foreground="Black" FontFamily="Verdana" FontWeight="Bold" FontSize="100" Style="{DynamicResource CurvedButton}" Click="btnDeleteConfirmCancel_Click" Background="#FFD6D4D4"/>
+        <Button x:Name="btnDeleteConfirm" Cursor="Hand" Content="Delete" HorizontalAlignment="Left" Height="198" Margin="175,682,0,0" VerticalAlignment="Top" Width="555" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="100" Style="{DynamicResource CurvedButton}" Click="btnDeleteConfirm_Click" Background="Red"/>
+        <ScrollViewer x:Name="scrlvwrNotifsBorrowed" Margin="0,0,840,351">
+            <TextBlock x:Name="txtblkNotifsBorrowed" Height="Auto" Width="Auto" TextWrapping="Wrap" Background="White" FontFamily="Verdana" FontWeight="Bold" FontStyle="Italic" FontSize="50"><Run Language="en-gb"/></TextBlock>
+        </ScrollViewer>
+        <TextBox x:Name="txtbxNewNotification" HorizontalAlignment="Left" Height="337" Margin="3,734,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="1077" FontFamily="Verdana" FontStyle="Italic" FontWeight="Bold" FontSize="50" TextChanged="txtbxNewNotification_TextChanged"/>
+        <Label x:Name="lblErrorCharacterCounter" Content="Characters left:" HorizontalAlignment="Left" Height="76" Margin="1113,984,0,0" VerticalAlignment="Top" Width="640" FontWeight="Bold" FontStyle="Italic" FontFamily="Verdana" FontSize="35"/>
+        <Button Style="{DynamicResource Close}" x:Name="CloseFocus2" Cursor="Hand" Content="X" HorizontalAlignment="Left" Height="102" Margin="1819,-1,0,0" VerticalAlignment="Top" Width="102" Background="Red" FontFamily="Verdana" Foreground="White" FontWeight="Bold" FontSize="50" BorderBrush="{x:Null}" Click="CloseFocus2_Click"/>
     </Grid>
 </Window>

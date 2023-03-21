@@ -18,8 +18,8 @@ namespace Library_System
 
         public User(String id)
         {
-            userID = id;
             fine = 0;
+            userID = id;
             if (userID[0] == '1')
             {
                 userType = "member";
@@ -33,34 +33,21 @@ namespace Library_System
                 userType = "admin";
             }
             notifications = new List<String>();
-            borrowedBooks = new List<Book>();
+            borrowedBooks = new List<Book>(); //PLEASE FIX EVERYTHING ;(((((
         }
-        public String CalculateFineString()
+        public Decimal CalculateFine(Book book) //a fine that is based off borrowed books that have not been returned
         {
-            if (CalculateFine() == 0)
+            Decimal tempFine = fine; //does not change actual fine value
+            if (book.dueDate < DateTime.Now) //give fine
             {
-                return "No Fine";
-            }
-           
-            return string.Format("{0:C}", CalculateFine());
-
-        }
-        public Decimal CalculateFine()
-        {
-            int weeks;
-            foreach (Book borrowed in borrowedBooks)
-            {
-                if (borrowed.dueDate < DateTime.Now) //give fine
+                int weeks = Convert.ToInt32((DateTime.Now - book.dueDate).TotalDays / 7);
+                weeks--; //grace period
+                if (weeks >= 1)
                 {
-                    weeks = Convert.ToInt32((DateTime.Now - borrowed.dueDate).TotalDays / 7);
-                    weeks--; //grace period
-                    if (weeks >= 1)
-                    {
-                        fine += borrowed.price * (Decimal)0.01 * weeks;
-                    }
+                    tempFine += book.price * (Decimal)0.01 * weeks;
                 }
             }
-            return fine;
+            return tempFine;
         }
     }
 }

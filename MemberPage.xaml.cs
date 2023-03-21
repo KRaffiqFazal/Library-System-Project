@@ -73,7 +73,6 @@ namespace Library_System
             picManageBooks.Visibility = Visibility.Hidden; //hide unused elements
             picManageMembers.Visibility = Visibility.Hidden;
             picManageUsers.Visibility = Visibility.Hidden;
-            picTrackOverdueBooks.Visibility = Visibility.Hidden;
             picLogErrors.Visibility = Visibility.Hidden;
             picErrors.Visibility = Visibility.Hidden;
 
@@ -84,12 +83,10 @@ namespace Library_System
         {
             picManageBooks.Margin = new Thickness(221, 430, 0, 0);
             picManageMembers.Margin = new Thickness(608, 430, 0, 0);
-            picTrackOverdueBooks.Margin = new Thickness(995, 430, 0, 0);
             picLogErrors.Margin = new Thickness(1382, 430, 0, 0);
 
             picManageBooks.Visibility = Visibility.Visible;
             picManageMembers.Visibility = Visibility.Visible;
-            picTrackOverdueBooks.Visibility = Visibility.Visible;
             picLogErrors.Visibility = Visibility.Visible;
 
             picSearchForBooks.Visibility = Visibility.Hidden;
@@ -106,12 +103,10 @@ namespace Library_System
         {
             picManageBooks.Margin = new Thickness(221, 430, 0, 0);
             picManageUsers.Margin = new Thickness(608, 430, 0, 0);
-            picTrackOverdueBooks.Margin = new Thickness(995, 430, 0, 0);
             picErrors.Margin = new Thickness(1382, 430, 0, 0);
 
             picManageBooks.Visibility = Visibility.Visible;
             picManageUsers.Visibility = Visibility.Visible;
-            picTrackOverdueBooks.Visibility = Visibility.Visible;
             picErrors.Visibility = Visibility.Visible;
 
             picSearchForBooks.Visibility = Visibility.Hidden;

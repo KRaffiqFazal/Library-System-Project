@@ -73,7 +73,6 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Image x:Name="picTrackOverdueBooks" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,-85,0,0" VerticalAlignment="Top" Width="284" Source="/TrackOverdueBooks.png"/>
         <Image x:Name="picLogErrors" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,199,0,0" VerticalAlignment="Top" Width="284" Source="/LibrarianLogErrors.png" MouseLeftButtonDown="picLogErrors_MouseLeftButtonDown"/>
         <Image x:Name="picManageUsers" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,483,0,0" VerticalAlignment="Top" Width="284" Source="/AdminManageUsers.png" MouseLeftButtonDown="picManageUsers_MouseLeftButtonDown"/>
         <Image x:Name="picErrors" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="-503,767,0,0" VerticalAlignment="Top" Width="284" Source="/AdminErrors.png" MouseLeftButtonDown="picLogErrors_MouseLeftButtonDown"/>

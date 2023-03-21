@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Mail;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Converters;
 using System.Xml;
 
 namespace Library_System
@@ -22,6 +25,10 @@ namespace Library_System
         {
             InitializeComponent();
             globalValues = globals;
+            OnStartUp();
+        }
+        private void OnStartUp()
+        {
             lblID.Content = globalValues.currentUser.userID;
             txtbxName.Text = globalValues.currentUser.name;
             txtbxMobile.Text = globalValues.currentUser.phoneNumber;
@@ -33,6 +40,7 @@ namespace Library_System
 
             rctnglCover.Visibility = Visibility.Hidden;
             scrlvwrNotifications.Visibility = Visibility.Hidden;
+            btnClearNotif.Visibility = Visibility.Hidden;
         }
         private async void Home()
         {
@@ -51,6 +59,7 @@ namespace Library_System
             {
                 rctnglCover.Visibility = Visibility.Hidden;
                 scrlvwrNotifications.Visibility = Visibility.Hidden;
+                btnClearNotif.Visibility = Visibility.Hidden;
 
                 btnReset.Visibility = Visibility.Visible;
                 btnSave.Visibility = Visibility.Visible;
@@ -67,48 +76,35 @@ namespace Library_System
 
         private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            String name = txtbxName.Text; //check data note to self
-            String phoneNumber = txtbxMobile.Text;
-            String email = txtbxEmail.Text;
-            if (name[0] == ' ' || name[name.Length - 1] == ' ')
-            {
-                Error("please remove trailing and leading spaces before name.");
-            }
-            else if (phoneNumber[0] == ' ' || phoneNumber[phoneNumber.Length - 1] == ' ')
-            {
-                Error("please remove trailing and leading spaces before phone number.");
-            }
-            else if (email[0] == ' ' || email[email.Length - 1] == ' ')
-            {
-                Error("please remove trailing and leading spaces before email address.");
-            }
-            else if (!name.Contains(" "))
-            {
-                Error("please enter full name.");
-            }
-            else if (phoneNumber[0] != '0' || phoneNumber.Length != 11) //standard UK phone number
-            {
-                if (phoneNumber.Length != 10) //some phone numbers are 10 digits long
-                {
-                    Error("please enter a valid UK phone number starting with 0.");
-                }
-            }
-            else if (!email.Contains("@"))
+            //https://stackoverflow.com/questions/2385701/regular-expression-for-first-and-last-name
+            Regex regex;
+            bool pass = true; //if no errors generated information is saved
+            //https://stackoverflow.com/questions/5342375/regex-email-validation/68198658#68198658
+            regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+            if (!regex.IsMatch(txtbxEmail.Text))
             {
                 Error("please enter a valid email address.");
+                pass = false;
             }
-            else
+            regex = new Regex("^0[0-9]{9,10}$"); //starts with 0, can be 10 or 11 digits in total
+            if (!regex.IsMatch(txtbxMobile.Text)) //standard UK phone number
+            {
+                Error("please enter a valid UK phone number starting with 0.");
+                pass = false;
+            }
+            regex = new Regex(@"^([a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?)"); //check for full name
+            if (!regex.IsMatch(txtbxName.Text))
+            {
+                Error("please enter full name.");
+                pass = false;
+            }
+            if (pass)
             {
 
                 globalValues.currentUser.name = txtbxName.Text;
                 globalValues.currentUser.phoneNumber = txtbxMobile.Text;
                 globalValues.currentUser.email = txtbxEmail.Text;
-                globalValues.xmlC.doc.Load(globalValues.xmlC.userPath);
-                XmlNode userNode = globalValues.xmlC.UserType(globalValues.currentUser.userID);
-                userNode.ChildNodes.Item(1).InnerText = globalValues.currentUser.name;
-                userNode.ChildNodes.Item(2).InnerText = globalValues.currentUser.phoneNumber;
-                userNode.ChildNodes.Item(3).InnerText = globalValues.currentUser.email;
-                globalValues.xmlC.doc.Save(globalValues.xmlC.userPath);
+                globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
                 txtblkErrorMessage.Foreground = Brushes.Black;
                 txtblkErrorMessage.Text = "Data saved successfully!";
                 await Task.Delay(10000);
@@ -142,36 +138,74 @@ namespace Library_System
             scrlvwrNotifications.Margin = new Thickness(85, 473, 0, 0);
             scrlvwrNotifications.Visibility = Visibility.Visible;
             txtblkNotifications.Text = "";
+            btnClearNotif.Visibility = Visibility.Visible;
 
             btnSave.Visibility = Visibility.Hidden;
             btnReset.Visibility = Visibility.Hidden;
             picNotifications.Visibility = Visibility.Hidden;
 
-            if (globalValues.currentUser.notifications.Count == 0 && globalValues.currentUser.borrowedBooks.Count == 0 && globalValues.currentUser.reserved.Equals(""))
+            LoadNotifs();
+            
+            page1 = false;
+        }
+
+        private void txtbxMobile_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void btnClearNotif_Click(object sender, RoutedEventArgs e)
+        {
+            if (globalValues.currentUser.notifications.Count == 0)
+            {
+                return;
+            }
+            globalValues.currentUser.notifications.RemoveAt(0);
+            globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
+            LoadNotifs();
+
+        }
+        private void LoadNotifs()
+        {
+            txtblkNotifications.Text = "";
+            globalValues.currentUser = globalValues.xmlC.CreateUser(globalValues.currentUser.userID);
+            if (globalValues.currentUser.notifications.Count == 0 && globalValues.currentUser.borrowedBooks.Count == 0 && globalValues.currentUser.reserved.Equals("") && globalValues.currentUser.fine == 0)
             {
                 txtblkNotifications.Text = "Clear!"; //no borrowed books and no active notifications
             }
+            if (globalValues.currentUser.fine != 0)
+            {
+                txtblkNotifications.Text += "Fine due: " + string.Format("{0:C}", globalValues.currentUser.fine) + ", please see a librarian immediately.\n\n";
+            }
             if (!(globalValues.currentUser.reserved.Equals(""))) //there is a book being reserved
             {
-                txtblkNotifications.Text += globalValues.xmlC.BookCompiler().Find(book => book.id == globalValues.currentUser.reserved).title + " is being reserved.\n";
+                txtblkNotifications.Text += globalValues.xmlC.BookCompiler().Find(book => book.id == globalValues.currentUser.reserved).title + " is being reserved.\n\n";
             }
             if (!(globalValues.currentUser.borrowedBooks.Count == 0)) // there are books that are currently being borrowed
             {
                 List<Book> books = globalValues.currentUser.borrowedBooks;
                 foreach (Book book in books)
                 {
-                    txtblkNotifications.Text += book.id + " " + book.title + " has been borrowed until " + book.dueDate.ToShortDateString() + "\n";
+                    if (book.dueDate > DateTime.Now)
+                    {
+                        txtblkNotifications.Text += book.id + " " + book.title + " has been borrowed until " + book.dueDate.ToShortDateString() + " due in " + Math.Floor((book.dueDate - DateTime.Now).TotalDays).ToString() + " days.\n\n";
+                    }
+                    else
+                    {
+                        txtblkNotifications.Text += book.id + " " + book.title + " has been borrowed until " + book.dueDate.ToShortDateString() + " due IMMEDIATELY " + "\n\n";
+                    }
                 }
             }
             if (!(globalValues.currentUser.notifications.Count == 0))//there are notifications to be displayed
             {
                 List<String> notifications = globalValues.currentUser.notifications;
+                notifications.Reverse();
                 foreach (String notif in notifications)
                 {
-                    txtblkNotifications.Text += notif + "\n";
+                    txtblkNotifications.Text += notif + "\n\n";
                 }
             }
-            page1 = false;
         }
     }
 }

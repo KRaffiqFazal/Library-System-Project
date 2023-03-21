@@ -134,7 +134,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <PasswordBox Style="{DynamicResource CurvedLogin1}" x:Name="pswdbxPassword" LostFocus="pswdbxTerminalPassword_LostFocus"  KeyDown="pswdbxPassword_KeyDown" HorizontalAlignment="Center" VerticalAlignment="Center" Width="804" Height="108" BorderBrush="Black" FontFamily="Verdana" FontSize="72"/>
+        <PasswordBox Style="{DynamicResource CurvedLogin1}" x:Name="pswdbxPassword" PreviewTextInput="pswdbxPassword_PreviewTextInput" LostFocus="pswdbxTerminalPassword_LostFocus"  KeyDown="pswdbxPassword_KeyDown" HorizontalAlignment="Center" VerticalAlignment="Center" Width="804" Height="108" BorderBrush="Black" FontFamily="Verdana" FontSize="72"/>
         <TextBox Style="{DynamicResource CurvedLogin}" x:Name="txtbxWatermarkedText" GotFocus="txtbxWatermarkedText_GotFocus"  Text="User ID" HorizontalAlignment="Center" Height="108" TextWrapping="Wrap" VerticalAlignment="Center" Width="804" FontSize="72" FontStyle="Italic" Foreground="#FF828282" BorderBrush="Black" FontFamily="Verdana" />
         <TextBlock x:Name="txtblkLoginErrorOmission" HorizontalAlignment="Left" Height="102" TextWrapping="Wrap" VerticalAlignment="Top" Width="1021" IsEnabled="False" TextAlignment="Center" FontSize="50" FontFamily="Verdana" FontWeight="Bold" Foreground="Black" Text="Please enter your User ID below." Margin="419,379,0,0"/>
         <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="113" Margin="0,123,0,0" TextWrapping="NoWrap" Text="Sign In" VerticalAlignment="Top" Width="Auto" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>
