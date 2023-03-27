@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -58,6 +59,7 @@ namespace Library_System
         {
             if (txtbxToReturn.Text.Equals(""))
             {
+                lblError.Foreground = Brushes.Red;
                 lblError.Content = "Error: No input detected.";
                 await Task.Delay(3000);
                 lblError.Content = "";
@@ -67,22 +69,34 @@ namespace Library_System
                 Book toReturn = globalValues.currentUser.borrowedBooks.Find(book => book.id == txtbxToReturn.Text);
                 if (toReturn.dueDate != DateTime.MinValue) //can be returned
                 {
+                    txtChangedRun = false;
                     if (globalValues.currentUser.CalculateFine(toReturn) > globalValues.currentUser.fine)
                     {
                         globalValues.currentUser.fine = globalValues.currentUser.CalculateFine(toReturn);
+                        lblError.Foreground = Brushes.Black;
                         lblError.Content = "Book returned, fine due, please see a librarian.";
                     }
                     else
                     {
+                        lblError.Foreground = Brushes.Black;
                         lblError.Content = "Book returned, hope it was enjoyable!";
                     }
                     toReturn.dueDate = DateTime.MinValue;
                     toReturn.renewed = false;
+                    if (toReturn.reserved == DateTime.MaxValue) //is currently reserved by someone
+                    {
+                        toReturn.reserved = DateTime.Now.AddDays(3);
+                        List<User> allUsers = globalValues.xmlC.GetAllUsers(globalValues.adminUser);
+                        User update = allUsers.Find(user => user.reserved == toReturn.id);
+                        update.notifications.Add(toReturn.title + " is back in stock, please see a librarian before " + toReturn.reserved.ToShortDateString() + ", to claim it.");
+                        globalValues.xmlC.UpdateUserRecord(update);
+                        globalValues.SendNotifications(update);
+                    }
                     txtbxToReturn.Text = "";
                     globalValues.currentUser.borrowedBooks.Remove(toReturn);
                     globalValues.xmlC.UpdateRecord(toReturn, false);
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
-                    txtChangedRun = false;
+                    globalValues.SendNotifications(globalValues.currentUser);
                     await Task.Delay(3000);
                     txtChangedRun = true;
                     lblError.Content = "";
@@ -90,6 +104,7 @@ namespace Library_System
                 else
                 {
                     txtChangedRun = false;
+                    lblError.Foreground = Brushes.Red;
                     lblError.Content = "Error: This book has not been borrowed.";
                     await Task.Delay(3000);
                     txtChangedRun = true;
@@ -123,6 +138,7 @@ namespace Library_System
                     globalValues.currentUser.borrowedBooks.Add(toRenew);
                     globalValues.xmlC.UpdateRecord(toRenew, true);
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
+                    globalValues.SendNotifications(globalValues.currentUser);
                     lblError.Foreground = Brushes.Red;
                     txtChangedRun = false;
                     lblError.Content = "Book renewed successfully!";

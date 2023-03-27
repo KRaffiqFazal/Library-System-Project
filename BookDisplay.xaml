@@ -5,11 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Library_System"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="1000"
-             Height="300" Width="1000">
+             d:DesignHeight="300" d:DesignWidth="1020"
+             Height="300" Width="1020">
     <Grid>
         <Image x:Name="picBook" HorizontalAlignment="Left" Height="300" VerticalAlignment="Center" Width="300" Margin="0,0,0,0"/>
-        <TextBlock x:Name="txtblkBookInfo" HorizontalAlignment="Left" Height="300" Margin="300,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" Background="White" FontSize="30" FontFamily="Verdana" FontWeight="Bold"/>
+        <TextBlock x:Name="txtblkBookInfo" HorizontalAlignment="Left" Height="300" Margin="320,0,0,0" TextWrapping="Wrap" VerticalAlignment="Center" Width="700" Background="White" FontSize="30" FontFamily="Verdana" FontWeight="Bold"/>
 
     </Grid>
 </UserControl>

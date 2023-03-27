@@ -83,7 +83,8 @@ namespace Library_System
                     globalValues.xmlC.UpdateRecord(toBorrow, true);
                     globalValues.currentUser.borrowedBooks.Add(toBorrow);
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
-                    lblError.Foreground = Brushes.Red;
+                    globalValues.SendNotifications(globalValues.currentUser);
+                    lblError.Foreground = Brushes.Black;
                     lblError.Content = "Book Borrowed, happy reading!";
                     await Task.Delay(3000);
                     lblError.Content = "";

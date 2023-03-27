@@ -31,6 +31,7 @@ namespace Library_System //need to add the user control and update each value, k
             txtbxNewNotification.MaxLength = 512;
             Hide1();
             CreateScreen(globalValues.xmlC.GetAllUsers(globalValues.currentUser));
+            txtbxMobile.MaxLength = 11;
         }
         private void CreateScreen(List<User> toDisplay)
         { 
@@ -46,7 +47,7 @@ namespace Library_System //need to add the user control and update each value, k
                 info[1] = user.name;
                 info[2] = user.email;
                 info[3] = user.phoneNumber;
-                info[4] = string.Format("{0:C}", (user.fine));
+                info[4] = string.Format("{0:C}", user.fine);
                 temp.UserInfo = info;
                 temp.Cursor = Cursors.Hand;
                 temp.MouseLeftButtonDown += OnMouseLeftButtonDown;
@@ -274,8 +275,9 @@ namespace Library_System //need to add the user control and update each value, k
             List<User> allUsers = globalValues.xmlC.GetAllUsers(globalValues.currentUser);
             User toUpdate = allUsers.Find(user => user.userID == lblUserIdFocusBox.Content.ToString());
             toUpdate.fine = 0;
-            globalValues.xmlC.UpdateUserRecord(toUpdate); //need to add fine field in this method and in xml file and a way to load it in when signed in
+            globalValues.xmlC.UpdateUserRecord(toUpdate);
             lblFineFocusBox.Content = "£0.00";
+            globalValues.SendNotifications(toUpdate);
         }
 
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
@@ -418,6 +420,7 @@ namespace Library_System //need to add the user control and update each value, k
             updateUser = globalValues.xmlC.CreateUser(lblUserIdFocusBox.Content.ToString());
             updateUser.notifications.Add(toSave);
             globalValues.xmlC.UpdateUserRecord(updateUser);
+            globalValues.SendNotifications(updateUser);
             String oldVal = lblErrorCharacterCounter.Content.ToString();
             lblErrorCharacterCounter.Content = "Added notification.";
             UpdateNotifs();

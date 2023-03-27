@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace Library_System
@@ -65,6 +67,16 @@ namespace Library_System
             {
                 globalValues.currentUser = new User(pswdbxPassword.Password);
                 globalValues.currentUser = globalValues.xmlC.CreateUser(pswdbxPassword.Password);
+                List<User> sendNotifs = globalValues.xmlC.CancelReservations();
+
+                if (sendNotifs.Count != 0)
+                {
+                    foreach (User user in sendNotifs)
+                    {
+                        globalValues.SendNotifications(user);
+                    }
+                }
+                
                 SwitchScreen();
             }
             else

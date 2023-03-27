@@ -189,11 +189,11 @@ namespace Library_System
                 {
                     if (book.dueDate > DateTime.Now)
                     {
-                        txtblkNotifications.Text += book.id + " " + book.title + " has been borrowed until " + book.dueDate.ToShortDateString() + " due in " + Math.Floor((book.dueDate - DateTime.Now).TotalDays).ToString() + " days.\n\n";
+                        txtblkNotifications.Text += book.id + " " + book.title + " has been borrowed until " + book.dueDate.ToShortDateString() + ", due in " + Math.Floor((book.dueDate - DateTime.Now).TotalDays).ToString() + " days.\n\n";
                     }
                     else
                     {
-                        txtblkNotifications.Text += book.id + " " + book.title + " has been borrowed until " + book.dueDate.ToShortDateString() + " due IMMEDIATELY " + "\n\n";
+                        txtblkNotifications.Text += book.id + " " + book.title + " has been borrowed until " + book.dueDate.ToShortDateString() + ", due IMMEDIATELY " + "\n\n";
                     }
                 }
             }

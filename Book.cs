@@ -12,18 +12,18 @@ namespace Library_System
         public String publisher { get; set; }
         public String edition { get; set; }
         public String isbn { get; set; }
-        public List<String> category { get; set; }
+        public String category { get; set; }
         public int availableCopies { get; set; }
         public String description { get; set; }
         public DateTime dueDate { get; set; }
         public decimal price { get; set; }
-        public bool reserved { get; set; }
+        public DateTime reserved { get; set; }
         public bool renewed { get; set; }
 
         public Book()
         {
             availableCopies = 0;
-            reserved = false;
+            reserved = DateTime.MinValue; //reserved is the date the book is reserved till, if min value it is not reserved
             renewed = false;
         }
     }

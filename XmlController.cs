@@ -36,6 +36,9 @@ namespace Library_System
                 return false;
             }
         }
+        /// <summary>
+        /// Returns user information based on their node
+        /// </summary>
         public String[] GetInfo(String userID)
         {
             doc.Load(userPath);
@@ -75,7 +78,9 @@ namespace Library_System
             return newUser;
 
         }
-
+        /// <summary>
+        /// Returns node that the entered user is on
+        /// </summary>
         public XmlNode UserType(String userID)
         {
             User currentUser = new User(userID);
@@ -128,6 +133,10 @@ namespace Library_System
             foreach (String bookID in bookIDList)
             {
                 bookNode = doc.SelectSingleNode("/library/book[id='" + bookID + "']");
+                if (bookNode == null)
+                {
+                    continue;
+                }
                 temp = new Book();
                 temp.id = bookNode.ChildNodes.Item(0).InnerText;
                 temp.title = bookNode.ChildNodes.Item(1).InnerText;
@@ -136,8 +145,7 @@ namespace Library_System
                 temp.publisher = bookNode.ChildNodes.Item(4).InnerText;
                 temp.edition = bookNode.ChildNodes.Item(5).InnerText;
                 temp.isbn = bookNode.ChildNodes.Item(6).InnerText;
-                temp.category = new List<String>();
-                temp.category.AddRange(bookNode.ChildNodes.Item(7).InnerText.Split(';'));
+                temp.category = bookNode.ChildNodes.Item(7).InnerText;
                 temp.description = bookNode.ChildNodes.Item(8).InnerText;
 
                 // https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parseexact?view=net-7.0
@@ -147,13 +155,16 @@ namespace Library_System
                 Decimal.TryParse(bookNode.ChildNodes.Item(10).InnerText, out price);
                 temp.price = price;
 
-                temp.reserved = bool.Parse(bookNode.ChildNodes.Item(11).InnerText);
+                temp.reserved = DateTime.ParseExact(bookNode.ChildNodes.Item(11).InnerText, "ddMMyyyy", CultureInfo.InvariantCulture);
                 temp.renewed = bool.Parse(bookNode.ChildNodes.Item(12).InnerText);
 
                 books.Add(temp);
             }
             return books;
         }
+        /// <summary>
+        /// Sorts compiled books by getting rid of duplicates
+        /// </summary>
         public List<Book> GetAvailableBooks(List<Book> books)
         {
             for (int i = 0; i < books.Count; i++) //finds all duplicates and changes available copies value accordingly
@@ -184,7 +195,9 @@ namespace Library_System
 
             return correctBooks;
         }
-
+        /// <summary>
+        /// Returns all books in the xml file without sorting them into their duplicates
+        /// </summary>
         public List<Book> BookCompiler()
         {
             List<Book> books = new List<Book>();
@@ -203,19 +216,21 @@ namespace Library_System
                 currentBook.publisher = currentNode.ChildNodes.Item(4).InnerText;
                 currentBook.edition = currentNode.ChildNodes.Item(5).InnerText;
                 currentBook.isbn = currentNode.ChildNodes.Item(6).InnerText;
-                currentBook.category = new List<String>();
-                currentBook.category.AddRange(currentNode.ChildNodes.Item(7).InnerText.Split(';'));
+                currentBook.category = currentNode.ChildNodes.Item(7).InnerText;
                 currentBook.description = currentNode.ChildNodes.Item(8).InnerText;
                 currentBook.dueDate = DateTime.ParseExact(currentNode.ChildNodes.Item(9).InnerText, "ddMMyyyy", CultureInfo.InvariantCulture);
                 Decimal.TryParse(currentNode.ChildNodes.Item(10).InnerText, out price);
                 currentBook.price = price;
 
-                currentBook.reserved = bool.Parse(currentNode.ChildNodes.Item(11).InnerText);
+                currentBook.reserved = DateTime.ParseExact(currentNode.ChildNodes.Item(11).InnerText, "ddMMyyyy", CultureInfo.InvariantCulture);
                 currentBook.renewed = bool.Parse(currentNode.ChildNodes.Item(12).InnerText);
                 books.Add(currentBook);
             }
             return books;
         }
+        /// <summary>
+        /// Updates book record
+        /// </summary>
         public void UpdateRecord(Book book, bool option)
         {
             doc.Load(bookPath);
@@ -232,7 +247,8 @@ namespace Library_System
                 newDate = "01010001";
             }
             insert.ChildNodes.Item(9).InnerText = newDate;
-            insert.ChildNodes.Item(11).InnerText = book.reserved.ToString();
+            String[] reserved = book.reserved.ToShortDateString().Split('/');
+            insert.ChildNodes.Item(11).InnerText = reserved[0] + reserved[1] + reserved[2];
             insert.ChildNodes.Item(12).InnerText = book.renewed.ToString();
             doc.Save(bookPath);
         }
@@ -332,6 +348,10 @@ namespace Library_System
                     books += user.borrowedBooks[user.borrowedBooks.Count - 1].id;
                     userNode.ChildNodes.Item(4).InnerText = books;
                 }
+                else
+                {
+                    userNode.ChildNodes.Item(4).InnerText = "";
+                }
             }
             if (user.notifications.Count == 1) //new notification needs to be added
             {
@@ -355,17 +375,108 @@ namespace Library_System
             userNode.ChildNodes.Item(7).InnerText = user.fine.ToString();
             doc.Save(userPath);
         }
-        public String ToReserve(Book finalBook) //finalBook is a book of multiple copies but needs to check if a book has already been reserved
+        /// <summary>
+        /// finalBook is a book of multiple copies but needs to check if a book has already been reserved
+        /// </summary>
+        public String ToReserve(Book finalBook)
         {
             List<Book> fullList = BookCompiler();
             foreach (Book bookMain in fullList)
             {
-                if (bookMain.isbn.Equals(finalBook.isbn) && !bookMain.reserved)
+                if (bookMain.isbn.Equals(finalBook.isbn) && bookMain.reserved == DateTime.MinValue)
                 {
                     return bookMain.id; //book can be reserved
                 }
             }
             return "";
+        }
+        public void AddBookRecord(Book toAdd)
+        {
+            doc.Load(bookPath);
+            XmlNode insertLocation = doc.SelectSingleNode("/library");
+
+            XmlNode bookNode = doc.CreateElement("book");
+            XmlNode idNode = doc.CreateElement("id");
+            XmlNode titleNode = doc.CreateElement("title");
+            XmlNode authorNode = doc.CreateElement("author");
+            XmlNode yearNode = doc.CreateElement("year");
+            XmlNode publisherNode = doc.CreateElement("publisher");
+            XmlNode editionNode = doc.CreateElement("edition");
+            XmlNode isbnNode = doc.CreateElement("isbn");
+            XmlNode categoryNode = doc.CreateElement("category");
+            XmlNode descriptionNode = doc.CreateElement("description");
+            XmlNode dueDateNode = doc.CreateElement("due_date");
+            XmlNode priceNode = doc.CreateElement("price");
+            XmlNode reservedNode = doc.CreateElement("reserved");
+            XmlNode renewedNode = doc.CreateElement("renewed");
+
+            idNode.InnerText = toAdd.id;
+            titleNode.InnerText = toAdd.title;
+            authorNode.InnerText = toAdd.author;
+            yearNode.InnerText = toAdd.year;
+            publisherNode.InnerText = toAdd.publisher;
+            editionNode.InnerText = toAdd.edition;
+            isbnNode.InnerText = toAdd.isbn;
+            categoryNode.InnerText = toAdd.category;
+            descriptionNode.InnerText = toAdd.description;
+            String[] due = toAdd.dueDate.ToShortDateString().Split('/');
+            dueDateNode.InnerText = due[0] + due[1] + due[2];
+            priceNode.InnerText = toAdd.price.ToString();
+            due = toAdd.reserved.ToShortDateString().Split('/');
+            reservedNode.InnerText = due[0] + due[1] + due[2];
+            renewedNode.InnerText = toAdd.renewed.ToString();
+
+            bookNode.AppendChild(idNode);
+            bookNode.AppendChild(titleNode);
+            bookNode.AppendChild(authorNode);
+            bookNode.AppendChild(yearNode);
+            bookNode.AppendChild(publisherNode);
+            bookNode.AppendChild(editionNode);
+            bookNode.AppendChild(isbnNode);
+            bookNode.AppendChild(categoryNode);
+            bookNode.AppendChild(descriptionNode);
+            bookNode.AppendChild(dueDateNode);
+            bookNode.AppendChild(priceNode);
+            bookNode.AppendChild(reservedNode);
+            bookNode.AppendChild(renewedNode);
+
+            insertLocation.AppendChild(bookNode);
+            doc.Save(bookPath);
+        }
+        public void DeleteBookRecord(String id)
+        {
+            doc.Load(bookPath);
+            XmlNode toDelete = doc.SelectSingleNode("/library/book[id='" + id + "']");
+            toDelete.ParentNode.RemoveChild(toDelete);
+            doc.Save(bookPath);
+
+        }
+        /// <summary>
+        /// When someone logs in, checks all books and cancels reservations for books that are past the reservation date
+        /// </summary>
+        public List<User> CancelReservations()
+        {
+            Book temp;
+            List<User> tempList = new List<User>();
+            foreach (User user in GetAllUsers(new User("3")))
+            {
+                if (!user.reserved.Equals(""))
+                {
+                    temp = new Book();
+                    temp = BookCompiler().Find(book => book.id == user.reserved);
+                    if (temp.reserved != DateTime.MinValue && temp.reserved < DateTime.Now) //is currently reserved and past 3 days
+                    {
+                        temp.reserved = DateTime.MinValue;
+                        user.notifications.Add("3 days have passed since" + temp.title + "has come back in stock and now can be borrowed by any member");
+                        UpdateRecord(temp, false);
+                        user.reserved = "";
+                        UpdateUserRecord(user);
+                        tempList.Add(user);
+
+                    }
+                }
+            }
+            return tempList;
         }
         public List<User> GetAllUsers(User currentUser)
         {

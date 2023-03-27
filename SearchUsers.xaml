@@ -301,6 +301,6 @@
         </ScrollViewer>
         <TextBox x:Name="txtbxNewNotification" HorizontalAlignment="Left" Height="337" Margin="3,734,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="1077" FontFamily="Verdana" FontStyle="Italic" FontWeight="Bold" FontSize="50" TextChanged="txtbxNewNotification_TextChanged"/>
         <Label x:Name="lblErrorCharacterCounter" Content="Characters left:" HorizontalAlignment="Left" Height="76" Margin="1113,984,0,0" VerticalAlignment="Top" Width="640" FontWeight="Bold" FontStyle="Italic" FontFamily="Verdana" FontSize="35"/>
-        <Button Style="{DynamicResource Close}" x:Name="CloseFocus2" Cursor="Hand" Content="X" HorizontalAlignment="Left" Height="102" Margin="1819,-1,0,0" VerticalAlignment="Top" Width="102" Background="Red" FontFamily="Verdana" Foreground="White" FontWeight="Bold" FontSize="50" BorderBrush="{x:Null}" Click="CloseFocus2_Click"/>
+        <Button Style="{DynamicResource Close}" x:Name="CloseFocus2" Cursor="Hand" Content="X" HorizontalAlignment="Left" Height="182" Margin="1739,-1,0,0" VerticalAlignment="Top" Width="182" Background="Red" FontFamily="Verdana" Foreground="White" FontWeight="Bold" FontSize="140" BorderBrush="{x:Null}" Click="CloseFocus2_Click"/>
     </Grid>
 </Window>

@@ -210,5 +210,11 @@
   <ItemGroup>
     <Resource Include="NotiificationButton.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="9781788165969.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

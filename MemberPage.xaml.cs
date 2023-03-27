@@ -21,8 +21,8 @@ namespace Library_System
             if (globalValues.currentUser.userType.Equals("member"))
             {
                 btnNextBack.Visibility = Visibility.Hidden; //members can't see additional functionality
-                LoadPage1();
             }
+            LoadPage1();
         }
 
         private async void picLogout_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -60,17 +60,29 @@ namespace Library_System
 
         private void LoadPage1()
         {
-            picSearchForBooks.Margin = new Thickness(221, 430, 0, 0); //move new elements to correct position
+            if (!globalValues.currentUser.userType.Equals("member"))
+            {
+                picManageBooks.Margin = new Thickness(221, 430, 0, 0);
+                picManageBooks.Visibility = Visibility.Visible;
+                picSearchForBooks.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                picSearchForBooks.Margin = new Thickness(221, 430, 0, 0);
+                picSearchForBooks.Visibility = Visibility.Visible;
+                picManageBooks.Visibility = Visibility.Hidden;
+            }
+            //move new elements to correct position
             picBorrowBooks.Margin = new Thickness(608, 430, 0, 0);
             picReturn.Margin = new Thickness(995, 430, 0, 0);
             picProfile.Margin = new Thickness(1382, 430, 0, 0);
 
-            picSearchForBooks.Visibility = Visibility.Visible; //make elements visible
+            //make elements visible
             picBorrowBooks.Visibility = Visibility.Visible;
             picReturn.Visibility = Visibility.Visible;
             picProfile.Visibility = Visibility.Visible;
 
-            picManageBooks.Visibility = Visibility.Hidden; //hide unused elements
+            //hide unused elements
             picManageMembers.Visibility = Visibility.Hidden;
             picManageUsers.Visibility = Visibility.Hidden;
             picLogErrors.Visibility = Visibility.Hidden;
@@ -81,15 +93,12 @@ namespace Library_System
 
         private void LoadPage2Librarian()
         {
-            picManageBooks.Margin = new Thickness(221, 430, 0, 0);
             picManageMembers.Margin = new Thickness(608, 430, 0, 0);
             picLogErrors.Margin = new Thickness(1382, 430, 0, 0);
 
-            picManageBooks.Visibility = Visibility.Visible;
             picManageMembers.Visibility = Visibility.Visible;
             picLogErrors.Visibility = Visibility.Visible;
 
-            picSearchForBooks.Visibility = Visibility.Hidden;
             picBorrowBooks.Visibility = Visibility.Hidden;
             picReturn.Visibility = Visibility.Hidden;
             picProfile.Visibility = Visibility.Hidden;
@@ -101,15 +110,12 @@ namespace Library_System
 
         private void LoadPage2Admin()
         {
-            picManageBooks.Margin = new Thickness(221, 430, 0, 0);
             picManageUsers.Margin = new Thickness(608, 430, 0, 0);
             picErrors.Margin = new Thickness(1382, 430, 0, 0);
 
-            picManageBooks.Visibility = Visibility.Visible;
             picManageUsers.Visibility = Visibility.Visible;
             picErrors.Visibility = Visibility.Visible;
 
-            picSearchForBooks.Visibility = Visibility.Hidden;
             picBorrowBooks.Visibility = Visibility.Hidden;
             picReturn.Visibility = Visibility.Hidden;
             picProfile.Visibility = Visibility.Hidden;
