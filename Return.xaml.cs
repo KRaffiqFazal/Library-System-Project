@@ -75,6 +75,7 @@ namespace Library_System
                         globalValues.currentUser.fine = globalValues.currentUser.CalculateFine(toReturn);
                         lblError.Foreground = Brushes.Black;
                         lblError.Content = "Book returned, fine due, please see a librarian.";
+                        globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " has a fine of " + string.Format("{0:C}", globalValues.currentUser.fine));
                     }
                     else
                     {
@@ -90,6 +91,7 @@ namespace Library_System
                         User update = allUsers.Find(user => user.reserved == toReturn.id);
                         update.notifications.Add(toReturn.title + " is back in stock, please see a librarian before " + toReturn.reserved.ToShortDateString() + ", to claim it.");
                         globalValues.xmlC.UpdateUserRecord(update);
+                        globalValues.UpdateDetailedLog(update.userID + " reserved " + toReturn.id + " and it is reserved for them for 3 days");
                         globalValues.SendNotifications(update);
                     }
                     txtbxToReturn.Text = "";
@@ -97,6 +99,7 @@ namespace Library_System
                     globalValues.xmlC.UpdateRecord(toReturn, false);
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
                     globalValues.SendNotifications(globalValues.currentUser);
+                    globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " returned " + toReturn.id);
                     await Task.Delay(3000);
                     txtChangedRun = true;
                     lblError.Content = "";
@@ -139,6 +142,7 @@ namespace Library_System
                     globalValues.xmlC.UpdateRecord(toRenew, true);
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
                     globalValues.SendNotifications(globalValues.currentUser);
+                    globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " has renewed " + toRenew.id);
                     lblError.Foreground = Brushes.Red;
                     txtChangedRun = false;
                     lblError.Content = "Book renewed successfully!";

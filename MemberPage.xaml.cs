@@ -27,11 +27,13 @@ namespace Library_System
 
         private async void picLogout_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            globalValues = null;
+            
             txtblkLogoutMessage.Margin = new Thickness(0, 0, 0, 0);
             txtblkLogoutMessage.Visibility = Visibility.Visible;
+            globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " Logged out.");
+            globalValues = null;
             await Task.Delay(2000);
-            MainWindow window = new MainWindow();
+            MainWindow window = new MainWindow(null);
             window.Show();
             await Task.Delay(250);
             Close();
@@ -62,21 +64,14 @@ namespace Library_System
         {
             if (!globalValues.currentUser.userType.Equals("member"))
             {
-                picManageBooks.Margin = new Thickness(221, 430, 0, 0);
                 picManageBooks.Visibility = Visibility.Visible;
                 picSearchForBooks.Visibility = Visibility.Hidden;
             }
             else
             {
-                picSearchForBooks.Margin = new Thickness(221, 430, 0, 0);
                 picSearchForBooks.Visibility = Visibility.Visible;
                 picManageBooks.Visibility = Visibility.Hidden;
             }
-            //move new elements to correct position
-            picBorrowBooks.Margin = new Thickness(608, 430, 0, 0);
-            picReturn.Margin = new Thickness(995, 430, 0, 0);
-            picProfile.Margin = new Thickness(1382, 430, 0, 0);
-
             //make elements visible
             picBorrowBooks.Visibility = Visibility.Visible;
             picReturn.Visibility = Visibility.Visible;
@@ -87,40 +82,43 @@ namespace Library_System
             picManageUsers.Visibility = Visibility.Hidden;
             picLogErrors.Visibility = Visibility.Hidden;
             picErrors.Visibility = Visibility.Hidden;
+            picReports.Visibility = Visibility.Hidden;
 
             btnNextBack.Content = "Next"; //change content of button
         }
 
         private void LoadPage2Librarian()
         {
-            picManageMembers.Margin = new Thickness(608, 430, 0, 0);
-            picLogErrors.Margin = new Thickness(1382, 430, 0, 0);
-
             picManageMembers.Visibility = Visibility.Visible;
             picLogErrors.Visibility = Visibility.Visible;
+            picReports.Visibility = Visibility.Visible;
+            
 
             picBorrowBooks.Visibility = Visibility.Hidden;
             picReturn.Visibility = Visibility.Hidden;
             picProfile.Visibility = Visibility.Hidden;
             picErrors.Visibility = Visibility.Hidden;
+            picSearchForBooks.Visibility = Visibility.Hidden;
             picManageUsers.Visibility = Visibility.Hidden;
+            picManageBooks.Visibility = Visibility.Hidden;
+            picErrors.Visibility = Visibility.Hidden;
 
             btnNextBack.Content = "Back";
         }
 
         private void LoadPage2Admin()
         {
-            picManageUsers.Margin = new Thickness(608, 430, 0, 0);
-            picErrors.Margin = new Thickness(1382, 430, 0, 0);
-
             picManageUsers.Visibility = Visibility.Visible;
             picErrors.Visibility = Visibility.Visible;
+            picReports.Visibility = Visibility.Visible;
 
             picBorrowBooks.Visibility = Visibility.Hidden;
             picReturn.Visibility = Visibility.Hidden;
             picProfile.Visibility = Visibility.Hidden;
             picLogErrors.Visibility = Visibility.Hidden;
             picManageMembers.Visibility = Visibility.Hidden;
+            picManageBooks.Visibility = Visibility.Hidden;
+            picSearchForBooks.Visibility = Visibility.Hidden;
 
             btnNextBack.Content = "Back";
         }
@@ -177,6 +175,14 @@ namespace Library_System
         private async void ViewUsers()
         {
             SearchUsers win = new SearchUsers(globalValues);
+            win.Show();
+            await Task.Delay(250);
+            Close();
+        }
+
+        private async void picReports_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Report win = new Report(globalValues);
             win.Show();
             await Task.Delay(250);
             Close();

@@ -84,6 +84,8 @@ namespace Library_System
                     globalValues.currentUser.borrowedBooks.Add(toBorrow);
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
                     globalValues.SendNotifications(globalValues.currentUser);
+                    globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " borrowed " + toBorrow.id);
+                    globalValues.BorrowedLog(toBorrow, globalValues.currentUser);
                     lblError.Foreground = Brushes.Black;
                     lblError.Content = "Book Borrowed, happy reading!";
                     await Task.Delay(3000);
@@ -103,6 +105,7 @@ namespace Library_System
                     {
                         lblError.Foreground = Brushes.Red;
                         lblError.Content = "Please report this book to a librarian immediately.";
+                        globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " tried returning " + txtbxToBorrow.Text + ", this is not borrowed by them.");
                     }
 
                 }

@@ -33,7 +33,7 @@ namespace Library_System
                 userType = "admin";
             }
             notifications = new List<String>();
-            borrowedBooks = new List<Book>(); //PLEASE FIX EVERYTHING ;(((((
+            borrowedBooks = new List<Book>();
         }
         public Decimal CalculateFine(Book book) //a fine that is based off borrowed books that have not been returned
         {
@@ -48,6 +48,17 @@ namespace Library_System
                 }
             }
             return tempFine;
+        }
+        public bool Overdue()
+        {
+            foreach (Book book in borrowedBooks)
+            {
+                if (book.dueDate < DateTime.Now)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

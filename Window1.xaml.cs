@@ -67,6 +67,7 @@ namespace Library_System
             {
                 globalValues.currentUser = new User(pswdbxPassword.Password);
                 globalValues.currentUser = globalValues.xmlC.CreateUser(pswdbxPassword.Password);
+                globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " Logged in.");
                 List<User> sendNotifs = globalValues.xmlC.CancelReservations();
 
                 if (sendNotifs.Count != 0)
@@ -74,9 +75,9 @@ namespace Library_System
                     foreach (User user in sendNotifs)
                     {
                         globalValues.SendNotifications(user);
+                        globalValues.UpdateDetailedLog(user.userID + " was emailed regarding a cancelled reservation.");
                     }
                 }
-                
                 SwitchScreen();
             }
             else

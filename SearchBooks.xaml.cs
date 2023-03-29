@@ -263,6 +263,7 @@ namespace Library_System
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
                     globalValues.SendNotifications(globalValues.currentUser);
                     globalValues.xmlC.UpdateRecord(currentBook, true);
+                    globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " has reserved " + currentBook.id);
                 }
                 else
                 {
@@ -290,6 +291,7 @@ namespace Library_System
                 newBook.dueDate = DateTime.MinValue;
                 globalValues.xmlC.AddBookRecord(newBook);
                 lblError.Content = "Book Added!";
+                globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " added a new book to the library with id: " + newBook.id);
                 ResetDeletionFields();
             }
             else //Delete
@@ -339,6 +341,7 @@ namespace Library_System
                             lblError.Content = "Book is currently borrowed, please confirm by deletion.";
                         }
                     }
+                    globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " deleted " + books[index].id);
                 }
                 else //value entered does not exist
                 {

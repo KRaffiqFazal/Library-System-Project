@@ -15,9 +15,15 @@ namespace Library_System
         String terminalPassword = "Admin123";
         Globals globalValues;
 
-        public MainWindow()
+        public MainWindow(Globals globals)
         {
             InitializeComponent();
+            if (globals != null) //runs on startup of program, i.e. once a day
+            {
+                globalValues = new Globals();
+                globalValues.xmlC = new XmlController();
+                globalValues.NotifyUsers();
+            }
             globalValues = new Globals();
             globalValues.xmlC = new XmlController();
             Hide2();
