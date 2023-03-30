@@ -99,26 +99,26 @@ namespace Library_System
 
             if (top3.Count == 1)
             {
-                first = top3[0].id + " - " + top3[0].val;
-                last = top3[0].id + " - " + top3[0].val;
+                first = top3[0].id + " ~ " + top3[0].val;
+                last = top3[0].id + " ~ " + top3[0].val;
             }
             else if (top3.Count == 2)
             {
-                first = top3[0].id + " - " + top3[0].val;
-                second = top3[1].id + " - " + top3[1].val;
+                first = top3[0].id + " ~ " + top3[0].val;
+                second = top3[1].id + " ~ " + top3[1].val;
 
-                last = top3[top3.Count - 1].id + " - " + top3[top3.Count - 1].val;
-                secondLast = top3[top3.Count - 2].id + " - " + top3[top3.Count - 2].val;
+                last = top3[top3.Count - 1].id + " ~ " + top3[top3.Count - 1].val;
+                secondLast = top3[top3.Count - 2].id + " ~ " + top3[top3.Count - 2].val;
             }
             else
             {
-                first = top3[0].id + " - " + top3[0].val;
-                second = top3[1].id + " - " + top3[1].val;
-                third = top3[2].id + " - " + top3[2].val;
+                first = top3[0].id + " ~ " + top3[0].val;
+                second = top3[1].id + " ~ " + top3[1].val;
+                third = top3[2].id + " ~ " + top3[2].val;
 
-                last = top3[top3.Count - 1].id + " - " + top3[top3.Count - 1].val;
-                secondLast = top3[top3.Count - 2].id + " - " + top3[top3.Count - 2].val;
-                thirdLast = top3[top3.Count - 3].id + " - " + top3[top3.Count - 3].val;
+                last = top3[top3.Count - 1].id + " ~ " + top3[top3.Count - 1].val;
+                secondLast = top3[top3.Count - 2].id + " ~ " + top3[top3.Count - 2].val;
+                thirdLast = top3[top3.Count - 3].id + " ~ " + top3[top3.Count - 3].val;
             }
             String[] month = { "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" };
             String currentMonth = month[DateTime.Now.Month - 1];
@@ -128,12 +128,11 @@ namespace Library_System
             top3 = new List<IdCounter>();
             temp = new IdCounter();
             List<Book> allBooks = globalValues.xmlC.GetAvailableBooks(globalValues.xmlC.BookCompiler());
-            tempSequence = borrowedList.Last().Remove(userList.Last().Length - 1, 1).Split(';');
-            sequence = new String[tempSequence.Length - 1];
-            for (int j = 1; j < tempSequence.Length; j++)
-            {
-                sequence[j - 1] = tempSequence[j];
-            }
+            String basicSequence = borrowedList.Last();
+            basicSequence = basicSequence.Remove(basicSequence.Length - 1, 1);
+            basicSequence = basicSequence.Substring(7, basicSequence.Length - 7);
+            tempSequence = basicSequence.Split(';');
+            sequence = tempSequence;
             i = 0;
             foreach (Book book in allBooks)
             {
@@ -151,7 +150,6 @@ namespace Library_System
                 top3.Add(temp);
             }
             top3.OrderBy(x => x.val).ToList();
-
             first = "None";
             second = "None";
             third = "None";
@@ -162,26 +160,26 @@ namespace Library_System
 
             if (top3.Count == 1)
             {
-                first = top3[0].id + " - " + top3[0].val;
-                last = top3[0].id + " - " + top3[0].val;
+                first = top3[0].id + " ~ " + top3[0].val;
+                last = top3[0].id + " ~ " + top3[0].val;
             }
             else if (top3.Count == 2)
             {
-                first = top3[0].id + " - " + top3[0].val;
-                second = top3[1].id + " - " + top3[1].val;
+                first = top3[0].id + " ~ " + top3[0].val;
+                second = top3[1].id + " ~ " + top3[1].val;
 
-                last = top3[top3.Count - 1].id + " - " + top3[top3.Count - 1].val;
-                secondLast = top3[top3.Count - 2].id + " - " + top3[top3.Count - 2].val;
+                last = top3[top3.Count - 1].id + " ~ " + top3[top3.Count - 1].val;
+                secondLast = top3[top3.Count - 2].id + " ~ " + top3[top3.Count - 2].val;
             }
             else
             {
-                first = top3[0].id + " - " + top3[0].val;
-                second = top3[1].id + " - " + top3[1].val;
-                third = top3[2].id + " - " + top3[2].val;
+                first = top3[0].id + " ~ " + top3[0].val;
+                second = top3[1].id + " ~ " + top3[1].val;
+                third = top3[2].id + " ~ " + top3[2].val;
 
-                last = top3[top3.Count - 1].id + " - " + top3[top3.Count - 1].val;
-                secondLast = top3[top3.Count - 2].id + " - " + top3[top3.Count - 2].val;
-                thirdLast = top3[top3.Count - 3].id + " - " + top3[top3.Count - 3].val;
+                last = top3[top3.Count - 1].id + " ~ " + top3[top3.Count - 1].val;
+                secondLast = top3[top3.Count - 2].id + " ~ " + top3[top3.Count - 2].val;
+                thirdLast = top3[top3.Count - 3].id + " ~ " + top3[top3.Count - 3].val;
             }
             txtblkRecentBreakdown.Text += "Most Popular Books: \n1) " + first + "\n2) " + second + "\n3) " + third + "\n\nLeast Popular Books:\n1) " + last + "\n2) " + secondLast + "\n3) " + thirdLast + "\n\n";
 
@@ -194,18 +192,18 @@ namespace Library_System
 
             if (top3.Count == 1)
             {
-                first = allUsers[0].userID + " - " + string.Format("{0:C}", allUsers[0].fine);
+                first = allUsers[0].userID + " ~ " + string.Format("{0:C}", allUsers[0].fine);
             }
             else if (top3.Count == 2)
             {
-                first = allUsers[0].userID + " - " + string.Format("{0:C}", allUsers[0].fine);
-                second = allUsers[1].userID + " - " + string.Format("{0:C}", allUsers[1].fine);
+                first = allUsers[0].userID + " ~ " + string.Format("{0:C}", allUsers[0].fine);
+                second = allUsers[1].userID + " ~ " + string.Format("{0:C}", allUsers[1].fine);
             }
             else
             {
-                first = allUsers[0].userID + " - " + string.Format("{0:C}", allUsers[0].fine);
-                second = allUsers[1].userID + " - " + string.Format("{0:C}", allUsers[1].fine);
-                third = allUsers[2].userID + " - " + string.Format("{0:C}", allUsers[2].fine);
+                first = allUsers[0].userID + " ~ " + string.Format("{0:C}", allUsers[0].fine);
+                second = allUsers[1].userID + " ~ " + string.Format("{0:C}", allUsers[1].fine);
+                third = allUsers[2].userID + " ~ " + string.Format("{0:C}", allUsers[2].fine);
             }
             txtblkRecentBreakdown.Text += "Largest fined users (current): \n1) " + first + "\n2) " + second + "\n3) " + third;
 

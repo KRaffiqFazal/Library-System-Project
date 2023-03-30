@@ -33,6 +33,8 @@ namespace Library_System
             txtbxName.Text = globalValues.currentUser.name;
             txtbxMobile.Text = globalValues.currentUser.phoneNumber;
             txtbxEmail.Text = globalValues.currentUser.email;
+            List<Book> allBooks = globalValues.xmlC.BookCompiler();
+            lblReserved.Content = allBooks.Find(x => x.id == globalValues.currentUser.reserved).title;
 
             oldName = globalValues.currentUser.name;
             oldPhone = globalValues.currentUser.phoneNumber;
@@ -64,6 +66,7 @@ namespace Library_System
                 btnReset.Visibility = Visibility.Visible;
                 btnSave.Visibility = Visibility.Visible;
                 picNotifications.Visibility = Visibility.Visible;
+                btnCancelReservation.Visibility = Visibility.Visible;
 
                 page1 = true;
             }
@@ -143,6 +146,7 @@ namespace Library_System
             btnSave.Visibility = Visibility.Hidden;
             btnReset.Visibility = Visibility.Hidden;
             picNotifications.Visibility = Visibility.Hidden;
+            btnCancelReservation.Visibility = Visibility.Hidden;
 
             LoadNotifs();
             
@@ -205,6 +209,20 @@ namespace Library_System
                 {
                     txtblkNotifications.Text += notif + "\n\n";
                 }
+            }
+        }
+
+        private void btnCancelReservation_Click(object sender, RoutedEventArgs e)
+        {
+            String idToDelete;
+            if (!globalValues.currentUser.reserved.Equals(""))
+            { 
+                idToDelete = globalValues.currentUser.reserved;
+                Book cancelReservation = globalValues.xmlC.BookCompiler().Find(x => x.id == idToDelete);
+                cancelReservation.reserved = DateTime.MinValue;
+                globalValues.xmlC.UpdateRecord(cancelReservation, true);
+                globalValues.currentUser.reserved = "";
+
             }
         }
     }
