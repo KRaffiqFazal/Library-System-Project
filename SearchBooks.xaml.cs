@@ -131,10 +131,8 @@ namespace Library_System
             BookDisplay currentDisplayed;
             for (int i = 0; i < filePaths.Length; i++)
             {
-                Trace.WriteLine(filePaths[i]);
                 availableImgs[i] = filePaths[i].Substring(6, filePaths[i].Length - 10); //gets array of ids that have images
                 availableImgs[i] = availableImgs[i].Substring(availableImgs[i].Length - 13);
-                Trace.WriteLine(availableImgs[i]);
             }
             String currentDir = Directory.GetCurrentDirectory();
             stackPanel.Children.Clear();
@@ -148,13 +146,11 @@ namespace Library_System
                 if (availableImgs.Contains(book.isbn))
                 {
                     currentDisplayed.picBook.Source = new BitmapImage(new Uri(currentDir + @"\" + book.isbn + ".png", UriKind.Absolute));
-                    Trace.WriteLine("Success");
                 }
                 else
                 {
                     currentDisplayed.picBook.Source = new BitmapImage(new Uri("/0.png", UriKind.Relative));
                     currentDisplayed.picBook.Visibility = Visibility.Visible;
-                    Trace.WriteLine("Fail");
                 }
                 currentDisplayed.BookIsbn = book.isbn;
                 currentDisplayed.MouseLeftButtonDown += OnMouseLeftButtonDown;
@@ -183,7 +179,7 @@ namespace Library_System
 
             if (txtblkBookInfoFocus.Text.Contains("Available Copies: 0"))
             {
-                if (!globalValues.xmlC.ToReserve(currentBook).Equals("") && !globalValues.currentUser.reserved.Equals("") && globalValues.currentUser.borrowedBooks.FindIndex(book => book.isbn == currentBook.isbn) == -1) //a copy available that is not reserved, the user is not reserving a book and the user has not borrowed a copy of the book they wish to reserve
+                if (!globalValues.xmlC.ToReserve(currentBook).Equals("") && globalValues.currentUser.reserved.Equals("") && !(globalValues.currentUser.borrowedBooks.FindIndex(book => book.isbn == currentBook.isbn) != -1)) //a copy available that is not reserved, the user is not reserving a book and the user has not borrowed a copy of the book they wish to reserve
                 {
                     currentIsbn = temp.BookIsbn;
                     btnReserve.Visibility = Visibility.Visible;
@@ -193,7 +189,7 @@ namespace Library_System
                 {
                     lblError.Content = "You have already reserved another book.";
                 }
-                else if (globalValues.currentUser.borrowedBooks.FindIndex(book => book.isbn == currentBook.isbn) == -1)
+                else if (globalValues.currentUser.borrowedBooks.FindIndex(book => book.isbn == currentBook.isbn) != -1)
                 {
                     lblError.Content = "You cannot reserve a copy of the same borrowed book.";
                 }
@@ -248,6 +244,7 @@ namespace Library_System
                 btnDelete.Visibility = Visibility.Visible;
             }
             lblError.Content = "";
+            CreateScreen(globalValues.xmlC.GetAvailableBooks(globalValues.xmlC.BookCompiler()));
         }
 
         private async void btnReserve_Click(object sender, RoutedEventArgs e) //button only seen if reservation possible
@@ -264,6 +261,8 @@ namespace Library_System
                     globalValues.SendNotifications(globalValues.currentUser);
                     globalValues.xmlC.UpdateRecord(currentBook, true);
                     globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " has reserved " + currentBook.id);
+                    lblError.Content = "Reservation Successful";
+                    btnReserve.Visibility = Visibility.Hidden;
                 }
                 else
                 {
@@ -289,6 +288,7 @@ namespace Library_System
                 newBook.category = txtbxCategory.Text;
                 newBook.price = Decimal.Parse(txtbxPrice.Text);
                 newBook.dueDate = DateTime.MinValue;
+                newBook.description = txtbxDescription.Text;
                 globalValues.xmlC.AddBookRecord(newBook);
                 lblError.Content = "Book Added!";
                 globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " added a new book to the library with id: " + newBook.id);

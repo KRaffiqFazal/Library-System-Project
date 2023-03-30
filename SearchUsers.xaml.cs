@@ -91,6 +91,7 @@ namespace Library_System //need to add the user control and update each value, k
             txtbxEmail.Text = info[2];
             lblFineFocusBox.Content = info[4];
             Show1();
+            btnSaveFocus.Content = "Save";
 
 
         }
@@ -198,6 +199,9 @@ namespace Library_System //need to add the user control and update each value, k
             txtbxMobile.Text = "";
             txtbxEmail.Text = "";
             lblUserIdFocusBox.Content = "";
+            rdbtnLibrarian.IsChecked = false;
+            rdbtnMember.IsChecked = false;
+            rdbtnAdmin.IsChecked = false;
         }
 
         private async void btnSaveFocus_Click(object sender, RoutedEventArgs e)
@@ -288,6 +292,7 @@ namespace Library_System //need to add the user control and update each value, k
             lblFineFocus.Visibility = Visibility.Hidden;
             lblFineFocusBox.Visibility = Visibility.Hidden;
             lblUserTypeFocus.Visibility = Visibility.Visible;
+            btnMore.Visibility = Visibility.Hidden;
             rdbtnMember.Visibility = Visibility.Visible;
             if (globalValues.currentUser.userType.Equals("admin"))
             {
@@ -357,8 +362,16 @@ namespace Library_System //need to add the user control and update each value, k
             System.Media.SystemSounds.Beep.Play();
         }
 
-        private void btnDeleteConfirm_Click(object sender, RoutedEventArgs e)
+        private async void btnDeleteConfirm_Click(object sender, RoutedEventArgs e)
         {
+            if (globalValues.currentUser.userID.Equals(lblUserIdFocusBox.Content.ToString()))
+            {
+                globalValues = null;
+                MainWindow window = new MainWindow(null);
+                window.Show();
+                await Task.Delay(250);
+                Close();
+            }
             globalValues.xmlC.DeleteUserRecord(lblUserIdFocusBox.Content.ToString());
             Hide1();
         }

@@ -255,15 +255,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Style="{DynamicResource CurvedButton}" x:Name="btnDelete" Cursor="Hand" Content="Delete" HorizontalAlignment="Left" Height="137" Margin="1638,256,0,0" VerticalAlignment="Top" Width="230" FontFamily="Verdana" FontWeight="Bold" Foreground="White" FontSize="50" BorderBrush="{x:Null}" Click="btnDelete_Click">
-            <Button.Background>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF517651"/>
-                    <GradientStop Color="#FF517651" Offset="1"/>
-                    <GradientStop Color="#FF3E5E42" Offset="0.5"/>
-                </LinearGradientBrush>
-            </Button.Background>
-        </Button>
+        <Button Style="{DynamicResource CurvedButton}" x:Name="btnDelete" Cursor="Hand" Content="Delete" HorizontalAlignment="Left" Height="137" Margin="1638,256,0,0" VerticalAlignment="Top" Width="230" FontFamily="Verdana" FontWeight="Bold" Foreground="White" FontSize="50" BorderBrush="{x:Null}" Click="btnDelete_Click" Background="Red"/>
         <Rectangle x:Name="rctnglFocus" HorizontalAlignment="Center" Height="1080" Stroke="Black" VerticalAlignment="Center" Width="1920" Fill="White"/>
         <Image x:Name="picBookFocus" HorizontalAlignment="Left" Height="550" Margin="1334,256,0,0" VerticalAlignment="Top" Width="550"/>
         <Button Style="{DynamicResource CurvedButton}" x:Name="btnReserve" Cursor="Hand" Content="Reserve" HorizontalAlignment="Left" Height="227" Margin="1346,837,0,0" VerticalAlignment="Top" Width="522" FontFamily="Verdana" FontWeight="Bold" Foreground="White" FontSize="90" BorderBrush="{x:Null}" Click="btnReserve_Click">

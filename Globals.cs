@@ -91,8 +91,11 @@ namespace Library_System
                 Credentials = new NetworkCredential(fromMail, fromPassword),
                 EnableSsl = true,
             };
-
-            smtpClient.Send(message);
+            try
+            {
+                smtpClient.Send(message);
+            }
+            catch { }
         }
         /// <summary>
         /// Notifies librarians that there are members who have not returned their books yet

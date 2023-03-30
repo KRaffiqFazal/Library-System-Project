@@ -34,7 +34,14 @@ namespace Library_System
             txtbxMobile.Text = globalValues.currentUser.phoneNumber;
             txtbxEmail.Text = globalValues.currentUser.email;
             List<Book> allBooks = globalValues.xmlC.BookCompiler();
-            lblReserved.Content = allBooks.Find(x => x.id == globalValues.currentUser.reserved).title;
+            if (!globalValues.currentUser.reserved.Equals(""))
+            {
+                lblReserved.Content = allBooks.Find(x => x.id == globalValues.currentUser.reserved).title;
+            }
+            else
+            {
+                lblReserved.Content = "";
+            }
 
             oldName = globalValues.currentUser.name;
             oldPhone = globalValues.currentUser.phoneNumber;
@@ -222,6 +229,7 @@ namespace Library_System
                 cancelReservation.reserved = DateTime.MinValue;
                 globalValues.xmlC.UpdateRecord(cancelReservation, true);
                 globalValues.currentUser.reserved = "";
+                lblReserved.Content = "";
 
             }
         }
