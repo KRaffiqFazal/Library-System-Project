@@ -131,7 +131,7 @@ namespace Library_System
                 Book toRenew = globalValues.currentUser.borrowedBooks.Find(book => book.id == txtbxToReturn.Text);
                 if (globalValues.currentUser.CalculateFine(toRenew) > globalValues.currentUser.fine) //if they are different, a fine needs to take place so the book must be returned
                 {
-                    lblError.Content = "Please return this book as it is overdue.";
+                    lblError.Content = "Please return this book as a fine is due.";
                 }
                 else if (!toRenew.renewed)
                 {
