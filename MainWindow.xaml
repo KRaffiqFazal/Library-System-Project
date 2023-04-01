@@ -141,14 +141,6 @@
                             <Trigger Property="IsDefaulted" Value="true">
                                 <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
                             </Trigger>
-                            <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.MouseOver.Background2}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.MouseOver.Border2}"/>
-                            </Trigger>
-                            <Trigger Property="IsPressed" Value="true">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Pressed.Background2}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Pressed.Border2}"/>
-                            </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
                                 <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background2}"/>
                                 <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border2}"/>
@@ -251,6 +243,12 @@
     </Window.Resources>
     <Grid Width="1920" Height="1080" Background="#FFB4F5F4" >
         <Image x:Name="picLogo" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/logo.png" Stretch="UniformToFill" Margin="0,20,0,0" Height="343" Width="445"/>
+        <Button Style="{DynamicResource HiddenButton}" x:Name="btnQuit" HorizontalAlignment="Left" Height="135" Margin="1590,0,0,0" VerticalAlignment="Top" Width="330" Background="#FFB4F5F4" BorderBrush="#FFB4F5F4" PreviewMouseDown="btnQuit_PreviewMouseDown" PreviewMouseUp="btnQuit_PreviewMouseUp"/>
+        <Button Style="{DynamicResource SmallButtonCurved}" x:Name="btnAdminQuit" Cursor="Hand" Content="Quit" HorizontalAlignment="Center" Height="106" Margin="0,645,0,0" VerticalAlignment="Top" Width="224" Background="#FF3A5A40" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontSize="40" FontWeight="Bold" Click="btnAdminQuit_Click"/>
+        <Button x:Name="btnRestart" Content="Reset" HorizontalAlignment="Left" Cursor="Hand" Height="95" Margin="1700,975,0,0" VerticalAlignment="Top" Width="210" Background="#FF3A5A40" BorderBrush="{x:Null}" Foreground="White" FontSize="40" FontFamily="Verdana" FontWeight="Bold" Click="btnRestart_Click" Style="{DynamicResource SmallButtonCurved}"/>
+        <PasswordBox Style="{DynamicResource CurvedLogin1}" x:Name="pswdbxTerminalPassword" LostFocus="pswdbxTerminalPassword_LostFocus" HorizontalAlignment="Center" VerticalAlignment="Center" Width="804" Height="108" BorderBrush="Black" FontFamily="Verdana" FontSize="72" KeyDown="pswdbxTerminalPassword_KeyDown"/>
+        <TextBox Style="{DynamicResource CurvedLogin}" x:Name="txtbxWatermarkedText" GotFocus="txtbxWatermarkedText_GotFocus"  Text="Terminal ID" HorizontalAlignment="Center" Height="108" TextWrapping="Wrap" VerticalAlignment="Center" Width="804" FontSize="72" FontStyle="Italic" Foreground="#FF828282" BorderBrush="Black" />
+        <Label x:Name="lblUserHelp" Content="Not an Admin?" HorizontalAlignment="Left" Height="57" Margin="1406,1003,0,0" VerticalAlignment="Top" Width="262" FontWeight="Bold" FontStyle="Italic" FontFamily="Verdana" FontSize="30"/>
         <Button Style="{DynamicResource RoundedButton}" x:Name="btnProceed" Content="Start" HorizontalAlignment="Center" VerticalAlignment="Top" Width="1256" Height="542" Margin="0,443,0,0" Click="btnProceed_Click" Foreground="White" FontWeight="Bold" FontSize="350" FontFamily="Verdana Pro Cond Semibold" Cursor="Hand">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -262,11 +260,5 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Style="{DynamicResource HiddenButton}" x:Name="btnQuit" HorizontalAlignment="Left" Height="135" Margin="1590,0,0,0" VerticalAlignment="Top" Width="330" Background="#FFB4F5F4" BorderBrush="#FFB4F5F4" PreviewMouseDown="btnQuit_PreviewMouseDown" PreviewMouseUp="btnQuit_PreviewMouseUp"/>
-        <Button Style="{DynamicResource SmallButtonCurved}" x:Name="btnAdminQuit" Content="Quit" HorizontalAlignment="Center" Height="106" Margin="0,645,0,0" VerticalAlignment="Top" Width="224" Background="#FF3A5A40" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontSize="40" FontWeight="Bold" Click="btnAdminQuit_Click"/>
-        <Button x:Name="btnRestart" Content="Reset" HorizontalAlignment="Left" Height="95" Margin="1700,975,0,0" VerticalAlignment="Top" Width="210" Background="#FF3A5A40" BorderBrush="{x:Null}" Foreground="White" FontSize="40" FontFamily="Verdana" FontWeight="Bold" Click="btnRestart_Click" Style="{DynamicResource SmallButtonCurved}"/>
-        <PasswordBox Style="{DynamicResource CurvedLogin1}" x:Name="pswdbxTerminalPassword" LostFocus="pswdbxTerminalPassword_LostFocus" HorizontalAlignment="Center" VerticalAlignment="Center" Width="804" Height="108" BorderBrush="Black" FontFamily="Verdana" FontSize="72" KeyDown="pswdbxTerminalPassword_KeyDown"/>
-        <TextBox Style="{DynamicResource CurvedLogin}" x:Name="txtbxWatermarkedText" GotFocus="txtbxWatermarkedText_GotFocus"  Text="Terminal ID" HorizontalAlignment="Center" Height="108" TextWrapping="Wrap" VerticalAlignment="Center" Width="804" FontSize="72" FontStyle="Italic" Foreground="#FF828282" BorderBrush="Black" />
-        <Label x:Name="lblUserHelp" Content="Not an Admin?" HorizontalAlignment="Left" Height="57" Margin="1406,1003,0,0" VerticalAlignment="Top" Width="262" FontWeight="Bold" FontStyle="Italic" FontFamily="Verdana" FontSize="30"/>
     </Grid>
 </Window>

@@ -69,7 +69,7 @@ namespace Library_System
         }
 
         /// <summary>
-        /// https://stackoverflow.com/questions/26682729/event-for-when-a-button-is-held-clicked-for-some-time
+        /// Opens a screen when a button is held for longer than 2 seconds (heltonbiker, 2015)
         /// </summary>
         private void btnQuit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -89,7 +89,7 @@ namespace Library_System
         }
 
         /// <summary>
-        /// https://www.youtube.com/watch?v=YPwnBJod5a8
+        /// Textbox reads what it requires to be inputted until it is clicked (GameDevMadeEasy Live, 2018)
         /// </summary>
         private void txtbxWatermarkedText_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -126,6 +126,7 @@ namespace Library_System
                     Restart();
                 }
                 pswdbxTerminalPassword.Password = "";
+
             }
         }
         private void btnAdminQuit_Click(object sender, RoutedEventArgs e)
@@ -139,7 +140,7 @@ namespace Library_System
         }
 
         /// <summary>
-        /// https://learn.microsoft.com/en-us/dotnet/api/system.windows.input.keyboard.keydown?view=windowsdesktop-7.0
+        /// Allows user to press enter to proceed (dotnet-bot, 2023b)
         /// </summary>
         private void pswdbxTerminalPassword_KeyDown(object sender, KeyEventArgs e)
         {

@@ -36,7 +36,7 @@ namespace Library_System
             List<Book> allBooks = globalValues.xmlC.BookCompiler();
             if (!globalValues.currentUser.reserved.Equals(""))
             {
-                lblReserved.Content = allBooks.Find(x => x.id == globalValues.currentUser.reserved).title;
+                lblReserved.Content = allBooks.Find(x => x.id == globalValues.currentUser.reserved).isbn;
             }
             else
             {
@@ -86,10 +86,10 @@ namespace Library_System
 
         private async void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            //https://stackoverflow.com/questions/2385701/regular-expression-for-first-and-last-name
+            //(Hellnar, 2010)
             Regex regex;
             bool pass = true; //if no errors generated information is saved
-            //https://stackoverflow.com/questions/5342375/regex-email-validation/68198658#68198658
+            //(Sergey, 2011)
             regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
             if (!regex.IsMatch(txtbxEmail.Text))
             {
@@ -140,7 +140,9 @@ namespace Library_System
             await Task.Delay(4000);
             txtblkErrorMessage.Text = "";
         }
-
+        /// <summary>
+        /// Creates a cover that hides the previous screen and displays notifications
+        /// </summary>
         private void picNotifications_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             rctnglCover.Margin = new Thickness(59, 437, 0, 0);
@@ -181,19 +183,15 @@ namespace Library_System
         {
             txtblkNotifications.Text = "";
             globalValues.currentUser = globalValues.xmlC.CreateUser(globalValues.currentUser.userID);
-            if (globalValues.currentUser.notifications.Count == 0 && globalValues.currentUser.borrowedBooks.Count == 0 && globalValues.currentUser.reserved.Equals("") && globalValues.currentUser.fine == 0)
+            if (globalValues.currentUser.notifications.Count == 0 && globalValues.currentUser.borrowedBooks.Count == 0 && globalValues.currentUser.fine == 0)
             {
                 txtblkNotifications.Text = "Clear!"; //no borrowed books and no active notifications
             }
-            if (globalValues.currentUser.fine != 0)
+            if (globalValues.currentUser.fine != 0) //shows fines
             {
                 txtblkNotifications.Text += "Fine due: " + string.Format("{0:C}", globalValues.currentUser.fine) + ", please see a librarian immediately.\n\n";
             }
-            if (!(globalValues.currentUser.reserved.Equals(""))) //there is a book being reserved
-            {
-                txtblkNotifications.Text += globalValues.xmlC.BookCompiler().Find(book => book.id == globalValues.currentUser.reserved).title + " is being reserved.\n\n";
-            }
-            if (!(globalValues.currentUser.borrowedBooks.Count == 0)) // there are books that are currently being borrowed
+            if (!(globalValues.currentUser.borrowedBooks.Count == 0)) //there are books that are currently being borrowed
             {
                 List<Book> books = globalValues.currentUser.borrowedBooks;
                 foreach (Book book in books)

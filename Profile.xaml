@@ -78,7 +78,7 @@
         <TextBox x:Name="txtbxName" HorizontalAlignment="Left" Height="104" Margin="459,592,0,0" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" TextWrapping="Wrap" Text="xxx"/>
         <TextBox x:Name="txtbxMobile" PreviewTextInput="txtbxMobile_PreviewTextInput" HorizontalAlignment="Left" Height="109" Margin="459,696,0,0" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
         <TextBox x:Name="txtbxEmail" HorizontalAlignment="Left" Height="104" Margin="459,805,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
-        <TextBlock x:Name="txtblkErrorMessage" HorizontalAlignment="Left" Height="108" Margin="58,914,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="1057" FontFamily="Verdana" FontSize="40" FontWeight="Bold" Foreground="Red"/>
+        <TextBlock x:Name="txtblkErrorMessage" HorizontalAlignment="Left" Height="409" Margin="1120,448,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="428" FontFamily="Verdana" FontSize="40" FontWeight="Bold" Foreground="Red"/>
         <Label x:Name="lblReserved" Cursor="No"  Content="xxx" HorizontalAlignment="Left" Height="104" Margin="459,909,0,0" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" FontSize="40" Background="#FFFBFBFB" BorderBrush="Black" BorderThickness="1,1,1,1"/>
         <Label Content="Reserved:" HorizontalAlignment="Left" Height="104" Margin="58,914,0,0" VerticalAlignment="Top" Width="375" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
         <Button Style="{DynamicResource CurvedButton}" Cursor="Hand" x:Name="btnReset" Content="Undo" HorizontalAlignment="Left" Height="141" Margin="1566,661,0,0" VerticalAlignment="Top" Width="344" BorderBrush="{x:Null}" Foreground="White" FontFamily="Verdana" FontWeight="Bold" FontSize="100" Click="btnReset_Click">
@@ -115,7 +115,7 @@
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        
+
 
     </Grid>
 </Window>

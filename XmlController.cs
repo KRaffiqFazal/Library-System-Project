@@ -148,10 +148,10 @@ namespace Library_System
                 temp.category = bookNode.ChildNodes.Item(7).InnerText;
                 temp.description = bookNode.ChildNodes.Item(8).InnerText;
 
-                // https://learn.microsoft.com/en-us/dotnet/api/system.datetime.parseexact?view=net-7.0
+                //(dotnet-bot, 2023a)
                 temp.dueDate = DateTime.ParseExact(bookNode.ChildNodes.Item(9).InnerText, "ddMMyyyy", CultureInfo.InvariantCulture); //converts a string of numbers from database to dateTime;
 
-                //https://www.educative.io/answers/how-to-convert-a-string-to-a-decimal-in-c-sharp
+                //(Onyejiaku, 2023)
                 Decimal.TryParse(bookNode.ChildNodes.Item(10).InnerText, out price);
                 temp.price = price;
 
