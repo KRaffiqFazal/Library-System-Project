@@ -207,8 +207,41 @@ namespace Library_System
             }
             txtblkRecentBreakdown.Text += "Largest fined users (current): \n1) " + first + "\n2) " + second + "\n3) " + third;
 
-            //populate the detailed field
-
+            //all books displayed
+            txtblkFullBreakdown.Text += "Book Inventory:\n";
+            String reserved = "";
+            String renewed = "";
+            String due = "";
+            foreach (Book book in globalValues.xmlC.BookCompiler())
+            {
+                if (!book.renewed)
+                {
+                    renewed = "NO";
+                }
+                else
+                {
+                    renewed = "YES";
+                }
+                if (book.reserved == DateTime.MinValue)
+                {
+                    reserved = "NO";
+                }
+                else
+                {
+                    reserved = "YES";
+                }
+                if (book.dueDate == DateTime.MinValue)
+                {
+                    due = "IN STOCK";
+                }
+                else
+                {
+                    due = "OUT OF STOCK";
+                }
+                txtblkFullBreakdown.Text += $"ID: {book.id} | ISBN: {book.isbn} | RESERVED: {reserved} | RENEWED: {renewed} | STOCK: {due}\n";
+            }
+            //populate the log in the detailed field
+            txtblkFullBreakdown.Text += "\nLog:\n";
             lines = File.ReadAllLines(fullLog);
             foreach (String line in lines) 
             {
