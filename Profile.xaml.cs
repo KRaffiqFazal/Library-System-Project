@@ -145,9 +145,7 @@ namespace Library_System
         /// </summary>
         private void picNotifications_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            rctnglCover.Margin = new Thickness(59, 437, 0, 0);
             rctnglCover.Visibility = Visibility.Visible;
-            scrlvwrNotifications.Margin = new Thickness(85, 473, 0, 0);
             scrlvwrNotifications.Visibility = Visibility.Visible;
             txtblkNotifications.Text = "";
             btnClearNotif.Visibility = Visibility.Visible;
@@ -228,6 +226,7 @@ namespace Library_System
                 globalValues.xmlC.UpdateRecord(cancelReservation, true);
                 globalValues.currentUser.reserved = "";
                 lblReserved.Content = "";
+                globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
 
             }
         }

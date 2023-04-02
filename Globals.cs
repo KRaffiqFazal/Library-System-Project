@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -95,7 +96,10 @@ namespace Library_System
             {
                 smtpClient.Send(message);
             }
-            catch { }
+            catch (Exception e)
+            {
+                Trace.WriteLine(e.Message);
+            }
         }
         /// <summary>
         /// Notifies librarians that there are members who have not returned their books yet

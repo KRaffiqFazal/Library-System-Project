@@ -293,6 +293,7 @@ namespace Library_System //need to add the user control and update each value, k
             lblFineFocusBox.Visibility = Visibility.Hidden;
             lblUserTypeFocus.Visibility = Visibility.Visible;
             btnMore.Visibility = Visibility.Hidden;
+            btnDelete.Visibility = Visibility.Hidden;
             rdbtnMember.Visibility = Visibility.Visible;
             if (globalValues.currentUser.userType.Equals("admin"))
             {
