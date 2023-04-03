@@ -22,7 +22,9 @@ namespace Library_System
             globalValues = global;
             Start();
         }
-
+        /// <summary>
+        /// Sets max entry size, if user is admin allows them to view log
+        /// </summary>
         private void Start()
         {
             txtbxErrorEntry.MaxLength = 512;
@@ -66,7 +68,11 @@ namespace Library_System
                 Home();
             }
         }
-
+        /// <summary>
+        /// Updates number of characeters left
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtbxErrorEntry_TextChanged(object sender, TextChangedEventArgs e)
         {
             lblCharsLeft.Content = "Characters Left: " + (512 - txtbxErrorEntry.Text.Length);
@@ -74,7 +80,7 @@ namespace Library_System
 
         private void btnSubmit_Click(object sender, RoutedEventArgs e)
         {
-            if (txtbxErrorEntry.Text.Equals(""))
+            if (txtbxErrorEntry.Text.Equals("")) //empty
             {
                 lblErrorLogConfirm.Content = "Please enter an error message.";
                 return;
@@ -86,13 +92,17 @@ namespace Library_System
             {
                 sw.Write(globalValues.currentUser.userID + " " + DateTime.Now + " " + txtbxErrorEntry.Text + Environment.NewLine);
             }
-
+            //reports error and locks choice
             lblErrorLogConfirm.Visibility = Visibility.Visible;
-            lblErrorLogConfirm.Content = "<Error Reported>";
+            lblErrorLogConfirm.Content = "Error Reported";
             txtbxErrorEntry.IsReadOnly = true;
             txtbxErrorEntry.Foreground = Brushes.Gray;
         }
-
+        /// <summary>
+        /// Admins can read through all the entered reports
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnNext_Click(object sender, RoutedEventArgs e)
         {
             lblCharsLeft.Visibility = Visibility.Hidden;

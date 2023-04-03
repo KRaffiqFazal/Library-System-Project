@@ -23,7 +23,7 @@ namespace Library_System
         }
 
         /// <summary>
-        /// Emails a user with all their notifications https://www.youtube.com/watch?v=lk5dhDzfzsU
+        /// Emails a user with all their notifications (The dotnet Channel, 2022)
         /// </summary>
         public void SendNotifications(User currentUser)
         {
@@ -120,6 +120,7 @@ namespace Library_System
                     }
                 }
             }
+
         }
 
         /// <summary>
@@ -206,7 +207,10 @@ namespace Library_System
                 File.SetAttributes(logPath, FileAttributes.Hidden);
             }
         }
-
+        /// <summary>
+        /// writes a message into the detailed log file
+        /// </summary>
+        /// <param name="message"></param>
         public void UpdateDetailedLog(String message)
         {
             CheckLogsExistence();

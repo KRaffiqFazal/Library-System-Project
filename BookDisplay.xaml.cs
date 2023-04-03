@@ -12,7 +12,7 @@ namespace Library_System
         {
             InitializeComponent();
         }
-
+        //allows book information to be set and allows ISBN to be retrieved to identify the book information
         public String BookInfo
         {
             get { return txtblkBookInfo.Text; }

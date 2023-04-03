@@ -25,7 +25,9 @@ namespace Library_System
             globalValues = globals;
             OnStartUp();
         }
-
+        /// <summary>
+        /// sets user information in fields
+        /// </summary>
         private void OnStartUp()
         {
             lblID.Content = globalValues.currentUser.userID;
@@ -41,7 +43,7 @@ namespace Library_System
             {
                 lblReserved.Content = "";
             }
-
+            //remembers initial information if user wants to undo
             oldName = globalValues.currentUser.name;
             oldPhone = globalValues.currentUser.phoneNumber;
             oldEmail = globalValues.currentUser.email;
@@ -129,7 +131,11 @@ namespace Library_System
             await Task.Delay(10000);
             txtblkErrorMessage.Text = "";
         }
-
+        /// <summary>
+        /// Uses initial details to undo any changes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnReset_Click(object sender, RoutedEventArgs e)
         {
             txtbxName.Text = oldName;
@@ -166,7 +172,11 @@ namespace Library_System
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
-
+        /// <summary>
+        /// Clears last notification
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClearNotif_Click(object sender, RoutedEventArgs e)
         {
             if (globalValues.currentUser.notifications.Count == 0)
@@ -177,7 +187,9 @@ namespace Library_System
             globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
             LoadNotifs();
         }
-
+        /// <summary>
+        /// Loads all notifications and any pending activity that the user has: fines, borrowed books
+        /// </summary>
         private void LoadNotifs()
         {
             txtblkNotifications.Text = "";
@@ -215,7 +227,11 @@ namespace Library_System
                 }
             }
         }
-
+        /// <summary>
+        /// Cancels current book reservation so that the user can reserve another book
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelReservation_Click(object sender, RoutedEventArgs e)
         {
             String idToDelete;

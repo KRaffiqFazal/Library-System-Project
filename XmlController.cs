@@ -18,7 +18,11 @@ namespace Library_System
             bookPath = "Library.xml";
             doc = new XmlDocument();
         }
-
+        /// <summary>
+        /// Checks if entered userID corresponds to a user
+        /// </summary>
+        /// <param name="enteredID"></param>
+        /// <returns></returns>
         public bool Exists(String enteredID)
         {
             doc.Load(userPath);
@@ -50,7 +54,11 @@ namespace Library_System
             temp[5] = userNode.ChildNodes.Item(7).InnerText; //fine
             return temp;
         }
-
+        /// <summary>
+        /// Uses node information to create a user object
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public User CreateUser(String userID)
         {
             doc.Load(userPath);
@@ -113,7 +121,11 @@ namespace Library_System
                 return doc.SelectSingleNode("/users/admins/user[id='" + currentUser.userID + "']");
             }
         }
-
+        /// <summary>
+        /// Gets all books that are borrowed by the user
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <returns></returns>
         public List<Book> GetBorrowedBooks(String userID)
         {
             XmlNode userNode = UserType(userID);
@@ -488,6 +500,7 @@ namespace Library_System
             List<User> toAdd = new List<User>();
             User temp;
 
+            //members
             foreach (XmlNode node in rootNode1.ChildNodes)
             {
                 temp = new User(node.ChildNodes.Item(0).InnerText);
@@ -500,7 +513,7 @@ namespace Library_System
                 temp.fine = Decimal.Parse(node.ChildNodes.Item(7).InnerText);
                 toAdd.Add(temp);
             }
-            if (currentUser.userType.Equals("admin")) //only admin and librarian details
+            if (currentUser.userType.Equals("admin")) //only admins can grab admin and librarian details
             {
                 rootNode1 = rootNode.ChildNodes[1];
                 foreach (XmlNode node in rootNode1.ChildNodes)

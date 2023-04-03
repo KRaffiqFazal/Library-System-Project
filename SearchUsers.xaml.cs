@@ -9,11 +9,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 
-namespace Library_System //need to add the user control and update each value, kinda like the other one
+namespace Library_System
 {
-    /// <summary>
-    /// Interaction logic for SearchUsers.xaml
-    /// </summary>
     public partial class SearchUsers : Window
     {
         private Globals globalValues;
@@ -27,7 +24,10 @@ namespace Library_System //need to add the user control and update each value, k
             CreateScreen(globalValues.xmlC.GetAllUsers(globalValues.currentUser));
             txtbxMobile.MaxLength = 11;
         }
-
+        /// <summary>
+        /// Displays a list of users that is parsed into function with user control, shows a table
+        /// </summary>
+        /// <param name="toDisplay"></param>
         private void CreateScreen(List<User> toDisplay)
         {
             stackPanel.Children.Clear();
@@ -49,8 +49,10 @@ namespace Library_System //need to add the user control and update each value, k
                 stackPanel.Children.Add(temp);
             }
         }
-
-        private void Show1() //shows the overlay for update
+        /// <summary>
+        /// Shows the overlay for update
+        /// </summary>
+        private void Show1()
         {
             rctnglNewScreen.Visibility = Visibility.Visible;
             lblUserTypeFocus.Visibility = Visibility.Hidden;
@@ -75,8 +77,12 @@ namespace Library_System //need to add the user control and update each value, k
             btnMore.Visibility = Visibility.Visible;
             lblError.Content = "";
         }
-
-        private void OnMouseLeftButtonDown(object sender, MouseEventArgs e) //reveals the update screen
+        /// <summary>
+        /// reveals the update screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnMouseLeftButtonDown(object sender, MouseEventArgs e)
         {
             UserLine temp = (UserLine)sender;
             String[] info = temp.UserInfo;
@@ -88,8 +94,10 @@ namespace Library_System //need to add the user control and update each value, k
             Show1();
             btnSaveFocus.Content = "Save";
         }
-
-        private void Hide1() //hides overlay for librarian
+        /// <summary>
+        /// hides overlay for librarian
+        /// </summary>
+        private void Hide1()
         {
             rctnglNewScreen.Visibility = Visibility.Hidden;
             lblUserTypeFocus.Visibility = Visibility.Hidden;
@@ -155,7 +163,11 @@ namespace Library_System //need to add the user control and update each value, k
             await Task.Delay(250);
             Close();
         }
-
+        /// <summary>
+        /// Checks which filters are active and displays results that match
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtbxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             List<User> users = globalValues.xmlC.GetAllUsers(globalValues.currentUser);
@@ -166,11 +178,11 @@ namespace Library_System //need to add the user control and update each value, k
                 {
                     updatedUsers.Add(user);
                 }
-                else if (user.name.Contains(txtbxSearch.Text) && chkbxName.IsChecked == true)
+                else if (user.name.ToLower().Contains(txtbxSearch.Text.ToLower()) && chkbxName.IsChecked == true)
                 {
                     updatedUsers.Add(user);
                 }
-                else if (user.email.Contains(txtbxSearch.Text) && chkbxEmail.IsChecked == true)
+                else if (user.email.ToLower().Contains(txtbxSearch.Text.ToLower()) && chkbxEmail.IsChecked == true)
                 {
                     updatedUsers.Add(user);
                 }
@@ -185,7 +197,11 @@ namespace Library_System //need to add the user control and update each value, k
             }
             CreateScreen(updatedUsers);
         }
-
+        /// <summary>
+        /// Close detailed user screen
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCloseFocus_Click(object sender, RoutedEventArgs e)
         {
             CreateScreen(globalValues.xmlC.GetAllUsers(globalValues.currentUser));
@@ -198,7 +214,11 @@ namespace Library_System //need to add the user control and update each value, k
             rdbtnMember.IsChecked = false;
             rdbtnAdmin.IsChecked = false;
         }
-
+        /// <summary>
+        /// Saves changed details to specific users
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnSaveFocus_Click(object sender, RoutedEventArgs e)
         {
             if (btnSaveFocus.Content.ToString().Equals("Save"))
@@ -216,7 +236,7 @@ namespace Library_System //need to add the user control and update each value, k
             {
                 Regex regex;
                 bool pass = true;
-
+                //checks if details are valid with regex, if not, does not save
                 regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
                 if (!regex.IsMatch(txtbxEmail.Text))
                 {
@@ -242,6 +262,7 @@ namespace Library_System //need to add the user control and update each value, k
                 }
                 if (pass)
                 {
+                    //saves details to a new user record
                     User newUser = new User(lblUserIdFocusBox.Content.ToString());
                     newUser.name = txtbxName.Text;
                     newUser.phoneNumber = txtbxMobile.Text;
@@ -261,7 +282,10 @@ namespace Library_System //need to add the user control and update each value, k
                 }
             }
         }
-
+        /// <summary>
+        /// Displays an error message explaining why save not possible
+        /// </summary>
+        /// <param name="msg"></param>
         private async void Error(String msg)
         {
             lblError.Foreground = Brushes.Red;
@@ -269,7 +293,11 @@ namespace Library_System //need to add the user control and update each value, k
             await Task.Delay(10000);
             lblError.Content = "";
         }
-
+        /// <summary>
+        /// Sets fine to 0 if it has been paid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFineRemove_Click(object sender, RoutedEventArgs e)
         {
             List<User> allUsers = globalValues.xmlC.GetAllUsers(globalValues.currentUser);
@@ -279,7 +307,11 @@ namespace Library_System //need to add the user control and update each value, k
             lblFineFocusBox.Content = "£0.00";
             globalValues.SendNotifications(toUpdate);
         }
-
+        /// <summary>
+        /// Reveals fields that allow a user to be added
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
             Show1();
@@ -297,7 +329,11 @@ namespace Library_System //need to add the user control and update each value, k
                 rdbtnAdmin.Visibility = Visibility.Visible;
             }
         }
-
+        /// <summary>
+        /// Dynamically creates a new member ID
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rdbtnMember_Checked(object sender, RoutedEventArgs e) //create unique member id
         {
             List<User> allUsers = globalValues.xmlC.GetAllUsers(globalValues.currentUser);
@@ -310,7 +346,11 @@ namespace Library_System //need to add the user control and update each value, k
             }
             lblUserIdFocusBox.Content = tempID + i.ToString();
         }
-
+        /// <summary>
+        /// Dynamically creates a new librarian ID
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rdbtnLibrarian_Checked(object sender, RoutedEventArgs e)
         {
             if (btnSaveFocus.Content.ToString().Equals("Add")) //create unique member id
@@ -326,7 +366,11 @@ namespace Library_System //need to add the user control and update each value, k
                 lblUserIdFocusBox.Content = tempID + i.ToString();
             }
         }
-
+        /// <summary>
+        /// Dynamically creates a new admin ID
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rdbtnAdmin_Checked(object sender, RoutedEventArgs e)
         {
             if (btnSaveFocus.Content.ToString().Equals("Add")) //create unique member id
@@ -348,7 +392,11 @@ namespace Library_System //need to add the user control and update each value, k
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
-
+        /// <summary>
+        /// Asks for confirmation to delete a user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             txtblkDeleteConfirm.Visibility = Visibility.Visible;
@@ -358,7 +406,11 @@ namespace Library_System //need to add the user control and update each value, k
 
             System.Media.SystemSounds.Beep.Play();
         }
-
+        /// <summary>
+        /// Deletes user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnDeleteConfirm_Click(object sender, RoutedEventArgs e)
         {
             if (globalValues.currentUser.userID.Equals(lblUserIdFocusBox.Content.ToString()))
@@ -379,7 +431,11 @@ namespace Library_System //need to add the user control and update each value, k
             btnDeleteConfirm.Visibility = Visibility.Hidden;
             btnDeleteConfirmCancel.Visibility = Visibility.Hidden;
         }
-
+        /// <summary>
+        /// Shows additional user information
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnMore_Click(object sender, RoutedEventArgs e)
         {
             txtblkDeleteConfirm.Visibility = Visibility.Visible;
@@ -394,7 +450,9 @@ namespace Library_System //need to add the user control and update each value, k
 
             UpdateNotifs();
         }
-
+        /// <summary>
+        /// Displays all borrowed books and user notifications
+        /// </summary>
         private void UpdateNotifs()
         {
             txtblkNotifsBorrowed.Text = "Borrowed Books:\n\n";
@@ -410,7 +468,11 @@ namespace Library_System //need to add the user control and update each value, k
                 txtblkNotifsBorrowed.Text += notif + "\n\n";
             }
         }
-
+        /// <summary>
+        /// Adds entered notification to user and informs them
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void btnAddNotification_Click(object sender, RoutedEventArgs e)
         {
             if (txtbxNewNotification.Text.Equals(""))

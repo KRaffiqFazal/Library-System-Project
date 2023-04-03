@@ -12,7 +12,9 @@ namespace Library_System
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Retrieves and sets user details to and from the text block
+        /// </summary>
         public String[] UserInfo
         {
             get

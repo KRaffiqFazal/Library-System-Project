@@ -16,7 +16,7 @@ namespace Library_System
         private Globals globalValues;
         private String borrowedPath = @"Borrowed.txt"; //records each time a book is borrowed
         private String usersPath = @"Users.txt"; //records each time a user borrows a book
-        private String fullLog = @"Log.txt";
+        private String fullLog = @"Log.txt"; //A log of all events that occur as the system is navigated through
 
         public Report(Globals globals)
         {

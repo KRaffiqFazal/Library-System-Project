@@ -28,14 +28,18 @@ namespace Library_System
             globalValues.xmlC = new XmlController();
             Hide2();
         }
-
+        /// <summary>
+        /// Hides main buttons to show more admin quit functionality
+        /// </summary>
         private void Hide1()
         {
             btnProceed.Visibility = Visibility.Hidden;
             btnQuit.Visibility = Visibility.Hidden;
             picLogo.Visibility = Visibility.Hidden;
         }
-
+        /// <summary>
+        /// Hides admin functionality to show main buttons
+        /// </summary>
         private void Hide2()
         {
             btnAdminQuit.Visibility = Visibility.Hidden;
@@ -45,14 +49,18 @@ namespace Library_System
             lblUserHelp.Visibility = Visibility.Hidden;
             attempts = 3;
         }
-
+        /// <summary>
+        /// Reveals main functionality after admin functionality is hidden
+        /// </summary>
         private void Reveal1()
         {
             btnProceed.Visibility = Visibility.Visible;
             btnQuit.Visibility = Visibility.Visible;
             picLogo.Visibility = Visibility.Visible;
         }
-
+        /// <summary>
+        /// Reveals admin functionality after main functionality is hidden.
+        /// </summary>
         private void Reveal2()
         {
             btnAdminQuit.Visibility = Visibility.Visible;
@@ -71,14 +79,18 @@ namespace Library_System
         }
 
         /// <summary>
-        /// Opens a screen when a button is held for longer than 2 seconds (heltonbiker, 2015)
+        /// Opens a screen when a button is held for longer than 2 seconds (heltonbiker, 2015) (!/2)
         /// </summary>
         private void btnQuit_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
             stopwatch = new Stopwatch();
             stopwatch.Start();
         }
-
+        /// <summary>
+        /// Opens admin functionality (2/2)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnQuit_PreviewMouseUp(object sender, MouseButtonEventArgs e)
         {
             stopwatch.Stop();
@@ -107,7 +119,6 @@ namespace Library_System
                 txtbxWatermarkedText.Visibility = Visibility.Visible;
             }
         }
-
         private void Restart()
         {
             Hide2();
@@ -130,7 +141,6 @@ namespace Library_System
                 pswdbxTerminalPassword.Password = "";
             }
         }
-
         private void btnAdminQuit_Click(object sender, RoutedEventArgs e)
         {
             PasswordEnter();

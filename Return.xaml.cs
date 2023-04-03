@@ -72,7 +72,7 @@ namespace Library_System
                 if (toReturn.dueDate != DateTime.MinValue) //can be returned
                 {
                     txtChangedRun = false;
-                    if (globalValues.currentUser.CalculateFine(toReturn) > globalValues.currentUser.fine)
+                    if (globalValues.currentUser.CalculateFine(toReturn) > globalValues.currentUser.fine) //if the fine increases, inform user and add the fine
                     {
                         globalValues.currentUser.fine = globalValues.currentUser.CalculateFine(toReturn);
                         lblError.Foreground = Brushes.Black;
@@ -84,10 +84,11 @@ namespace Library_System
                         lblError.Foreground = Brushes.Black;
                         lblError.Content = "Book returned, hope it was enjoyable!";
                     }
-                    toReturn.dueDate = DateTime.MinValue;
+                    toReturn.dueDate = DateTime.MinValue; //back in stock
                     toReturn.renewed = false;
                     if (toReturn.reserved == DateTime.MaxValue) //is currently reserved by someone
                     {
+                        //informs user who reserved book to obtain it within 3 days
                         toReturn.reserved = DateTime.Now.AddDays(3);
                         List<User> allUsers = globalValues.xmlC.GetAllUsers(globalValues.adminUser);
                         User update = allUsers.Find(user => user.reserved == toReturn.id);
@@ -96,6 +97,7 @@ namespace Library_System
                         globalValues.UpdateDetailedLog(update.userID + " reserved " + toReturn.id + " and it is reserved for them for 3 days");
                         globalValues.SendNotifications(update);
                     }
+                    //clears field and informs the user that the book is reserved
                     txtbxToReturn.Text = "";
                     globalValues.currentUser.borrowedBooks.Remove(toReturn);
                     globalValues.xmlC.UpdateRecord(toReturn, false);
@@ -167,7 +169,11 @@ namespace Library_System
                 lblError.Content = "Error: ID not found, please enter a valid book ID.";
             }
         }
-
+        /// <summary>
+        /// Displays book title when id is entered
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtbxToReturn_TextChanged(object sender, TextChangedEventArgs e)
         {
             String id = txtbxToReturn.Text;

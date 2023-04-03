@@ -7,6 +7,9 @@ namespace Library_System
     /// </summary>
     public partial class Window2 : Window
     {
+        /// <summary>
+        /// Runs once when program starts (once each day) and emails users that it needs to wih this information
+        /// </summary>
         public Window2()
         {
             InitializeComponent();

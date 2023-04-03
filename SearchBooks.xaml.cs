@@ -33,13 +33,17 @@ namespace Library_System
             }
             txtbxIsbn.MaxLength = 13;
         }
-
+        /// <summary>
+        /// Only librarians/admins can add/delete books
+        /// </summary>
         private void Permissions()
         {
             btnAdd.Visibility = Visibility.Visible;
             btnDelete.Visibility = Visibility.Visible;
         }
-
+        /// <summary>
+        /// Gets book images so that they can be displayed
+        /// </summary>
         private void FirstOpen()
         {
             filePaths = Directory.GetFiles(Directory.GetCurrentDirectory());
@@ -49,8 +53,10 @@ namespace Library_System
             Hide1();
             Hide2();
         }
-
-        private void Hide1() //hides popups
+        /// <summary>
+        /// hides detailed book information
+        /// </summary>
+        private void Hide1()
         {
             picBookFocus.Visibility = Visibility.Hidden;
             rctnglFocus.Visibility = Visibility.Hidden;
@@ -62,7 +68,9 @@ namespace Library_System
             btnAdd.Visibility = Visibility.Hidden;
             btnDelete.Visibility = Visibility.Hidden;
         }
-
+        /// <summary>
+        /// Hides adding/deleting screen
+        /// </summary>
         private void Hide2()
         {
             lblId.Visibility = Visibility.Hidden;
@@ -86,7 +94,9 @@ namespace Library_System
             txtbxPrice.Visibility = Visibility.Hidden;
             scrlvwrDescription.Visibility = Visibility.Hidden;
         }
-
+        /// <summary>
+        /// Reveals adding/deleting screen
+        /// </summary>
         private void Show2()
         {
             btnCloseFocus.Visibility = Visibility.Visible;
@@ -127,7 +137,10 @@ namespace Library_System
             txtbxPrice.Text = "";
             txtbxDescription.Text = "";
         }
-
+        /// <summary>
+        /// Displays all books in the parsed list with their images and information
+        /// </summary>
+        /// <param name="books"></param>
         private void CreateScreen(List<Book> books)
         {
             BookDisplay currentDisplayed;
@@ -158,9 +171,13 @@ namespace Library_System
                 currentDisplayed.MouseLeftButtonDown += OnMouseLeftButtonDown;
                 stackPanel.Children.Add(currentDisplayed);
             }
-        } //Mess around with this until it works
-
-        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) //work out why pictures don't show, change buttons so they don't have hover and have click hand cursor work out how reservations work, also change how availability works for borrowed books
+        }
+        /// <summary>
+        /// When a book's information/image is clicked, detailed information is revealed
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             rctnglFocus.Visibility = Visibility.Visible;
             BookDisplay temp = new BookDisplay();
@@ -178,7 +195,7 @@ namespace Library_System
             scrlvwrFocus.Visibility = Visibility.Visible;
             picBack.Visibility = Visibility.Visible;
             btnCloseFocus.Visibility = Visibility.Visible;
-
+            //if no copies available, reserve button needs to be displayed if there are enough copies that can be reserved
             if (txtblkBookInfoFocus.Text.Contains("Available Copies: 0"))
             {
                 if (!globalValues.xmlC.ToReserve(currentBook).Equals("") && globalValues.currentUser.reserved.Equals("") && !(globalValues.currentUser.borrowedBooks.FindIndex(book => book.isbn == currentBook.isbn) != -1)) //a copy available that is not reserved, the user is not reserving a book and the user has not borrowed a copy of the book they wish to reserve
@@ -201,7 +218,9 @@ namespace Library_System
                 }
             }
         }
-
+        /// <summary>
+        /// Sends to homepage
+        /// </summary>
         private async void Home()
         {
             MemberPage window = new MemberPage(globalValues);
@@ -235,7 +254,11 @@ namespace Library_System
             txtbxSearch.Visibility = Visibility.Visible;
             txtbxSearch.Focus();
         }
-
+        /// <summary>
+        /// When specific book details are closed, books are reloaded
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCloseFocus_Click(object sender, RoutedEventArgs e)
         {
             Hide1();
@@ -251,6 +274,7 @@ namespace Library_System
 
         private async void btnReserve_Click(object sender, RoutedEventArgs e) //button only seen if reservation possible
         {
+            //checks if book can be reserved
             if (btnReserve.Content.ToString().Equals("Reserve"))
             {
                 List<Book> booksAvailable = globalValues.xmlC.GetAvailableBooks(globalValues.xmlC.BookCompiler());
@@ -277,26 +301,37 @@ namespace Library_System
                     return;
                 }
             }
+            //checks if the entered details are sufficient to add a book to the library
             else if (btnReserve.Content.ToString().Equals("Add"))
             {
-                Book newBook = new Book();
-                newBook.id = txtbxId.Text;
-                newBook.isbn = txtbxIsbn.Text;
-                newBook.title = txtbxTitle.Text;
-                newBook.author = txtbxAuthor.Text;
-                newBook.year = txtbxYear.Text;
-                newBook.publisher = txtbxPublisher.Text;
-                newBook.edition = txtbxEdition.Text;
-                newBook.category = txtbxCategory.Text;
-                newBook.price = Decimal.Parse(txtbxPrice.Text);
-                newBook.dueDate = DateTime.MinValue;
-                newBook.description = txtbxDescription.Text;
-                globalValues.xmlC.AddBookRecord(newBook);
-                lblError.Content = "Book Added!";
-                globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " added a new book to the library with id: " + newBook.id);
-                ResetDeletionFields();
+                Decimal test;
+                //gets information from text box to form new book
+                if ((txtbxIsbn.Text.Length != 10 && txtbxIsbn.Text.Length != 13) || !Decimal.TryParse(txtbxPrice.Text, out test) || txtbxTitle.Text.Equals("") || txtbxAuthor.Text.Equals("") ||
+                    txtbxYear.Text.Equals("") || txtbxPublisher.Text.Equals("") || txtbxEdition.Text.Equals("") || txtbxCategory.Text.Equals("") || txtbxDescription.Text.Equals(""))
+                {
+                    lblError.Content = "Error: Please fill out empty spaces and enter valid values for 'ISBN', 'year' and 'price' ";
+                }
+                else //if entered details are suitable values and not empty, saves book
+                {
+                    Book newBook = new Book();
+                    newBook.id = txtbxId.Text;
+                    newBook.isbn = txtbxIsbn.Text;
+                    newBook.title = txtbxTitle.Text;
+                    newBook.author = txtbxAuthor.Text;
+                    newBook.year = txtbxYear.Text;
+                    newBook.publisher = txtbxPublisher.Text;
+                    newBook.edition = txtbxEdition.Text;
+                    newBook.category = txtbxCategory.Text;
+                    newBook.price = Decimal.Parse(txtbxPrice.Text);
+                    newBook.dueDate = DateTime.MinValue;
+                    newBook.description = txtbxDescription.Text;
+                    globalValues.xmlC.AddBookRecord(newBook);
+                    lblError.Content = "Book Added!";
+                    globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " added a new book to the library with id: " + newBook.id);
+                    ResetDeletionFields();
+                }
             }
-            else //Delete
+            else //Delete a book from the library
             {
                 List<Book> books = globalValues.xmlC.BookCompiler();
                 int index = books.FindIndex(book => book.id == txtbxId.Text); //position of book to delete in list books
@@ -380,7 +415,11 @@ namespace Library_System
             await Task.Delay(3000);
             lblError.Content = "";
         }
-
+        /// <summary>
+        /// Checks which filters are active and which books correspond to them
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtbxSearch_TextChanged(object sender, TextChangedEventArgs e) //displays books based on filters selected
         {
             List<Book> newList = globalValues.xmlC.GetAvailableBooks(globalValues.xmlC.BookCompiler());
@@ -458,7 +497,11 @@ namespace Library_System
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text);
         }
-
+        /// <summary>
+        /// Autofills book details if ID is entered and makes other fields immutable
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void txtbxId_TextChanged(object sender, TextChangedEventArgs e)
         {
             await Task.Delay(250);
@@ -489,7 +532,7 @@ namespace Library_System
                     txtbxPrice.IsEnabled = false;
                     txtbxDescription.IsEnabled = false;
                 }
-                else
+                else //if the book does not exist, nothing displayed
                 {
                     txtbxIsbn.Text = "";
                     txtbxTitle.Text = "";
@@ -523,7 +566,11 @@ namespace Library_System
                 txtbxId.IsEnabled = false;
             }
         }
-
+        /// <summary>
+        /// Autofills details if ISBN is entered
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private async void txtbxIsbn_TextChanged(object sender, TextChangedEventArgs e)
         {
             await Task.Delay(250);

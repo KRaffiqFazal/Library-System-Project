@@ -80,7 +80,7 @@ namespace Library_System
                 Book toBorrow = books.Find(book => book.id == txtbxToBorrow.Text);
                 if (toBorrow.dueDate == DateTime.MinValue) //can be borrowed
                 {
-                    toBorrow.dueDate = DateTime.Now.AddDays(30); //due in a month
+                    toBorrow.dueDate = DateTime.Now.AddMonths(1); //due in a month
                     txtbxToBorrow.Text = "";
                     globalValues.xmlC.UpdateRecord(toBorrow, true);
                     globalValues.currentUser.borrowedBooks.Add(toBorrow);
@@ -102,7 +102,7 @@ namespace Library_System
                         await Task.Delay(3000);
                         lblError.Content = "";
                     }
-                    else
+                    else //borrowed book forgotten in library
                     {
                         lblError.Foreground = Brushes.Red;
                         lblError.Content = "Please report this book to a librarian immediately.";
@@ -118,7 +118,11 @@ namespace Library_System
                 lblError.Content = "";
             }
         }
-
+        /// <summary>
+        /// Displays borrowed book
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtbxToBorrow_TextChanged(object sender, TextChangedEventArgs e)
         {
             String id = txtbxToBorrow.Text;
