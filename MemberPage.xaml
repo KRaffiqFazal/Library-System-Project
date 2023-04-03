@@ -13,43 +13,43 @@
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
-        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
         <Style x:Key="CurvedButton" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border x:Name="border" CornerRadius="40" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -58,29 +58,28 @@
         </Style>
     </Window.Resources>
     <Grid Width="1920" Height="1080" Background="#FFB4F5F4">
-        <Image x:Name="picLogo" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/logo.png" Stretch="UniformToFill" Margin="0,20,0,0" Height="343" Width="445"/>
-        <Image x:Name="picLogout" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/logout.png" Stretch="Uniform" Margin="1382,5,0,0" Height="192" Width="556" MouseLeftButtonDown="picLogout_MouseLeftButtonDown"/>
-        <Image x:Name="picProfile" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="1382,430,0,0" VerticalAlignment="Top" Width="284" Source="/ProfileButton.png" MouseLeftButtonDown="picProfile_MouseLeftButtonDown"/>
-        <Image x:Name="picReturn" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="995,430,0,0" VerticalAlignment="Top" Width="284" Source="/ReturnButton.png" MouseLeftButtonDown="picReturn_MouseLeftButtonDown"/>
-        <Image x:Name="picBorrowBooks" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="608,430,0,0" VerticalAlignment="Top" Width="284" Source="/BorrowButton.png" MouseLeftButtonDown="picBorrowBooks_MouseLeftButtonDown"/>
-        <Image x:Name="picSearchForBooks" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="221,430,0,0" VerticalAlignment="Top" Width="284" Source="/SearchButton.png" MouseLeftButtonDown="picSearchForBooks_MouseLeftButtonDown"/>
+        <Image x:Name="picLogo" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/logo.png" Stretch="UniformToFill" Margin="0,20,0,0" Height="343" Width="445" />
+        <Image x:Name="picLogout" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/logout.png" Stretch="Uniform" Margin="1382,5,0,0" Height="192" Width="556" MouseLeftButtonDown="picLogout_MouseLeftButtonDown" />
+        <Image x:Name="picProfile" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="1382,430,0,0" VerticalAlignment="Top" Width="284" Source="/ProfileButton.png" MouseLeftButtonDown="picProfile_MouseLeftButtonDown" />
+        <Image x:Name="picReturn" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="995,430,0,0" VerticalAlignment="Top" Width="284" Source="/ReturnButton.png" MouseLeftButtonDown="picReturn_MouseLeftButtonDown" />
+        <Image x:Name="picBorrowBooks" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="608,430,0,0" VerticalAlignment="Top" Width="284" Source="/BorrowButton.png" MouseLeftButtonDown="picBorrowBooks_MouseLeftButtonDown" />
+        <Image x:Name="picSearchForBooks" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="221,430,0,0" VerticalAlignment="Top" Width="284" Source="/SearchButton.png" MouseLeftButtonDown="picSearchForBooks_MouseLeftButtonDown" />
         <Button Style="{DynamicResource CurvedButton}" x:Name="btnNextBack" Content="Next" HorizontalAlignment="Center" Height="176" Margin="0,894,0,0" VerticalAlignment="Top" Width="410" Foreground="White" BorderBrush="{x:Null}" FontFamily="Verdana" FontWeight="Bold" FontSize="100" Cursor="Hand" Click="btnNextBack_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF567D55"/>
-                    <GradientStop Color="#FF567D55" Offset="1"/>
-                    <GradientStop Color="#FF3D5D42" Offset="0.5"/>
+                    <GradientStop Color="#FF567D55" />
+                    <GradientStop Color="#FF567D55" Offset="1" />
+                    <GradientStop Color="#FF3D5D42" Offset="0.5" />
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Image x:Name="picLogErrors" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="995,422,0,0" VerticalAlignment="Top" Width="284" Source="/LibrarianLogErrors.png" MouseLeftButtonDown="picLogErrors_MouseLeftButtonDown"/>
-        <Image x:Name="picManageUsers" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="610,431,0,0" VerticalAlignment="Top" Width="284" Source="/AdminManageUsers.png" MouseLeftButtonDown="picManageUsers_MouseLeftButtonDown"/>
-        <Image x:Name="picErrors" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="995,423,0,0" VerticalAlignment="Top" Width="284" Source="/AdminErrors.png" MouseLeftButtonDown="picLogErrors_MouseLeftButtonDown"/>
-        <Image x:Name="picManageBooks" Cursor="Hand" HorizontalAlignment="Left" Height="296" Margin="216,431,0,0" VerticalAlignment="Top" Width="297" Source="/ManageBooks.png" MouseLeftButtonDown="picSearchForBooks_MouseLeftButtonDown"/>
-        <Image x:Name="picManageMembers" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="610,431,0,0" VerticalAlignment="Top" Width="284" Source="/LibrarianManageMembers.png" MouseLeftButtonDown="picManageMembers_MouseLeftButtonDown"/>
-        <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="Auto" Margin="0,123,0,0" TextWrapping="Wrap" Text="Welcome: xxx" VerticalAlignment="Top" Width="744" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>
-        <Image x:Name="picReports" Cursor="Hand" HorizontalAlignment="Left" Height="277" Margin="216,430,0,0" VerticalAlignment="Top" Width="276" Source="/Reports.png" MouseLeftButtonDown="picReports_MouseLeftButtonDown"/>
-        <TextBlock x:Name="txtblkLogoutMessage" HorizontalAlignment="Center" Height="1080" TextWrapping="Wrap" VerticalAlignment="Top" Width="1920" IsEnabled="False" TextAlignment="Center" FontSize="150" FontFamily="Verdana" FontWeight="Bold" Background="#FFB4F5F4" Foreground="Black" Margin="0,-1080,0,0"><Run Language="en-gb"/><LineBreak/><Run Language="en-gb"/><LineBreak/><Run Language="en-gb" Text="Thank you for visiting!"/></TextBlock>
-
+        <Image x:Name="picLogErrors" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="995,422,0,0" VerticalAlignment="Top" Width="284" Source="/LibrarianLogErrors.png" MouseLeftButtonDown="picLogErrors_MouseLeftButtonDown" />
+        <Image x:Name="picManageUsers" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="610,431,0,0" VerticalAlignment="Top" Width="284" Source="/AdminManageUsers.png" MouseLeftButtonDown="picManageUsers_MouseLeftButtonDown" />
+        <Image x:Name="picErrors" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="995,423,0,0" VerticalAlignment="Top" Width="284" Source="/AdminErrors.png" MouseLeftButtonDown="picLogErrors_MouseLeftButtonDown" />
+        <Image x:Name="picManageBooks" Cursor="Hand" HorizontalAlignment="Left" Height="296" Margin="216,431,0,0" VerticalAlignment="Top" Width="297" Source="/ManageBooks.png" MouseLeftButtonDown="picSearchForBooks_MouseLeftButtonDown" />
+        <Image x:Name="picManageMembers" Cursor="Hand" HorizontalAlignment="Left" Height="284" Margin="610,431,0,0" VerticalAlignment="Top" Width="284" Source="/LibrarianManageMembers.png" MouseLeftButtonDown="picManageMembers_MouseLeftButtonDown" />
+        <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="Auto" Margin="0,123,0,0" TextWrapping="Wrap" Text="Welcome: xxx" VerticalAlignment="Top" Width="744" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White" />
+        <Image x:Name="picReports" Cursor="Hand" HorizontalAlignment="Left" Height="277" Margin="216,430,0,0" VerticalAlignment="Top" Width="276" Source="/Reports.png" MouseLeftButtonDown="picReports_MouseLeftButtonDown" />
+        <TextBlock x:Name="txtblkLogoutMessage" HorizontalAlignment="Center" Height="1080" TextWrapping="Wrap" VerticalAlignment="Top" Width="1920" IsEnabled="False" TextAlignment="Center" FontSize="150" FontFamily="Verdana" FontWeight="Bold" Background="#FFB4F5F4" Foreground="Black" Margin="0,-1080,0,0"><Run Language="en-gb" /><LineBreak /><Run Language="en-gb" /><LineBreak /><Run Language="en-gb" Text="Thank you for visiting!" /></TextBlock>
     </Grid>
 </Window>

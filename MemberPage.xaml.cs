@@ -9,8 +9,9 @@ namespace Library_System
     /// </summary>
     public partial class MemberPage : Window
     {
-        Globals globalValues;
-        bool mainPage = true;
+        private Globals globalValues;
+        private bool mainPage = true;
+
         public MemberPage(Globals global)
         {
             InitializeComponent();
@@ -27,7 +28,6 @@ namespace Library_System
 
         private async void picLogout_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            
             txtblkLogoutMessage.Margin = new Thickness(0, 0, 0, 0);
             txtblkLogoutMessage.Visibility = Visibility.Visible;
             globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " Logged out.");
@@ -92,7 +92,6 @@ namespace Library_System
             picManageMembers.Visibility = Visibility.Visible;
             picLogErrors.Visibility = Visibility.Visible;
             picReports.Visibility = Visibility.Visible;
-            
 
             picBorrowBooks.Visibility = Visibility.Hidden;
             picReturn.Visibility = Visibility.Hidden;
@@ -172,6 +171,7 @@ namespace Library_System
         {
             ViewUsers();
         }
+
         private async void ViewUsers()
         {
             SearchUsers win = new SearchUsers(globalValues);

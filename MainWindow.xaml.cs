@@ -8,12 +8,12 @@ namespace Library_System
 {
     public partial class MainWindow : Window
     {
-
         //usage in MainWindow.xaml
-        Stopwatch stopwatch;
-        int attempts;
-        String terminalPassword = "Admin123";
-        Globals globalValues;
+        private Stopwatch stopwatch;
+
+        private int attempts;
+        private String terminalPassword = "Admin123";
+        private Globals globalValues;
 
         public MainWindow(Globals globals)
         {
@@ -35,6 +35,7 @@ namespace Library_System
             btnQuit.Visibility = Visibility.Hidden;
             picLogo.Visibility = Visibility.Hidden;
         }
+
         private void Hide2()
         {
             btnAdminQuit.Visibility = Visibility.Hidden;
@@ -44,12 +45,14 @@ namespace Library_System
             lblUserHelp.Visibility = Visibility.Hidden;
             attempts = 3;
         }
+
         private void Reveal1()
         {
             btnProceed.Visibility = Visibility.Visible;
             btnQuit.Visibility = Visibility.Visible;
             picLogo.Visibility = Visibility.Visible;
         }
+
         private void Reveal2()
         {
             btnAdminQuit.Visibility = Visibility.Visible;
@@ -58,14 +61,13 @@ namespace Library_System
             pswdbxTerminalPassword.Visibility = Visibility.Visible;
             lblUserHelp.Visibility = Visibility.Visible;
         }
+
         private async void btnProceed_Click(object sender, RoutedEventArgs e)
         {
-
             Window1 win = new Window1(globalValues);
             win.Show();
             await Task.Delay(250);
             Close();
-
         }
 
         /// <summary>
@@ -84,7 +86,6 @@ namespace Library_System
             {
                 Hide1();
                 Reveal2();
-
             }
         }
 
@@ -112,6 +113,7 @@ namespace Library_System
             Hide2();
             Reveal1();
         }
+
         private void PasswordEnter()
         {
             if (pswdbxTerminalPassword.Password.Equals(terminalPassword))
@@ -126,9 +128,9 @@ namespace Library_System
                     Restart();
                 }
                 pswdbxTerminalPassword.Password = "";
-
             }
         }
+
         private void btnAdminQuit_Click(object sender, RoutedEventArgs e)
         {
             PasswordEnter();

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Converters;
-using System.Xml;
 
 namespace Library_System
 {
@@ -16,17 +13,19 @@ namespace Library_System
     /// </summary>
     public partial class Profile : Window
     {
-        Globals globalValues;
-        String oldName;
-        String oldPhone;
-        String oldEmail;
-        bool page1 = true;
+        private Globals globalValues;
+        private String oldName;
+        private String oldPhone;
+        private String oldEmail;
+        private bool page1 = true;
+
         public Profile(Globals globals)
         {
             InitializeComponent();
             globalValues = globals;
             OnStartUp();
         }
+
         private void OnStartUp()
         {
             lblID.Content = globalValues.currentUser.userID;
@@ -51,6 +50,7 @@ namespace Library_System
             scrlvwrNotifications.Visibility = Visibility.Hidden;
             btnClearNotif.Visibility = Visibility.Hidden;
         }
+
         private async void Home()
         {
             MemberPage window = new MemberPage(globalValues);
@@ -58,6 +58,7 @@ namespace Library_System
             await Task.Delay(250);
             Close();
         }
+
         private void picBack_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             if (page1)
@@ -110,7 +111,6 @@ namespace Library_System
             }
             if (pass)
             {
-
                 globalValues.currentUser.name = txtbxName.Text;
                 globalValues.currentUser.phoneNumber = txtbxMobile.Text;
                 globalValues.currentUser.email = txtbxEmail.Text;
@@ -140,6 +140,7 @@ namespace Library_System
             await Task.Delay(4000);
             txtblkErrorMessage.Text = "";
         }
+
         /// <summary>
         /// Creates a cover that hides the previous screen and displays notifications
         /// </summary>
@@ -156,7 +157,7 @@ namespace Library_System
             btnCancelReservation.Visibility = Visibility.Hidden;
 
             LoadNotifs();
-            
+
             page1 = false;
         }
 
@@ -175,8 +176,8 @@ namespace Library_System
             globalValues.currentUser.notifications.RemoveAt(0);
             globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
             LoadNotifs();
-
         }
+
         private void LoadNotifs()
         {
             txtblkNotifications.Text = "";
@@ -219,7 +220,7 @@ namespace Library_System
         {
             String idToDelete;
             if (!globalValues.currentUser.reserved.Equals(""))
-            { 
+            {
                 idToDelete = globalValues.currentUser.reserved;
                 Book cancelReservation = globalValues.xmlC.BookCompiler().Find(x => x.id == idToDelete);
                 cancelReservation.reserved = DateTime.MinValue;
@@ -227,7 +228,6 @@ namespace Library_System
                 globalValues.currentUser.reserved = "";
                 lblReserved.Content = "";
                 globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
-
             }
         }
     }

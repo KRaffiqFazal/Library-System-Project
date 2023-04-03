@@ -13,7 +13,8 @@ namespace Library_System
     /// </summary>
     public partial class Borrow : Window
     {
-        Globals globalValues;
+        private Globals globalValues;
+
         public Borrow(Globals globals)
         {
             InitializeComponent();
@@ -21,6 +22,7 @@ namespace Library_System
             lblError.Content = "";
             UserCheck();
         }
+
         private async void Home()
         {
             MemberPage window = new MemberPage(globalValues);
@@ -90,7 +92,6 @@ namespace Library_System
                     lblError.Content = "Book Borrowed, happy reading!";
                     await Task.Delay(3000);
                     lblError.Content = "";
-
                 }
                 else //needs to check if the borrowed book belongs to a user or is lost
                 {
@@ -107,7 +108,6 @@ namespace Library_System
                         lblError.Content = "Please report this book to a librarian immediately.";
                         globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " tried returning " + txtbxToBorrow.Text + ", this is not borrowed by them.");
                     }
-
                 }
             }
             else

@@ -9,15 +9,14 @@
         WindowState="Maximized"
         WindowStyle="None">
     <Grid Width="1920" Height="1080" Background="#FFB4F5F4">
-        <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="Auto" Margin="0,123,0,0" TextWrapping="Wrap" Text="Reports" VerticalAlignment="Top" Width="356" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>
-        <Image x:Name="picBack" Cursor="Hand" HorizontalAlignment="Left" Height="178" Margin="1566,5,0,0" VerticalAlignment="Top" Width="344" Source="/Back.png" MouseLeftButtonDown="picBack_MouseLeftButtonDown"/>
-        <Image x:Name="picLogo" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/logo.png" Stretch="UniformToFill" Margin="0,20,0,0" Height="343" Width="445" MouseLeftButtonDown="picLogo_MouseLeftButtonDown"/>
+        <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="Auto" Margin="0,123,0,0" TextWrapping="Wrap" Text="Reports" VerticalAlignment="Top" Width="356" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White" />
+        <Image x:Name="picBack" Cursor="Hand" HorizontalAlignment="Left" Height="178" Margin="1566,5,0,0" VerticalAlignment="Top" Width="344" Source="/Back.png" MouseLeftButtonDown="picBack_MouseLeftButtonDown" />
+        <Image x:Name="picLogo" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/logo.png" Stretch="UniformToFill" Margin="0,20,0,0" Height="343" Width="445" MouseLeftButtonDown="picLogo_MouseLeftButtonDown" />
         <ScrollViewer Margin="10,425,1199,10">
-            <TextBlock x:Name="txtblkRecentBreakdown" Height="Auto" Width="Auto" TextWrapping="Wrap" Background="White" FontFamily="Verdana" FontWeight="Bold" FontStyle="Italic" FontSize="50"><Run Language="en-gb"/></TextBlock>
+            <TextBlock x:Name="txtblkRecentBreakdown" Height="Auto" Width="Auto" TextWrapping="Wrap" Background="White" FontFamily="Verdana" FontWeight="Bold" FontStyle="Italic" FontSize="50"><Run Language="en-gb" /></TextBlock>
         </ScrollViewer>
         <ScrollViewer Margin="1196,425,10,10">
-            <TextBlock x:Name="txtblkFullBreakdown" Height="Auto" Width="Auto" TextWrapping="Wrap" Background="White" FontFamily="Verdana" FontSize="25"><Run Language="en-gb"/></TextBlock>
+            <TextBlock x:Name="txtblkFullBreakdown" Height="Auto" Width="Auto" TextWrapping="Wrap" Background="White" FontFamily="Verdana" FontSize="25"><Run Language="en-gb" /></TextBlock>
         </ScrollViewer>
-
     </Grid>
 </Window>

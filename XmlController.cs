@@ -1,10 +1,8 @@
 ﻿using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Xml;
-using System.Xml.Linq;
 
 namespace Library_System
 {
@@ -14,14 +12,13 @@ namespace Library_System
         public String bookPath { get; set; }
         public XmlDocument doc { get; set; }
 
-
         public XmlController()
         {
             userPath = "Users.xml";
             bookPath = "Library.xml";
             doc = new XmlDocument();
-
         }
+
         public bool Exists(String enteredID)
         {
             doc.Load(userPath);
@@ -36,6 +33,7 @@ namespace Library_System
                 return false;
             }
         }
+
         /// <summary>
         /// Returns user information based on their node
         /// </summary>
@@ -52,6 +50,7 @@ namespace Library_System
             temp[5] = userNode.ChildNodes.Item(7).InnerText; //fine
             return temp;
         }
+
         public User CreateUser(String userID)
         {
             doc.Load(userPath);
@@ -76,8 +75,8 @@ namespace Library_System
             newUser.reserved = userInfo[4];
             newUser.fine = Decimal.Parse(userInfo[5]);
             return newUser;
-
         }
+
         /// <summary>
         /// Returns node that the entered user is on
         /// </summary>
@@ -104,7 +103,6 @@ namespace Library_System
             if (currentUser.userType.Equals("member"))
             {
                 return doc.SelectSingleNode("/users/members/user[id='" + currentUser.userID + "']");
-
             }
             else if (currentUser.userType.Equals("librarian"))
             {
@@ -115,6 +113,7 @@ namespace Library_System
                 return doc.SelectSingleNode("/users/admins/user[id='" + currentUser.userID + "']");
             }
         }
+
         public List<Book> GetBorrowedBooks(String userID)
         {
             XmlNode userNode = UserType(userID);
@@ -162,6 +161,7 @@ namespace Library_System
             }
             return books;
         }
+
         /// <summary>
         /// Sorts compiled books by getting rid of duplicates
         /// </summary>
@@ -195,6 +195,7 @@ namespace Library_System
 
             return correctBooks;
         }
+
         /// <summary>
         /// Returns all books in the xml file without sorting them into their duplicates
         /// </summary>
@@ -228,6 +229,7 @@ namespace Library_System
             }
             return books;
         }
+
         /// <summary>
         /// Updates book record
         /// </summary>
@@ -240,7 +242,6 @@ namespace Library_System
             {
                 String[] date = book.dueDate.ToShortDateString().Split('/');
                 newDate = date[0] + date[1] + date[2];
-
             }
             else
             {
@@ -259,8 +260,7 @@ namespace Library_System
             XmlNode toDelete;
             if (userId[0] == '1')
             {
-                toDelete = doc.SelectSingleNode("/users/members/user[id='" + userId+ "']");
-
+                toDelete = doc.SelectSingleNode("/users/members/user[id='" + userId + "']");
             }
             else if (userId[0] == '2')
             {
@@ -306,7 +306,6 @@ namespace Library_System
             userNode.AppendChild(notificationsNode);
             userNode.AppendChild(reservedNode);
             userNode.AppendChild(fineNode);
-
 
             if (user.userType.Equals("member")) //find which child it must be inserted into
             {
@@ -375,6 +374,7 @@ namespace Library_System
             userNode.ChildNodes.Item(7).InnerText = user.fine.ToString();
             doc.Save(userPath);
         }
+
         /// <summary>
         /// finalBook is a book of multiple copies but needs to check if a book has already been reserved
         /// </summary>
@@ -390,6 +390,7 @@ namespace Library_System
             }
             return "";
         }
+
         public void AddBookRecord(Book toAdd)
         {
             doc.Load(bookPath);
@@ -443,14 +444,15 @@ namespace Library_System
             insertLocation.AppendChild(bookNode);
             doc.Save(bookPath);
         }
+
         public void DeleteBookRecord(String id)
         {
             doc.Load(bookPath);
             XmlNode toDelete = doc.SelectSingleNode("/library/book[id='" + id + "']");
             toDelete.ParentNode.RemoveChild(toDelete);
             doc.Save(bookPath);
-
         }
+
         /// <summary>
         /// When someone logs in, checks all books and cancels reservations for books that are past the reservation date
         /// </summary>
@@ -472,12 +474,12 @@ namespace Library_System
                         user.reserved = "";
                         UpdateUserRecord(user);
                         tempList.Add(user);
-
                     }
                 }
             }
             return tempList;
         }
+
         public List<User> GetAllUsers(User currentUser)
         {
             doc.Load(userPath);
@@ -497,14 +499,12 @@ namespace Library_System
                 temp.reserved = node.ChildNodes.Item(6).InnerText;
                 temp.fine = Decimal.Parse(node.ChildNodes.Item(7).InnerText);
                 toAdd.Add(temp);
-                
             }
             if (currentUser.userType.Equals("admin")) //only admin and librarian details
             {
                 rootNode1 = rootNode.ChildNodes[1];
                 foreach (XmlNode node in rootNode1.ChildNodes)
                 {
-
                     temp = new User(node.ChildNodes.Item(0).InnerText);
                     temp.name = node.ChildNodes.Item(1).InnerText;
                     temp.phoneNumber = node.ChildNodes.Item(2).InnerText;
@@ -518,7 +518,6 @@ namespace Library_System
                 rootNode1 = rootNode.ChildNodes[2];
                 foreach (XmlNode node in rootNode1.ChildNodes)
                 {
-
                     temp = new User(node.ChildNodes.Item(0).InnerText);
                     temp.name = node.ChildNodes.Item(1).InnerText;
                     temp.phoneNumber = node.ChildNodes.Item(2).InnerText;
@@ -528,7 +527,7 @@ namespace Library_System
                     temp.reserved = node.ChildNodes.Item(6).InnerText;
                     temp.fine = Decimal.Parse(node.ChildNodes.Item(7).InnerText);
                     toAdd.Add(temp);
-                }   
+                }
             }
             return toAdd;
         }

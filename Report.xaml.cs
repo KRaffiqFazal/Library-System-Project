@@ -1,19 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net.NetworkInformation;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace Library_System
 {
@@ -22,10 +13,11 @@ namespace Library_System
     /// </summary>
     public partial class Report : Window
     {
-        Globals globalValues;
-        String borrowedPath = @"Borrowed.txt"; //records each time a book is borrowed
-        String usersPath = @"Users.txt"; //records each time a user borrows a book
-        String fullLog = @"Log.txt";
+        private Globals globalValues;
+        private String borrowedPath = @"Borrowed.txt"; //records each time a book is borrowed
+        private String usersPath = @"Users.txt"; //records each time a user borrows a book
+        private String fullLog = @"Log.txt";
+
         public Report(Globals globals)
         {
             InitializeComponent();
@@ -42,6 +34,7 @@ namespace Library_System
         {
             Home();
         }
+
         private async void Home()
         {
             MemberPage window = new MemberPage(globalValues);
@@ -49,6 +42,7 @@ namespace Library_System
             await Task.Delay(250);
             Close();
         }
+
         /// <summary>
         /// loops through data in both text files and translates content into meaningful information
         /// </summary>
@@ -243,7 +237,7 @@ namespace Library_System
             //populate the log in the detailed field
             txtblkFullBreakdown.Text += "\nLog:\n";
             lines = File.ReadAllLines(fullLog);
-            foreach (String line in lines) 
+            foreach (String line in lines)
             {
                 txtblkFullBreakdown.Text += line + "\n";
             }

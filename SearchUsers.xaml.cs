@@ -2,19 +2,12 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Net.Mail;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using System.Xml;
 
 namespace Library_System //need to add the user control and update each value, kinda like the other one
 {
@@ -23,7 +16,8 @@ namespace Library_System //need to add the user control and update each value, k
     /// </summary>
     public partial class SearchUsers : Window
     {
-        Globals globalValues;
+        private Globals globalValues;
+
         public SearchUsers(Globals globals)
         {
             InitializeComponent();
@@ -33,13 +27,14 @@ namespace Library_System //need to add the user control and update each value, k
             CreateScreen(globalValues.xmlC.GetAllUsers(globalValues.currentUser));
             txtbxMobile.MaxLength = 11;
         }
+
         private void CreateScreen(List<User> toDisplay)
-        { 
+        {
             stackPanel.Children.Clear();
             UserLine temp;
             String[] info;
             toDisplay = toDisplay.OrderByDescending(user => user.fine).ToList();
-            foreach (User user in toDisplay) 
+            foreach (User user in toDisplay)
             {
                 temp = new UserLine();
                 info = new String[5];
@@ -54,6 +49,7 @@ namespace Library_System //need to add the user control and update each value, k
                 stackPanel.Children.Add(temp);
             }
         }
+
         private void Show1() //shows the overlay for update
         {
             rctnglNewScreen.Visibility = Visibility.Visible;
@@ -79,10 +75,9 @@ namespace Library_System //need to add the user control and update each value, k
             btnMore.Visibility = Visibility.Visible;
             lblError.Content = "";
         }
+
         private void OnMouseLeftButtonDown(object sender, MouseEventArgs e) //reveals the update screen
         {
-            
-
             UserLine temp = (UserLine)sender;
             String[] info = temp.UserInfo;
             lblUserIdFocusBox.Content = info[0];
@@ -92,9 +87,8 @@ namespace Library_System //need to add the user control and update each value, k
             lblFineFocusBox.Content = info[4];
             Show1();
             btnSaveFocus.Content = "Save";
-
-
         }
+
         private void Hide1() //hides overlay for librarian
         {
             rctnglNewScreen.Visibility = Visibility.Hidden;
@@ -126,8 +120,8 @@ namespace Library_System //need to add the user control and update each value, k
             txtbxNewNotification.Visibility = Visibility.Hidden;
             scrlvwrNotifsBorrowed.Visibility = Visibility.Hidden;
             btnAddNotification.Visibility = Visibility.Hidden;
-
         }
+
         private void txtbxWatermarked_GotFocus(object sender, RoutedEventArgs e)
         {
             txtbxWatermarked.Visibility = Visibility.Collapsed;
@@ -153,6 +147,7 @@ namespace Library_System //need to add the user control and update each value, k
         {
             Home();
         }
+
         private async void Home()
         {
             MemberPage window = new MemberPage(globalValues);
@@ -183,7 +178,7 @@ namespace Library_System //need to add the user control and update each value, k
                 {
                     updatedUsers.Add(user);
                 }
-                else if (string.Format("{0:C}", user.fine).Contains(txtbxSearch.Text)) 
+                else if (string.Format("{0:C}", user.fine).Contains(txtbxSearch.Text))
                 {
                     updatedUsers.Add(user);
                 }
@@ -221,7 +216,7 @@ namespace Library_System //need to add the user control and update each value, k
             {
                 Regex regex;
                 bool pass = true;
-                
+
                 regex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
                 if (!regex.IsMatch(txtbxEmail.Text))
                 {
@@ -266,6 +261,7 @@ namespace Library_System //need to add the user control and update each value, k
                 }
             }
         }
+
         private async void Error(String msg)
         {
             lblError.Foreground = Brushes.Red;
@@ -382,7 +378,6 @@ namespace Library_System //need to add the user control and update each value, k
             txtblkDeleteConfirm.Visibility = Visibility.Hidden;
             btnDeleteConfirm.Visibility = Visibility.Hidden;
             btnDeleteConfirmCancel.Visibility = Visibility.Hidden;
-            
         }
 
         private void btnMore_Click(object sender, RoutedEventArgs e)
@@ -399,6 +394,7 @@ namespace Library_System //need to add the user control and update each value, k
 
             UpdateNotifs();
         }
+
         private void UpdateNotifs()
         {
             txtblkNotifsBorrowed.Text = "Borrowed Books:\n\n";
@@ -444,13 +440,12 @@ namespace Library_System //need to add the user control and update each value, k
             {
                 lblErrorCharacterCounter.Content = oldVal;
             }
-            
         }
+
         private void txtbxNewNotification_TextChanged(object sender, TextChangedEventArgs e)
         {
             lblErrorCharacterCounter.Content = "Characters left: " + (512 - txtbxNewNotification.Text.Length);
         }
-
 
         private void CloseFocus2_Click(object sender, RoutedEventArgs e)
         {

@@ -35,6 +35,7 @@ namespace Library_System
             notifications = new List<String>();
             borrowedBooks = new List<Book>();
         }
+
         public Decimal CalculateFine(Book book) //a fine that is based off borrowed books that have not been returned
         {
             Decimal tempFine = fine; //does not change actual fine value
@@ -49,6 +50,7 @@ namespace Library_System
             }
             return tempFine;
         }
+
         public bool Overdue()
         {
             foreach (Book book in borrowedBooks)

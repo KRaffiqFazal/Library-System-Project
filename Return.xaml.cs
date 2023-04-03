@@ -13,14 +13,16 @@ namespace Library_System
     /// </summary>
     public partial class Return : Window
     {
-        Globals globalValues;
-        bool txtChangedRun;
+        private Globals globalValues;
+        private bool txtChangedRun;
+
         public Return(Globals globals)
         {
             InitializeComponent();
             globalValues = globals;
             txtChangedRun = true;
         }
+
         private async void Home()
         {
             MemberPage window = new MemberPage(globalValues);
@@ -149,7 +151,6 @@ namespace Library_System
                     await Task.Delay(3000);
                     txtChangedRun = true;
                     lblError.Content = "";
-
                 }
                 else
                 {
@@ -160,8 +161,6 @@ namespace Library_System
                     txtChangedRun = true;
                     lblError.Content = "";
                 }
-
-
             }
             else
             {

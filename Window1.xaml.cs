@@ -1,16 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace Library_System
 {
     public partial class Window1 : Window
     {
-        Globals globalValues;
+        private Globals globalValues;
+
         public Window1(Globals globals)
         {
             globalValues = globals;
@@ -18,6 +17,7 @@ namespace Library_System
             txtblkLoginError.Visibility = Visibility.Hidden;
             txtblkLoginErrorOmission.Visibility = Visibility.Hidden;
         }
+
         public async void SwitchScreen()
         {
             MemberPage win = new MemberPage(globalValues);

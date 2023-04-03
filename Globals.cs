@@ -5,9 +5,6 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
 
 namespace Library_System
 {
@@ -23,8 +20,8 @@ namespace Library_System
         public Globals()
         {
             adminUser = new User("3");
-
         }
+
         /// <summary>
         /// Emails a user with all their notifications https://www.youtube.com/watch?v=lk5dhDzfzsU
         /// </summary>
@@ -101,6 +98,7 @@ namespace Library_System
                 Trace.WriteLine(e.Message);
             }
         }
+
         /// <summary>
         /// Notifies librarians that there are members who have not returned their books yet
         /// </summary>
@@ -123,6 +121,7 @@ namespace Library_System
                 }
             }
         }
+
         /// <summary>
         /// Each time a user has borrowed a book, both logs need to update
         /// </summary>
@@ -168,8 +167,8 @@ namespace Library_System
                     sw.Write(Environment.NewLine + currentMonth[1] + currentMonth[2] + ";" + userUpdate.userID + ";");
                 }
             }
-
         }
+
         /// <summary>
         /// Check if all logs exist
         /// </summary>
@@ -188,7 +187,6 @@ namespace Library_System
                     String[] temp = DateTime.Now.ToShortDateString().Split('/');
                     sw.Write(temp[1] + temp[2] + ";");
                 }
-
             }
             if (!File.Exists(bookPath))
             {

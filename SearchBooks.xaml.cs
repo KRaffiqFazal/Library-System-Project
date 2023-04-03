@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -17,11 +16,12 @@ namespace Library_System
     /// </summary>
     public partial class SearchBooks : Window
     {
-        Globals globalValues;
-        String[] filePaths;
-        String[] availableImgs;
-        String currentIsbn;
-        String deleteId = "";
+        private Globals globalValues;
+        private String[] filePaths;
+        private String[] availableImgs;
+        private String currentIsbn;
+        private String deleteId = "";
+
         public SearchBooks(Globals globals)
         {
             InitializeComponent();
@@ -32,15 +32,14 @@ namespace Library_System
                 Permissions();
             }
             txtbxIsbn.MaxLength = 13;
-            
-            
-
         }
+
         private void Permissions()
         {
             btnAdd.Visibility = Visibility.Visible;
             btnDelete.Visibility = Visibility.Visible;
         }
+
         private void FirstOpen()
         {
             filePaths = Directory.GetFiles(Directory.GetCurrentDirectory());
@@ -50,6 +49,7 @@ namespace Library_System
             Hide1();
             Hide2();
         }
+
         private void Hide1() //hides popups
         {
             picBookFocus.Visibility = Visibility.Hidden;
@@ -62,6 +62,7 @@ namespace Library_System
             btnAdd.Visibility = Visibility.Hidden;
             btnDelete.Visibility = Visibility.Hidden;
         }
+
         private void Hide2()
         {
             lblId.Visibility = Visibility.Hidden;
@@ -84,8 +85,8 @@ namespace Library_System
             txtbxCategory.Visibility = Visibility.Hidden;
             txtbxPrice.Visibility = Visibility.Hidden;
             scrlvwrDescription.Visibility = Visibility.Hidden;
-
         }
+
         private void Show2()
         {
             btnCloseFocus.Visibility = Visibility.Visible;
@@ -126,6 +127,7 @@ namespace Library_System
             txtbxPrice.Text = "";
             txtbxDescription.Text = "";
         }
+
         private void CreateScreen(List<Book> books)
         {
             BookDisplay currentDisplayed;
@@ -157,6 +159,7 @@ namespace Library_System
                 stackPanel.Children.Add(currentDisplayed);
             }
         } //Mess around with this until it works
+
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) //work out why pictures don't show, change buttons so they don't have hover and have click hand cursor work out how reservations work, also change how availability works for borrowed books
         {
             rctnglFocus.Visibility = Visibility.Visible;
@@ -170,7 +173,6 @@ namespace Library_System
             txtblkBookInfoFocus.Text = currentBook.title + "\n\nAuthor: " + currentBook.author + "  Publisher: " + currentBook.publisher + "\n\nEdition: " + currentBook.edition
                 + "  Year: " + currentBook.year + "\n\nCategory: " + String.Join(", ", currentBook.category) + "\n\nISBN: " + currentBook.isbn + "\n\n" + currentBook.description +
                 "\n\nAvailable Copies: " + currentBook.availableCopies;
-
 
             txtblkBookInfoFocus.Visibility = Visibility.Visible;
             scrlvwrFocus.Visibility = Visibility.Visible;
@@ -197,9 +199,9 @@ namespace Library_System
                 {
                     lblError.Content = "All copies have been reserved";
                 }
-
             }
         }
+
         private async void Home()
         {
             MemberPage window = new MemberPage(globalValues);
@@ -349,6 +351,7 @@ namespace Library_System
                 }
             }
         }
+
         private bool BookChecker(User checkUser, Book toCheck)
         {
             List<Book> borrowedBooks = checkUser.borrowedBooks;
@@ -361,6 +364,7 @@ namespace Library_System
             }
             return false;
         }
+
         private async void ResetDeletionFields()
         {
             txtbxId.Text = "";

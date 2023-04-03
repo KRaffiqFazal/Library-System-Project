@@ -13,14 +13,14 @@ namespace Library_System
     /// </summary>
     public partial class ErrorLogger : Window
     {
-        Globals globalValues;
-        String path = @"ErrorLog.txt";
+        private Globals globalValues;
+        private String path = @"ErrorLog.txt";
+
         public ErrorLogger(Globals global)
         {
             InitializeComponent();
             globalValues = global;
             Start();
-
         }
 
         private void Start()
@@ -43,6 +43,7 @@ namespace Library_System
         {
             Home();
         }
+
         private async void Home()
         {
             MemberPage window = new MemberPage(globalValues);

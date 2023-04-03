@@ -1,17 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Library_System
 {
@@ -24,6 +12,7 @@ namespace Library_System
         {
             InitializeComponent();
         }
+
         public String[] UserInfo
         {
             get
@@ -36,8 +25,8 @@ namespace Library_System
                 fields[4] = txtblkFine.Text;
                 return fields;
             }
-            set 
-            { 
+            set
+            {
                 txtblkId.Text = value[0];
                 txtblkName.Text = value[1];
                 txtblkEmail.Text = value[2];

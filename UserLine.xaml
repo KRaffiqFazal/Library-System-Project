@@ -1,19 +1,18 @@
 ﻿<UserControl x:Class="Library_System.UserLine"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Library_System"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="102" d:DesignWidth="1536"
              Height="102"
              Width="1536">
     <Grid Background="Black">
-        <TextBlock x:Name="txtblkId" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Height="100" TextWrapping="Wrap" VerticalAlignment="Center" Width="305" FontFamily="Verdana" FontSize="40" Background="White"/>
-        <TextBlock x:Name="txtblkName" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Height="100" TextWrapping="Wrap" VerticalAlignment="Center" Width="305" FontFamily="Verdana" FontSize="40" Background="White" Margin="307,0,0,0"/>
-        <TextBlock x:Name="txtblkPhone" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Height="100" TextWrapping="Wrap" VerticalAlignment="Center" Width="306" FontFamily="Verdana" FontSize="40" Background="White" Margin="614,0,0,0"/>
-        <TextBlock x:Name="txtblkEmail" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Height="100" TextWrapping="Wrap" VerticalAlignment="Center" Width="306" FontFamily="Verdana" FontSize="40" Background="White" Margin="922,0,0,0"/>
-        <TextBlock x:Name="txtblkFine" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Height="100" TextWrapping="Wrap" VerticalAlignment="Center" Width="306" FontFamily="Verdana" FontSize="40" Background="White" Margin="1230,0,0,0"/>
-
+        <TextBlock x:Name="txtblkId" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Height="100" TextWrapping="Wrap" VerticalAlignment="Center" Width="305" FontFamily="Verdana" FontSize="40" Background="White" />
+        <TextBlock x:Name="txtblkName" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Height="100" TextWrapping="Wrap" VerticalAlignment="Center" Width="305" FontFamily="Verdana" FontSize="40" Background="White" Margin="307,0,0,0" />
+        <TextBlock x:Name="txtblkPhone" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Height="100" TextWrapping="Wrap" VerticalAlignment="Center" Width="306" FontFamily="Verdana" FontSize="40" Background="White" Margin="614,0,0,0" />
+        <TextBlock x:Name="txtblkEmail" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Height="100" TextWrapping="Wrap" VerticalAlignment="Center" Width="306" FontFamily="Verdana" FontSize="40" Background="White" Margin="922,0,0,0" />
+        <TextBlock x:Name="txtblkFine" TextTrimming="CharacterEllipsis" HorizontalAlignment="Left" Height="100" TextWrapping="Wrap" VerticalAlignment="Center" Width="306" FontFamily="Verdana" FontSize="40" Background="White" Margin="1230,0,0,0" />
     </Grid>
 </UserControl>

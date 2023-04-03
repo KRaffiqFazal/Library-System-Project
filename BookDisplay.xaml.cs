@@ -11,13 +11,14 @@ namespace Library_System
         public BookDisplay()
         {
             InitializeComponent();
-
         }
+
         public String BookInfo
         {
             get { return txtblkBookInfo.Text; }
             set { txtblkBookInfo.Text = value; }
         }
+
         public String BookIsbn { get; set; }
     }
 }

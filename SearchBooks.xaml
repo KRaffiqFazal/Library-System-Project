@@ -10,53 +10,53 @@
         WindowStyle="None"
         Title="SearchBooks">
     <Window.Resources>
-        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA"/>
-        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5"/>
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border" Color="#FF7EB4EA" />
+        <SolidColorBrush x:Key="TextBox.Focus.Border" Color="#FF569DE5" />
         <ControlTemplate x:Key="CurvedLogin" TargetType="{x:Type TextBoxBase}">
             <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
-                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
             </Border>
             <ControlTemplate.Triggers>
                 <Trigger Property="IsEnabled" Value="false">
-                    <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                    <Setter Property="Opacity" TargetName="border" Value="0.56" />
                 </Trigger>
                 <Trigger Property="IsMouseOver" Value="true">
-                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border}" />
                 </Trigger>
                 <Trigger Property="IsKeyboardFocused" Value="true">
-                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}"/>
+                    <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border}" />
                 </Trigger>
             </ControlTemplate.Triggers>
         </ControlTemplate>
-        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3"/>
-        <SolidColorBrush x:Key="TextBox.MouseOver.Border1" Color="#FF7EB4EA"/>
-        <SolidColorBrush x:Key="TextBox.Focus.Border1" Color="#FF569DE5"/>
+        <SolidColorBrush x:Key="TextBox.Static.Border" Color="#FFABAdB3" />
+        <SolidColorBrush x:Key="TextBox.MouseOver.Border1" Color="#FF7EB4EA" />
+        <SolidColorBrush x:Key="TextBox.Focus.Border1" Color="#FF569DE5" />
         <Style x:Key="Curved" TargetType="{x:Type TextBox}">
-            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
-            <Setter Property="HorizontalContentAlignment" Value="Left"/>
-            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-            <Setter Property="AllowDrop" Value="true"/>
-            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst"/>
-            <Setter Property="Stylus.IsFlicksEnabled" Value="False"/>
+            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}" />
+            <Setter Property="BorderBrush" Value="{StaticResource TextBox.Static.Border}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None" />
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="AllowDrop" Value="true" />
+            <Setter Property="ScrollViewer.PanningMode" Value="VerticalFirst" />
+            <Setter Property="Stylus.IsFlicksEnabled" Value="False" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type TextBox}">
                         <Border x:Name="border" CornerRadius="25" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True" Margin="0,0,0,-30">
-                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Opacity" TargetName="border" Value="0.56"/>
+                                <Setter Property="Opacity" TargetName="border" Value="0.56" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border1}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.MouseOver.Border1}" />
                             </Trigger>
                             <Trigger Property="IsKeyboardFocused" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border1}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource TextBox.Focus.Border1}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -65,10 +65,10 @@
             <Style.Triggers>
                 <MultiTrigger>
                     <MultiTrigger.Conditions>
-                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true"/>
-                        <Condition Property="IsSelectionActive" Value="false"/>
+                        <Condition Property="IsInactiveSelectionHighlightEnabled" Value="true" />
+                        <Condition Property="IsSelectionActive" Value="false" />
                     </MultiTrigger.Conditions>
-                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}"/>
+                    <Setter Property="SelectionBrush" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightBrushKey}}" />
                 </MultiTrigger>
             </Style.Triggers>
         </Style>
@@ -76,43 +76,43 @@
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD"/>
-        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383"/>
+        <SolidColorBrush x:Key="Button.Static.Background" Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border" Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background" Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border" Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background" Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border" Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background" Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border" Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground" Color="#FF838383" />
         <Style x:Key="CurvedButton" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background}" />
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border x:Name="border" CornerRadius="40" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}"/>
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background}" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border}" />
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -123,43 +123,43 @@
             <Setter Property="Control.Template">
                 <Setter.Value>
                     <ControlTemplate>
-                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1"/>
+                        <Rectangle Margin="2" StrokeDashArray="1 2" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" SnapsToDevicePixels="true" StrokeThickness="1" />
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
         </Style>
-        <SolidColorBrush x:Key="Button.Static.Background1" Color="#FFDDDDDD"/>
-        <SolidColorBrush x:Key="Button.Static.Border1" Color="#FF707070"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Background1" Color="#FFBEE6FD"/>
-        <SolidColorBrush x:Key="Button.MouseOver.Border1" Color="#FF3C7FB1"/>
-        <SolidColorBrush x:Key="Button.Pressed.Background1" Color="#FFC4E5F6"/>
-        <SolidColorBrush x:Key="Button.Pressed.Border1" Color="#FF2C628B"/>
-        <SolidColorBrush x:Key="Button.Disabled.Background1" Color="#FFF4F4F4"/>
-        <SolidColorBrush x:Key="Button.Disabled.Border1" Color="#FFADB2B5"/>
-        <SolidColorBrush x:Key="Button.Disabled.Foreground1" Color="#FF838383"/>
+        <SolidColorBrush x:Key="Button.Static.Background1" Color="#FFDDDDDD" />
+        <SolidColorBrush x:Key="Button.Static.Border1" Color="#FF707070" />
+        <SolidColorBrush x:Key="Button.MouseOver.Background1" Color="#FFBEE6FD" />
+        <SolidColorBrush x:Key="Button.MouseOver.Border1" Color="#FF3C7FB1" />
+        <SolidColorBrush x:Key="Button.Pressed.Background1" Color="#FFC4E5F6" />
+        <SolidColorBrush x:Key="Button.Pressed.Border1" Color="#FF2C628B" />
+        <SolidColorBrush x:Key="Button.Disabled.Background1" Color="#FFF4F4F4" />
+        <SolidColorBrush x:Key="Button.Disabled.Border1" Color="#FFADB2B5" />
+        <SolidColorBrush x:Key="Button.Disabled.Foreground1" Color="#FF838383" />
         <Style x:Key="Crossbutton" TargetType="{x:Type Button}">
-            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual1}"/>
-            <Setter Property="Background" Value="{StaticResource Button.Static.Background1}"/>
-            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border1}"/>
-            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="HorizontalContentAlignment" Value="Center"/>
-            <Setter Property="VerticalContentAlignment" Value="Center"/>
-            <Setter Property="Padding" Value="1"/>
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual1}" />
+            <Setter Property="Background" Value="{StaticResource Button.Static.Background1}" />
+            <Setter Property="BorderBrush" Value="{StaticResource Button.Static.Border1}" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Button}">
                         <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="true">
-                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            <ContentPresenter x:Name="contentPresenter" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsDefaulted" Value="true">
-                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                                <Setter Property="BorderBrush" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}" />
                             </Trigger>
                             <Trigger Property="IsEnabled" Value="false">
-                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background1}"/>
-                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border1}"/>
-                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground1}"/>
+                                <Setter Property="Background" TargetName="border" Value="{StaticResource Button.Disabled.Background1}" />
+                                <Setter Property="BorderBrush" TargetName="border" Value="{StaticResource Button.Disabled.Border1}" />
+                                <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{StaticResource Button.Disabled.Foreground1}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -168,134 +168,131 @@
         </Style>
     </Window.Resources>
     <Grid x:Name="grid" Width="1920" Height="1080" Background="#FFB4F5F4">
-        <Border BorderBrush="Black" BorderThickness="1"/>
-        <Image x:Name="picLogo" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/logo.png" Stretch="UniformToFill" Margin="0,20,0,0" Height="343" Width="445" MouseLeftButtonDown="picLogo_MouseLeftButtonDown"/>
-        <Image x:Name="picBack" Cursor="Hand" HorizontalAlignment="Left" Height="178" Margin="1566,5,0,0" VerticalAlignment="Top" Width="344" Source="/Back.png" MouseLeftButtonDown="picBack_MouseLeftButtonDown"/>
-        <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="113" Margin="0,123,0,0" TextWrapping="NoWrap" Text="Search for Books" VerticalAlignment="Top" Width="Auto" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White"/>
-        <TextBox Style="{DynamicResource Curved}" x:Name="txtbxSearch" TextChanged="txtbxSearch_TextChanged" LostFocus="txtbxSearch_LostFocus" HorizontalAlignment="Left" Margin="619,295,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="675" FontSize="50" FontFamily="Verdana" Height="46"/>
-        <TextBox Style="{DynamicResource Curved}" x:Name="txtbxWatermarkedText" GotFocus="txtbxWatermarkedText_GotFocus" HorizontalAlignment="Left" Margin="619,295,0,0" TextWrapping="NoWrap" Text="Search" VerticalAlignment="Top" Width="675" FontSize="50" FontStyle="Italic" Foreground="#FF848282" FontFamily="Verdana" Height="46"/>
-        <Rectangle HorizontalAlignment="Left" Height="657" Margin="10,413,0,0" Stroke="Black" VerticalAlignment="Top" Width="1521" Fill="#FFCCF7F7"/>
-        <Rectangle HorizontalAlignment="Left" Height="657" Margin="1536,413,0,0" Stroke="Black" VerticalAlignment="Top" Width="374" Fill="#FFCCF7F7"/>
+        <Border BorderBrush="Black" BorderThickness="1" />
+        <Image x:Name="picLogo" Cursor="Hand" HorizontalAlignment="Left" VerticalAlignment="Top" Source="/logo.png" Stretch="UniformToFill" Margin="0,20,0,0" Height="343" Width="445" MouseLeftButtonDown="picLogo_MouseLeftButtonDown" />
+        <Image x:Name="picBack" Cursor="Hand" HorizontalAlignment="Left" Height="178" Margin="1566,5,0,0" VerticalAlignment="Top" Width="344" Source="/Back.png" MouseLeftButtonDown="picBack_MouseLeftButtonDown" />
+        <TextBlock x:Name="txtblkTitle" HorizontalAlignment="Center" Height="113" Margin="0,123,0,0" TextWrapping="NoWrap" Text="Search for Books" VerticalAlignment="Top" Width="Auto" IsEnabled="False" TextAlignment="Center" FontSize="70" FontFamily="Verdana" FontWeight="Bold" Background="White" />
+        <TextBox Style="{DynamicResource Curved}" x:Name="txtbxSearch" TextChanged="txtbxSearch_TextChanged" LostFocus="txtbxSearch_LostFocus" HorizontalAlignment="Left" Margin="619,295,0,0" TextWrapping="NoWrap" VerticalAlignment="Top" Width="675" FontSize="50" FontFamily="Verdana" Height="46" />
+        <TextBox Style="{DynamicResource Curved}" x:Name="txtbxWatermarkedText" GotFocus="txtbxWatermarkedText_GotFocus" HorizontalAlignment="Left" Margin="619,295,0,0" TextWrapping="NoWrap" Text="Search" VerticalAlignment="Top" Width="675" FontSize="50" FontStyle="Italic" Foreground="#FF848282" FontFamily="Verdana" Height="46" />
+        <Rectangle HorizontalAlignment="Left" Height="657" Margin="10,413,0,0" Stroke="Black" VerticalAlignment="Top" Width="1521" Fill="#FFCCF7F7" />
+        <Rectangle HorizontalAlignment="Left" Height="657" Margin="1536,413,0,0" Stroke="Black" VerticalAlignment="Top" Width="374" Fill="#FFCCF7F7" />
         <ScrollViewer HorizontalAlignment="Left" Height="580" Margin="62,452,0,0" VerticalAlignment="Top" Width="1418" ClipToBounds="True">
-            <StackPanel x:Name="stackPanel" Height="Auto" Width="Auto" Orientation="Vertical"/>
+            <StackPanel x:Name="stackPanel" Height="Auto" Width="Auto" Orientation="Vertical" />
         </ScrollViewer>
-        <Label Content="Filters:" Margin="1536,413,10,586" FontFamily="Verdana" FontWeight="Bold" FontSize="40" FontStyle="Italic" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label Content="Title" Margin="1566,522,-20,477" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label Content="Author" Margin="1566,602,-20,397" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label Content="ISBN" Margin="1566,682,-20,316" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label Content="Year" Margin="1566,757,-20,242" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label Content="Publisher" Margin="1566,837,-20,162" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-        <Label Content="Category" Margin="1566,915,-20,84" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Label Content="Filters:" Margin="1536,413,10,586" FontFamily="Verdana" FontWeight="Bold" FontSize="40" FontStyle="Italic" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Label Content="Title" Margin="1566,522,-20,477" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Label Content="Author" Margin="1566,602,-20,397" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Label Content="ISBN" Margin="1566,682,-20,316" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Label Content="Year" Margin="1566,757,-20,242" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Label Content="Publisher" Margin="1566,837,-20,162" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
+        <Label Content="Category" Margin="1566,915,-20,84" FontFamily="Verdana" FontWeight="Bold" FontSize="40" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
         <CheckBox x:Name="chkbxAuthor" Content="" HorizontalAlignment="Left" Height="15" Margin="1606,635,0,0" VerticalAlignment="Top" Width="20" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="7" IsChecked="True" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontStyle="Italic">
             <CheckBox.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform ScaleX="5" ScaleY="5"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform ScaleX="5" ScaleY="5" />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </CheckBox.RenderTransform>
         </CheckBox>
         <CheckBox x:Name="chkbxTitle" Content="" HorizontalAlignment="Left" Height="15" Margin="1606,555,0,0" VerticalAlignment="Top" Width="20" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="7" IsChecked="True" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontStyle="Italic">
             <CheckBox.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform ScaleX="5" ScaleY="5"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform ScaleX="5" ScaleY="5" />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </CheckBox.RenderTransform>
         </CheckBox>
         <CheckBox x:Name="chkbxIsbn" Content="" HorizontalAlignment="Left" Height="15" Margin="1606,715,0,0" VerticalAlignment="Top" Width="20" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="7" IsChecked="False" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontStyle="Italic">
             <CheckBox.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform ScaleX="5" ScaleY="5"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform ScaleX="5" ScaleY="5" />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </CheckBox.RenderTransform>
         </CheckBox>
         <CheckBox x:Name="chkbxYear" Content="" HorizontalAlignment="Left" Height="15" Margin="1606,790,0,0" VerticalAlignment="Top" Width="20" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="7" IsChecked="False" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontStyle="Italic">
             <CheckBox.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform ScaleX="5" ScaleY="5"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform ScaleX="5" ScaleY="5" />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </CheckBox.RenderTransform>
         </CheckBox>
         <CheckBox x:Name="chkbxPublisher" Content="" HorizontalAlignment="Left" Height="15" Margin="1606,870,0,0" VerticalAlignment="Top" Width="20" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="7" IsChecked="False" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontStyle="Italic">
             <CheckBox.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform ScaleX="5" ScaleY="5"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform ScaleX="5" ScaleY="5" />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </CheckBox.RenderTransform>
         </CheckBox>
         <CheckBox x:Name="chkbxCategory" Content="" HorizontalAlignment="Left" Height="15" Margin="1606,948,0,0" VerticalAlignment="Top" Width="20" BorderBrush="{x:Null}" FontFamily="Verdana" FontSize="7" IsChecked="False" FontWeight="Bold" RenderTransformOrigin="0.5,0.5" FontStyle="Italic">
             <CheckBox.RenderTransform>
                 <TransformGroup>
-                    <ScaleTransform ScaleX="5" ScaleY="5"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
+                    <ScaleTransform ScaleX="5" ScaleY="5" />
+                    <SkewTransform />
+                    <RotateTransform />
+                    <TranslateTransform />
                 </TransformGroup>
             </CheckBox.RenderTransform>
         </CheckBox>
         <Button Style="{DynamicResource CurvedButton}" x:Name="btnAdd" Cursor="Hand" Content="Add" HorizontalAlignment="Left" Height="137" Margin="1339,256,0,0" VerticalAlignment="Top" Width="230" FontFamily="Verdana" FontWeight="Bold" Foreground="White" FontSize="50" BorderBrush="{x:Null}" Click="btnAdd_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF517651"/>
-                    <GradientStop Color="#FF517651" Offset="1"/>
-                    <GradientStop Color="#FF3E5E42" Offset="0.5"/>
+                    <GradientStop Color="#FF517651" />
+                    <GradientStop Color="#FF517651" Offset="1" />
+                    <GradientStop Color="#FF3E5E42" Offset="0.5" />
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Style="{DynamicResource CurvedButton}" x:Name="btnDelete" Cursor="Hand" Content="Delete" HorizontalAlignment="Left" Height="137" Margin="1638,256,0,0" VerticalAlignment="Top" Width="230" FontFamily="Verdana" FontWeight="Bold" Foreground="White" FontSize="50" BorderBrush="{x:Null}" Click="btnDelete_Click" Background="Red"/>
-        <Rectangle x:Name="rctnglFocus" HorizontalAlignment="Center" Height="1080" Stroke="Black" VerticalAlignment="Center" Width="1920" Fill="White"/>
-        <Image x:Name="picBookFocus" HorizontalAlignment="Left" Height="550" Margin="1334,256,0,0" VerticalAlignment="Top" Width="550"/>
+        <Button Style="{DynamicResource CurvedButton}" x:Name="btnDelete" Cursor="Hand" Content="Delete" HorizontalAlignment="Left" Height="137" Margin="1638,256,0,0" VerticalAlignment="Top" Width="230" FontFamily="Verdana" FontWeight="Bold" Foreground="White" FontSize="50" BorderBrush="{x:Null}" Click="btnDelete_Click" Background="Red" />
+        <Rectangle x:Name="rctnglFocus" HorizontalAlignment="Center" Height="1080" Stroke="Black" VerticalAlignment="Center" Width="1920" Fill="White" />
+        <Image x:Name="picBookFocus" HorizontalAlignment="Left" Height="550" Margin="1334,256,0,0" VerticalAlignment="Top" Width="550" />
         <Button Style="{DynamicResource CurvedButton}" x:Name="btnReserve" Cursor="Hand" Content="Reserve" HorizontalAlignment="Left" Height="227" Margin="1346,837,0,0" VerticalAlignment="Top" Width="522" FontFamily="Verdana" FontWeight="Bold" Foreground="White" FontSize="90" BorderBrush="{x:Null}" Click="btnReserve_Click">
             <Button.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF517651"/>
-                    <GradientStop Color="#FF517651" Offset="1"/>
-                    <GradientStop Color="#FF3E5E42" Offset="0.5"/>
+                    <GradientStop Color="#FF517651" />
+                    <GradientStop Color="#FF517651" Offset="1" />
+                    <GradientStop Color="#FF3E5E42" Offset="0.5" />
                 </LinearGradientBrush>
             </Button.Background>
         </Button>
-        <Button Style="{DynamicResource Crossbutton}" x:Name="btnCloseFocus" Cursor="Hand" Content="X" HorizontalAlignment="Left" Height="182" Margin="1738,0,0,0" VerticalAlignment="Top" Width="182" Background="Red" FontFamily="Verdana" Foreground="White" FontWeight="Bold" FontSize="140" BorderBrush="{x:Null}" Click="btnCloseFocus_Click"/>
+        <Button Style="{DynamicResource Crossbutton}" x:Name="btnCloseFocus" Cursor="Hand" Content="X" HorizontalAlignment="Left" Height="182" Margin="1738,0,0,0" VerticalAlignment="Top" Width="182" Background="Red" FontFamily="Verdana" Foreground="White" FontWeight="Bold" FontSize="140" BorderBrush="{x:Null}" Click="btnCloseFocus_Click" />
         <ScrollViewer x:Name="scrlvwrFocus" Margin="62,180,672,48">
-            <TextBlock x:Name="txtblkBookInfoFocus" Height="Auto" TextWrapping="Wrap" Text="Title" Width="Auto" FontFamily="Verdana" FontSize="30" FontStyle="Italic" FontWeight="Bold"/>
+            <TextBlock x:Name="txtblkBookInfoFocus" Height="Auto" TextWrapping="Wrap" Text="Title" Width="Auto" FontFamily="Verdana" FontSize="30" FontStyle="Italic" FontWeight="Bold" />
         </ScrollViewer>
-        <Label x:Name="lblError" Content="" HorizontalAlignment="Left" Height="85" Margin="80,947,0,0" VerticalAlignment="Top" Width="944" Background="{x:Null}" Foreground="Red" FontFamily="Verdana" FontWeight="Bold" FontSize="20" VerticalContentAlignment="Center"/>
-        <Label x:Name="lblId" Content="ID:" HorizontalAlignment="Left" Height="104" Margin="10,71,0,0" VerticalAlignment="Top" Width="164" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
-        <Label x:Name="lblTitle" Content="Title:" HorizontalAlignment="Left" Height="104" Margin="0,277,0,0" VerticalAlignment="Top" Width="249" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
-        <Label x:Name="lblAuthor" Content="Author:" HorizontalAlignment="Left" Height="104" Margin="0,379,0,0" VerticalAlignment="Top" Width="444" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
-        <Label x:Name="lblYear" Content="Year:" HorizontalAlignment="Left" Height="104" VerticalAlignment="Center" Width="279" FontFamily="Verdana" FontWeight="Bold" FontSize="65" RenderTransformOrigin="0.505,0.49"/>
-        <TextBox x:Name="txtbxTitle" HorizontalAlignment="Left" Height="104" Margin="457,277,0,0" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" TextWrapping="Wrap" Text="xxx"/>
-        <TextBox x:Name="txtbxAuthor" HorizontalAlignment="Left" Height="109" Margin="457,379,0,0" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
-        <TextBox x:Name="txtbxYear" HorizontalAlignment="Left" Height="104" Margin="457,485,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
-        <TextBox x:Name="txtbxId" TextChanged="txtbxId_TextChanged" HorizontalAlignment="Left" Height="104" Margin="457,71,0,0" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" TextWrapping="Wrap" Text="xxx"/>
-        <Label x:Name="lblPublisher" Content="Publisher:" HorizontalAlignment="Left" Height="104" Margin="0,588,0,0" VerticalAlignment="Top" Width="396" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
-        <TextBox x:Name="txtbxPublisher" HorizontalAlignment="Left" Height="104" Margin="457,588,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
-        <Label x:Name="lblIsbn" Content="ISBN: " HorizontalAlignment="Left" Height="104" Margin="0,174,0,0" VerticalAlignment="Top" Width="249" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
-        <TextBox x:Name="txtbxIsbn" HorizontalAlignment="Left" TextChanged="txtbxIsbn_TextChanged" PreviewTextInput="txtbxIsbn_PreviewTextInput" Height="104" Margin="457,174,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
-        <Label x:Name="lblEdition" Content="Edition: " HorizontalAlignment="Left" Height="104" Margin="0,687,0,0" VerticalAlignment="Top" Width="396" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
-        <Label x:Name="lblCategory" Content="Category:" HorizontalAlignment="Left" Height="104" Margin="0,792,0,0" VerticalAlignment="Top" Width="396" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
-        <TextBox x:Name="txtbxEdition" HorizontalAlignment="Left" Height="104" Margin="457,689,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
-        <TextBox x:Name="txtbxCategory" HorizontalAlignment="Left" Height="104" Margin="457,792,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40"/>
-        <Label x:Name="lblPrice" Content="Price: £" HorizontalAlignment="Left" Height="104" Margin="1090,287,0,0" VerticalAlignment="Top" Width="396" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
-        <Label x:Name="lblDescription" Content="Description:" HorizontalAlignment="Left" Height="104" Margin="1136,418,0,0" VerticalAlignment="Top" Width="480" FontFamily="Verdana" FontWeight="Bold" FontSize="65"/>
-        <TextBox x:Name="txtbxPrice" HorizontalAlignment="Left" Height="76" Margin="1376,295,0,0" Text="xxx" VerticalAlignment="Top" Width="534" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="55"/>
+        <Label x:Name="lblError" Content="" HorizontalAlignment="Left" Height="85" Margin="80,947,0,0" VerticalAlignment="Top" Width="944" Background="{x:Null}" Foreground="Red" FontFamily="Verdana" FontWeight="Bold" FontSize="20" VerticalContentAlignment="Center" />
+        <Label x:Name="lblId" Content="ID:" HorizontalAlignment="Left" Height="104" Margin="10,71,0,0" VerticalAlignment="Top" Width="164" FontFamily="Verdana" FontWeight="Bold" FontSize="65" />
+        <Label x:Name="lblTitle" Content="Title:" HorizontalAlignment="Left" Height="104" Margin="0,277,0,0" VerticalAlignment="Top" Width="249" FontFamily="Verdana" FontWeight="Bold" FontSize="65" />
+        <Label x:Name="lblAuthor" Content="Author:" HorizontalAlignment="Left" Height="104" Margin="0,379,0,0" VerticalAlignment="Top" Width="444" FontFamily="Verdana" FontWeight="Bold" FontSize="65" />
+        <Label x:Name="lblYear" Content="Year:" HorizontalAlignment="Left" Height="104" VerticalAlignment="Center" Width="279" FontFamily="Verdana" FontWeight="Bold" FontSize="65" RenderTransformOrigin="0.505,0.49" />
+        <TextBox x:Name="txtbxTitle" HorizontalAlignment="Left" Height="104" Margin="457,277,0,0" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" TextWrapping="Wrap" Text="xxx" />
+        <TextBox x:Name="txtbxAuthor" HorizontalAlignment="Left" Height="109" Margin="457,379,0,0" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" />
+        <TextBox x:Name="txtbxYear" HorizontalAlignment="Left" Height="104" Margin="457,485,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" />
+        <TextBox x:Name="txtbxId" TextChanged="txtbxId_TextChanged" HorizontalAlignment="Left" Height="104" Margin="457,71,0,0" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" TextWrapping="Wrap" Text="xxx" />
+        <Label x:Name="lblPublisher" Content="Publisher:" HorizontalAlignment="Left" Height="104" Margin="0,588,0,0" VerticalAlignment="Top" Width="396" FontFamily="Verdana" FontWeight="Bold" FontSize="65" />
+        <TextBox x:Name="txtbxPublisher" HorizontalAlignment="Left" Height="104" Margin="457,588,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" />
+        <Label x:Name="lblIsbn" Content="ISBN: " HorizontalAlignment="Left" Height="104" Margin="0,174,0,0" VerticalAlignment="Top" Width="249" FontFamily="Verdana" FontWeight="Bold" FontSize="65" />
+        <TextBox x:Name="txtbxIsbn" HorizontalAlignment="Left" TextChanged="txtbxIsbn_TextChanged" PreviewTextInput="txtbxIsbn_PreviewTextInput" Height="104" Margin="457,174,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" />
+        <Label x:Name="lblEdition" Content="Edition: " HorizontalAlignment="Left" Height="104" Margin="0,687,0,0" VerticalAlignment="Top" Width="396" FontFamily="Verdana" FontWeight="Bold" FontSize="65" />
+        <Label x:Name="lblCategory" Content="Category:" HorizontalAlignment="Left" Height="104" Margin="0,792,0,0" VerticalAlignment="Top" Width="396" FontFamily="Verdana" FontWeight="Bold" FontSize="65" />
+        <TextBox x:Name="txtbxEdition" HorizontalAlignment="Left" Height="104" Margin="457,689,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" />
+        <TextBox x:Name="txtbxCategory" HorizontalAlignment="Left" Height="104" Margin="457,792,0,0" Text="xxx" VerticalAlignment="Top" Width="627" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" />
+        <Label x:Name="lblPrice" Content="Price: £" HorizontalAlignment="Left" Height="104" Margin="1090,287,0,0" VerticalAlignment="Top" Width="396" FontFamily="Verdana" FontWeight="Bold" FontSize="65" />
+        <Label x:Name="lblDescription" Content="Description:" HorizontalAlignment="Left" Height="104" Margin="1136,418,0,0" VerticalAlignment="Top" Width="480" FontFamily="Verdana" FontWeight="Bold" FontSize="65" />
+        <TextBox x:Name="txtbxPrice" HorizontalAlignment="Left" Height="76" Margin="1376,295,0,0" Text="xxx" VerticalAlignment="Top" Width="534" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="55" />
         <ScrollViewer x:Name="scrlvwrDescription" Margin="1136,524,52,270">
-            <TextBox x:Name="txtbxDescription" Text="xxx" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" TextWrapping="Wrap" Height="Auto" Width="Auto"/>
-
+            <TextBox x:Name="txtbxDescription" Text="xxx" FontFamily="Verdana" FontWeight="Bold" BorderBrush="Black" FontSize="40" TextWrapping="Wrap" Height="Auto" Width="Auto" />
         </ScrollViewer>
-
-
     </Grid>
 </Window>
