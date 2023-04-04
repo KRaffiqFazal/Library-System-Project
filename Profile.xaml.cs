@@ -38,10 +38,12 @@ namespace Library_System
             if (!globalValues.currentUser.reserved.Equals(""))
             {
                 lblReserved.Content = allBooks.Find(x => x.id == globalValues.currentUser.reserved).isbn;
+                btnCancelReservation.IsEnabled = true;
             }
             else
             {
                 lblReserved.Content = "";
+                btnCancelReservation.IsEnabled = false;
             }
             //remembers initial information if user wants to undo
             oldName = globalValues.currentUser.name;
@@ -244,6 +246,7 @@ namespace Library_System
                 globalValues.currentUser.reserved = "";
                 lblReserved.Content = "";
                 globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
+                btnCancelReservation.IsEnabled = false;
             }
         }
     }
