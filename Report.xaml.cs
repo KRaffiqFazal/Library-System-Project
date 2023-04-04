@@ -234,12 +234,15 @@ namespace Library_System
                 }
                 txtblkFullBreakdown.Text += $"ID: {book.id} | ISBN: {book.isbn} | RESERVED: {reserved} | RENEWED: {renewed} | STOCK: {due}\n";
             }
-            //populate the log in the detailed field
-            txtblkFullBreakdown.Text += "\nLog:\n";
-            lines = File.ReadAllLines(fullLog);
-            foreach (String line in lines)
+            //populate the log in the detailed field for admins
+            if (globalValues.currentUser.userType.Equals("admin"))
             {
-                txtblkFullBreakdown.Text += line + "\n";
+                txtblkFullBreakdown.Text += "\nLog:\n";
+                lines = File.ReadAllLines(fullLog);
+                foreach (String line in lines)
+                {
+                    txtblkFullBreakdown.Text += line + "\n";
+                }
             }
         }
     }

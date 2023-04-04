@@ -102,7 +102,6 @@ namespace Library_System
                     globalValues.currentUser.borrowedBooks.Remove(toReturn);
                     globalValues.xmlC.UpdateRecord(toReturn, false);
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
-                    globalValues.SendNotifications(globalValues.currentUser);
                     globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " returned " + toReturn.id);
                     await Task.Delay(3000);
                     txtChangedRun = true;
@@ -145,7 +144,6 @@ namespace Library_System
                     globalValues.currentUser.borrowedBooks.Add(toRenew);
                     globalValues.xmlC.UpdateRecord(toRenew, true);
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
-                    globalValues.SendNotifications(globalValues.currentUser);
                     globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " has renewed " + toRenew.id);
                     lblError.Foreground = Brushes.Red;
                     txtChangedRun = false;

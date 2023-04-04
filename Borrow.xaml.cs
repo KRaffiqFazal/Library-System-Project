@@ -85,7 +85,6 @@ namespace Library_System
                     globalValues.xmlC.UpdateRecord(toBorrow, true);
                     globalValues.currentUser.borrowedBooks.Add(toBorrow);
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
-                    globalValues.SendNotifications(globalValues.currentUser);
                     globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " borrowed " + toBorrow.id);
                     globalValues.BorrowedLog(toBorrow, globalValues.currentUser);
                     lblError.Foreground = Brushes.Black;

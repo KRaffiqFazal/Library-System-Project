@@ -284,7 +284,6 @@ namespace Library_System
                     globalValues.currentUser.reserved = globalValues.xmlC.ToReserve(currentBook);
                     currentBook.reserved = DateTime.MaxValue; //when it comes back in stock it will change
                     globalValues.xmlC.UpdateUserRecord(globalValues.currentUser);
-                    globalValues.SendNotifications(globalValues.currentUser);
                     globalValues.xmlC.UpdateRecord(currentBook, true);
                     globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " has reserved " + currentBook.id);
                     lblError.Content = "Reservation Successful";

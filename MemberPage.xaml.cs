@@ -31,7 +31,7 @@ namespace Library_System
             txtblkLogoutMessage.Margin = new Thickness(0, 0, 0, 0);
             txtblkLogoutMessage.Visibility = Visibility.Visible;
             globalValues.UpdateDetailedLog(globalValues.currentUser.userID + " Logged out.");
-            globalValues = null;
+            globalValues.SendNotifications(globalValues.currentUser);
             await Task.Delay(2000);
             MainWindow window = new MainWindow(null);
             window.Show();
