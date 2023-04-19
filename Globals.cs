@@ -27,8 +27,8 @@ namespace Library_System
         /// </summary>
         public void SendNotifications(User currentUser)
         {
-            String fromMail = "bookingslibrary@gmail.com";
-            String fromPassword = "cjgygkwvnuipnqrt";
+            String fromMail = "notifications.librarybookings@gmail.com";
+            String fromPassword = "yjtublmyxlprspsj";
 
             MailMessage message;
             String body;
@@ -92,9 +92,11 @@ namespace Library_System
             try
             {
                 smtpClient.Send(message);
+                Trace.WriteLine("WORKS");
             }
             catch (Exception e)
             {
+                Trace.WriteLine("ERROR\n");
                 Trace.WriteLine(e.Message);
             }
         }
@@ -114,7 +116,7 @@ namespace Library_System
                     {
                         if (user.userType.Equals("librarian"))
                         {
-                            user.notifications.Add(DateTime.Now.ToShortDateString() + " " + user.userID + " has at least one overdue book.");
+                            user.notifications.Add(DateTime.Now.ToShortDateString() + " " + currentUser.userID + " has at least one overdue book.");
                             xmlC.UpdateUserRecord(user);
                         }
                     }

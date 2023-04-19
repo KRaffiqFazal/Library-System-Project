@@ -407,12 +407,31 @@ namespace Library_System
             System.Media.SystemSounds.Beep.Play();
         }
         /// <summary>
-        /// Deletes user
+        /// Deletes user and returns their books and cancels reservations
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private async void btnDeleteConfirm_Click(object sender, RoutedEventArgs e)
         {
+            User toDeleteBooks = globalValues.xmlC.CreateUser(lblUserIdFocusBox.Content.ToString());
+            if (toDeleteBooks.borrowedBooks.Count != 0)
+            {
+                foreach (Book book in toDeleteBooks.borrowedBooks)
+                {
+                    book.renewed = false;
+                    globalValues.xmlC.UpdateRecord(book, false);
+
+                }
+            }
+            if (!toDeleteBooks.reserved.Equals(""))
+            {
+                Book unReserve = globalValues.xmlC.BookCompiler().Find(x => x.id == toDeleteBooks.reserved);
+                unReserve.reserved = DateTime.MinValue;
+                globalValues.xmlC.UpdateRecord(unReserve, true);
+            }
+            globalValues.xmlC.DeleteUserRecord(lblUserIdFocusBox.Content.ToString());
+            CreateScreen(globalValues.xmlC.GetAllUsers(globalValues.currentUser));
+            Hide1();
             if (globalValues.currentUser.userID.Equals(lblUserIdFocusBox.Content.ToString()))
             {
                 globalValues = null;
@@ -421,8 +440,6 @@ namespace Library_System
                 await Task.Delay(250);
                 Close();
             }
-            globalValues.xmlC.DeleteUserRecord(lblUserIdFocusBox.Content.ToString());
-            Hide1();
         }
 
         private void btnDeleteConfirmCancel_Click(object sender, RoutedEventArgs e)

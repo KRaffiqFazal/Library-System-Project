@@ -215,7 +215,7 @@ namespace Library_System
                     }
                     else
                     {
-                        txtblkNotifications.Text += book.id + " " + book.title + " has been borrowed until " + book.dueDate.ToShortDateString() + ", due IMMEDIATELY " + "\n\n";
+                        txtblkNotifications.Text += book.id + " " + book.title + " was borrowed until " + book.dueDate.ToShortDateString() + ", due IMMEDIATELY " + "\n\n";
                     }
                 }
             }
